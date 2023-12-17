@@ -2,13 +2,7 @@ from dash import dcc
 from dash import html
 import plotly.graph_objs as go
 
-def boune_view(model_description: str, fig_average: go.Figure, fig_pic: go.Figure, slider) -> html.Div:
-    warning_message = html.Div(
-        [
-            html.H3("ATTENTION"),
-            html.P("Ce site est en cours de développement, les données affichées sont donc fausses"),
-        ], className="warning-message"
-    )
+def boune_view(model_description: str, fig_day: go.Figure, fig_average: go.Figure, slider) -> html.Div:
     return html.Div(
         [
             html.Div(
@@ -19,7 +13,6 @@ def boune_view(model_description: str, fig_average: go.Figure, fig_pic: go.Figur
                         className="radio-items",
                         options=[
                             {'label': 'Euros', 'value': 'OPT1'},
-                            {'label': 'Bitcoins', 'value': 'OPT2'},
                         ],
                         value='OPT1',
                     )
@@ -27,25 +20,25 @@ def boune_view(model_description: str, fig_average: go.Figure, fig_pic: go.Figur
             ),
             html.Div(
                 [           
-                    warning_message,
-                    html.H1("> Serveur Monocompte"),
+                    html.H3("> Serveur Monocompte"),
                     html.P(model_description),
                     html.Div(
                         [html.Div(
+                            [
+                                dcc.Graph(figure=fig_day, config={
+                                    'displayModeBar': True,
+                                    'displaylogo': False,
+                                })
+                            ]
+                        ),
+                        html.Div(
                             [
                                 dcc.Graph(figure=fig_average, config={
                                     'displayModeBar': True,
                                     'displaylogo': False,
                                 }),
                                 slider
-                            ]
-                        ),
-                        html.Div(
-                            [
-                                dcc.Graph(figure=fig_pic, config={
-                                    'displayModeBar': True,
-                                    'displaylogo': False,
-                                }),
+                                
                             ]
                         )
                         ], className="graphs-content"

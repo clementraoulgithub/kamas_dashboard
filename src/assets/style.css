@@ -33,7 +33,6 @@ body, html {
     border: 1px solid #333;
     background-color: #92090F;
     color: #FFEECF;
-    padding: 10px;
     text-align: center;
     bottom: 0;
     width: 100%;
@@ -112,5 +111,18 @@ body, html {
 
 input[type='radio'] {
     accent-color: #92090F;
-  }
+}
+
+.graph-metrics {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.graph-metrics p {
+    margin: 0;
+    padding: 0;
+    margin-right: 50px;
+}
 
