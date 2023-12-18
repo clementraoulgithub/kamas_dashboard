@@ -6,9 +6,9 @@ from src.utils.utils import view_graph
 from src.views.server_view import server_view
 
 
-def boune_server() -> html.Div:
-    name = "boune"
-    description = f"Ces graphiques représentent les valeurs estimée du kamas en euros pour le serveur mono compte {name}"
+def galgarion_server() -> html.Div:
+    name = "galgarion"
+    description = f"Ces graphiques représentent les valeurs estimée du kamas en euros pour le serveur multi compte {name}"
     kamas_dict = backend_get_kamas_value(server=name)
     day_kamas_dict = get_daily_kamas_value(server=name)
     yesterday_kamas_dict = get_yesterday_kamas_value(server=name)

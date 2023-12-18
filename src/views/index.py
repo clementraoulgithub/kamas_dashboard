@@ -6,7 +6,16 @@ from src import NAME
 def index_view() -> html.Div:
     # Header
     header = html.Header(
-        children=[html.H1(children=NAME.capitalize()), html.P("Visualisation de valeurs de kamas")],
+        children=[
+            html.Div(
+                [
+                    html.Img(src="/assets/ressources/logo.png", className="logo"),
+                    html.H1(children=NAME.capitalize()),
+                ],
+                className="header-container",
+            ),
+            html.P("Visualisation de valeurs de kamas")
+        ],
         className="header",
     )
 
@@ -16,8 +25,11 @@ def index_view() -> html.Div:
     # Left Menu
     top_menu = html.Div(
         [
-            dcc.Link("Home", href="/"),
-            dcc.Link("Serveur Boune", href="/mono_server"),
+            dcc.Link("Serveur Boune", href="/boune"),
+            dcc.Link("Serveur Crail", href="/crail"),
+            dcc.Link("Serveur Eratz", href="/eratz"),
+            dcc.Link("Serveur Galgarion", href="/galgarion"),
+            dcc.Link("Serveur Henual", href="/henual"),
         ],
         className="top-menu",
     )

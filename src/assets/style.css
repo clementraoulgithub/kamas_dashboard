@@ -9,7 +9,7 @@ body, html {
 }
 
 h1, h2, h3, h4, h5, h6 {
-    color: #78787a;
+    color: orange;
     font-weight: bold;
     font-family: Arial;
 }
@@ -32,6 +32,12 @@ p {
 .header p {
     font-style: italic;
     margin-top: 0px;
+}
+
+.header-container {
+    display : flex;
+    flex-direction: row;
+    align-items: center;
 }
 
 .logo {

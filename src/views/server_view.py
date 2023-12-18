@@ -2,7 +2,8 @@ import plotly.graph_objs as go
 from dash import dcc, html
 
 
-def boune_view(
+def server_view(
+    name: str,
     model_description: str,
     fig_day: go.Figure,
     fig_average: go.Figure,
@@ -15,7 +16,7 @@ def boune_view(
         [
             html.Div(
                 [
-                    html.H2("Serveur Boune"),
+                    html.H2(f"Serveur {name}"),
                     html.P(model_description),
                     html.Div(
                         [
@@ -24,14 +25,14 @@ def boune_view(
                                     html.Div(
                                         [
                                             html.P("Moyenne:"),
-                                            html.H1(f"{average} €"),
+                                            html.H1(f"{average} €/m"),
                                         ],
                                         className="graph-info",
                                     ),
                                     html.Div(
                                         [
                                             html.P("Meilleur prix:"),
-                                            html.H1(f"{best_price} €"),
+                                            html.H1(f"{best_price} €/m"),
                                         ],
                                         className="graph-info",
                                     ),

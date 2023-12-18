@@ -6,6 +6,7 @@ from src.utils.scraping import get_current_kamas_value
 scheduler = BackgroundScheduler()
 
 if __name__ == "__main__":
-    scheduler.add_job(get_current_kamas_value, "interval", hours=0.1)
+    for server in ["boune", "crail", "eratz", "galgarion", "henual"]:
+        scheduler.add_job(lambda server=server: get_current_kamas_value(server), "interval", hours=0.1)
     scheduler.start()
     app.run_server(debug=True)

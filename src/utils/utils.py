@@ -123,3 +123,33 @@ def create_gauche_graph(yesterday_value: float, today_value: float):
     )
 
     return fig
+
+
+def view_graph(day_kamas_dict: dict, yesterday_kamas_dict: dict, kamas_dict: dict):
+    best_price = min(list(day_kamas_dict["kamas_dict"].values()))
+
+    fig_avg = create_graph(
+        "Evolution du cours du kamas (million)",
+        "",
+        "Tps",
+        "Valeur estimée moyenne",
+        [dict["timestamp"] for dict in kamas_dict],
+        [dict["average"] for dict in kamas_dict],
+        [dict["max"] for dict in kamas_dict],
+        [dict["min"] for dict in kamas_dict],
+    )
+
+    fig_day = create_daily_graph(
+        "Valeur journalière du kamas (million)",
+        "",
+        "Jour",
+        "Valeur estimée journalière",
+        day_kamas_dict["kamas_dict"],
+    )
+    
+    if yesterday_kamas_dict:
+        fig_gauge = create_gauche_graph(yesterday_kamas_dict["average"], day_kamas_dict["average"])
+    else:
+        fig_gauge = create_gauche_graph(day_kamas_dict["average"], day_kamas_dict["average"])
+        
+    return fig_day, fig_avg, fig_gauge, best_price
