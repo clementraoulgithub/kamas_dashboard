@@ -1,8 +1,9 @@
 import numpy as np
 import pandas as pd
-from src.models.graph_model import GraphModel
 import plotly.express as px
 import plotly.graph_objects as go
+
+from src.models.graph_model import GraphModel
 
 fr_months = [
     "janvier",

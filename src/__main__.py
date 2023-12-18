@@ -1,6 +1,6 @@
-from src.controllers.app import app
 from apscheduler.schedulers.background import BackgroundScheduler
 
+from src.controllers.app import app
 from src.utils.scraping import get_current_kamas_value
 
 scheduler = BackgroundScheduler()

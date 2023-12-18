@@ -1,8 +1,10 @@
 import os
+
 import dash
+
 from src import PATH
-from src.views.index import index_view
 from src.controllers.callbacks import callback
+from src.views.index import index_view
 
 app = dash.Dash(
     __name__,

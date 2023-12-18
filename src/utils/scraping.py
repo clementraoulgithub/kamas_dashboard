@@ -1,14 +1,13 @@
+import re
 from typing import List
+
 import numpy as np
 import requests
 from bs4 import BeautifulSoup
-import re
 
-from src.utils.backend.backend import (
-    backend_get_daily_kamas_value,
-    backend_post_daily_kamas_value,
-    backend_get_yesterday_kamas_value,
-)
+from src.utils.backend.backend import (backend_get_daily_kamas_value,
+                                       backend_get_yesterday_kamas_value,
+                                       backend_post_daily_kamas_value)
 
 
 def get_kamas_price_from_kamas_facile_endpoint():

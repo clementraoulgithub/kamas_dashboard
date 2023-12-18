@@ -1,6 +1,5 @@
-from dash import dcc
-from dash import html
 import plotly.graph_objs as go
+from dash import dcc, html
 
 
 def boune_view(
