@@ -1,6 +1,4 @@
-import datetime
-
-from dash import dcc, html
+from dash import html
 
 from src.utils.backend.backend import backend_get_kamas_value
 from src.utils.scraping import get_daily_kamas_value, get_yesterday_kamas_value
@@ -9,10 +7,7 @@ from src.views.boune_server import boune_view
 
 
 def monocompte_server() -> html.Div:
-    start_year = 2020
-    current_year = datetime.datetime.now().year
-
-    description = f"Ces graphiques représentent les valeurs estimée du kamas en euros pour le serveur mono compte dofus rétro (sortie en {start_year})"
+    description = "Ces graphiques représentent les valeurs estimée du kamas en euros pour le serveur mono compte dofus rétro"
     kamas_dict = backend_get_kamas_value()
     day_kamas_dict = get_daily_kamas_value()
     yesterday_kamas_dict = get_yesterday_kamas_value()
@@ -40,20 +35,12 @@ def monocompte_server() -> html.Div:
 
     fig_gauge = create_gauche_graph(yesterday_kamas_dict["average"], day_kamas_dict["average"])
 
-    slider = dcc.Slider(
-        min=0,
-        step=1,
-        max=current_year - start_year,
-        marks={i: str(start_year + i) for i in range(current_year - start_year + 1)},
-        value=0,
-    )
     return boune_view(
         description,
         fig_day,
         fig_avg,
         fig_gauge,
         best_price,
-        slider,
         average=day_kamas_dict["average"],
         nb_site=len(day_kamas_dict["kamas_dict"]),
     )

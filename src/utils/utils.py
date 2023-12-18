@@ -5,21 +5,6 @@ import plotly.graph_objects as go
 
 from src.models.graph_model import GraphModel
 
-fr_months = [
-    "janvier",
-    "février",
-    "mars",
-    "avril",
-    "mai",
-    "juin",
-    "juillet",
-    "août",
-    "septembre",
-    "octobre",
-    "novembre",
-    "décembre",
-]
-
 
 def create_daily_graph(
     title: str, description: str, x_title: str, y_title: str, x_values: dict
@@ -32,28 +17,45 @@ def create_daily_graph(
         x_values=list(x_values.values()),
         y_values=list(x_values.keys()),
     )
-
     average_value = round(np.mean(list(x_values.values())), 2)
-    fig = px.bar(
-        x=list(x_values.keys()),
-        y=list(x_values.values()),
-        title=model.title,
-        color=["< moy" if value < average_value else "> moy" for value in list(x_values.values())],
+
+    dataframe = pd.DataFrame(
+        data={
+            "Sites": list(x_values.keys()),
+            "Valeurs": list(x_values.values()),
+            "Moyenne": average_value,
+        }
     )
+
+    fig = px.bar(dataframe, x="Sites", y="Valeurs", title=model.title, text="Valeurs")
     fig.add_hline(
         y=average_value,
         line_dash="dash",
-        annotation_text=f"Moyenne = {average_value}€",
-        annotation_position="top left",
-        line_color="red",
+        line_color="white",
+        name="Moyenne",
+        annotation=dict(
+            text=f"Moyenne: {average_value}",
+            xref="paper",
+            yref="y",
+            x=1.0,
+            y=average_value,
+            showarrow=False,
+            font=dict(family="Courier New, monospace", size=16, color="white"),
+        ),
     )
+
     fig.update_layout(
         template="plotly_dark",
         plot_bgcolor="rgba(0, 0, 0, 0)",
         paper_bgcolor="rgba(0, 0, 0, 0)",
     )
-    fig.update_xaxes(title_text="Site de vente")
-    fig.update_yaxes(title_text="Valeur estimée")
+    fig.update_traces(
+        marker_color=[
+            "#00C58E" if value < average_value else "#FA4B3A" for value in list(x_values.values())
+        ]
+    )
+    fig.update_xaxes(title_text="Sites de ventes")
+    fig.update_yaxes(title_text="Valeurs estimées")
 
     return fig
 
@@ -96,12 +98,19 @@ def create_graph(
 
 def create_gauche_graph(yesterday_value: float, today_value: float):
     value = (today_value - yesterday_value) / yesterday_value * 100
+    value = round(value, 2)
+    max_value = max(today_value, yesterday_value)
     fig = go.Figure(
         go.Indicator(
-            mode="gauge+number",
-            value=value,
-            title={"text": "Variation (%)"},
+            mode="gauge+number+delta",
+            value=today_value,
+            title={"text": f"{value} %"},
+            domain={"x": [0, 1], "y": [0, 1]},
             delta={"reference": yesterday_value},
+            gauge={
+                "axis": {"range": [None, max_value], "tickwidth": 1, "tickcolor": "white"},
+                "bar": {"color": "#00C58E" if max_value == yesterday_value else "#FA4B3A"},
+            },
         ),
     )
     fig.update_layout(
@@ -109,8 +118,8 @@ def create_gauche_graph(yesterday_value: float, today_value: float):
         plot_bgcolor="rgba(0, 0, 0, 0)",
         paper_bgcolor="rgba(0, 0, 0, 0)",
         margin=dict(t=0, b=0, r=0, l=0, pad=0),
-        height=200,
-        width=200,
+        height=250,
+        width=250,
     )
 
     return fig

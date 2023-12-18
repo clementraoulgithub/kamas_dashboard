@@ -1,11 +1,17 @@
 /* style.css */
 
 body, html {
-    font-family: Arial;
+    font-family: Helvetica;
     height: 100%;
     display : flex;
     flex-direction: column;
     background-color: #161833;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #78787a;
+    font-weight: bold;
+    font-family: Arial;
 }
 
 p {
@@ -13,19 +19,19 @@ p {
 }
 
 .header {
-    border-bottom: none;
+    background-color: #1c1e3a;
     display : flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    background-color: #161833;
+    flex-direction: column;
     color: white; 
-    text-align: center;
-    padding-right: 50px;
+    padding: 10px;
+}
+.header h1 {
+    margin: 0px;
 }
 
-.header h1 {
-    color: #FFEECF;
+.header p {
+    font-style: italic;
+    margin-top: 0px;
 }
 
 .logo {
@@ -35,16 +41,17 @@ p {
 
 .footer {
     background-color: #161833;
-    color: #FFEECF;
+    color: #a1a1a1;
     text-align: center;
     bottom: 0;
     width: 100%;
 }
 
 .top-menu {
-    display : flex;
+    border: 2px solid #1c1e3a;
+    display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: left;
     align-items: center;
     background-color: #161833;
 }
@@ -71,7 +78,7 @@ p {
 
 .graph-main-content {
     flex: 1;
-    padding: 30px;
+    padding-left: 30px;
     border-radius: 16px;
     background-color: #161833;
 }
@@ -99,8 +106,8 @@ p {
 
 .radio-items-container {
     padding: 15px;
+    background-color: #1c1e3a;
     border-top: none;
-    background-color: #161833;
 }
 
 .radio-items-container h4 {
@@ -108,7 +115,7 @@ p {
     padding: 0;
     text-align: left;
     padding: 10px;
-    color: #FFEECF;
+    color: #a1a1a1;
 }
 
 .radio-items-container label {
@@ -135,7 +142,7 @@ input[type='radio'] {
 
 .dash-graph {
     border-radius: 16px;
-    background-color: #212452;
+    background-color: #1c1e3a;
     margin: 10px;
     flex: 1;
 }
@@ -145,13 +152,14 @@ input[type='radio'] {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #212452;
+    background-color: #1c1e3a;
     border-radius: 16px;
     margin: 10px;
 }
 
 .graph-info h1 {
     color: white;
+    font-weight: bold;
 }
 
 .graph-info dash-graph {
@@ -166,6 +174,20 @@ input[type='radio'] {
 .graph-info-container > * {
     flex: 1;
 }
+
+.rc-slider-mark-text {
+    color: white;
+}
+
+.rc-slider-rail,
+.rc-slider-track  {
+    background-color: #1c1e3a;
+}
+
+.rc-slider-step  {
+    background-color: #1c1e3a;
+}
+
 
 
 

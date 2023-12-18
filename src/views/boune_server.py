@@ -8,7 +8,6 @@ def boune_view(
     fig_average: go.Figure,
     fig_gauge: go.Figure,
     best_price: float,
-    slider: dcc.Slider,
     average: float,
     nb_site: int,
 ) -> html.Div:
@@ -16,21 +15,7 @@ def boune_view(
         [
             html.Div(
                 [
-                    html.H4("Devises"),
-                    dcc.RadioItems(
-                        id="radio-items",
-                        className="radio-items",
-                        options=[
-                            {"label": "Euros", "value": "OPT1"},
-                        ],
-                        value="OPT1",
-                    ),
-                ],
-                className="radio-items-container",
-            ),
-            html.Div(
-                [
-                    html.H3("Serveur Boune"),
+                    html.H2("Serveur Boune"),
                     html.P(model_description),
                     html.Div(
                         [
@@ -53,6 +38,10 @@ def boune_view(
                                     html.Div(
                                         dcc.Graph(
                                             figure=fig_gauge,
+                                            config={
+                                                "displayModeBar": False,
+                                                "displaylogo": False,
+                                            },
                                         ),
                                         className="graph-info",
                                     ),
@@ -64,7 +53,7 @@ def boune_view(
                                     dcc.Graph(
                                         figure=fig_day,
                                         config={
-                                            "displayModeBar": True,
+                                            "displayModeBar": False,
                                             "displaylogo": False,
                                         },
                                     ),
@@ -82,11 +71,10 @@ def boune_view(
                                     dcc.Graph(
                                         figure=fig_average,
                                         config={
-                                            "displayModeBar": True,
+                                            "displayModeBar": False,
                                             "displaylogo": False,
                                         },
                                     ),
-                                    slider,
                                 ]
                             ),
                         ],
