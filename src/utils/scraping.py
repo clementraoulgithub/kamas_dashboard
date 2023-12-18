@@ -4,7 +4,11 @@ import requests
 from bs4 import BeautifulSoup
 import re
 
-from src.utils.backend.backend import backend_get_daily_kamas_value, backend_post_daily_kamas_value
+from src.utils.backend.backend import (
+    backend_get_daily_kamas_value,
+    backend_post_daily_kamas_value,
+    backend_get_yesterday_kamas_value,
+)
 
 
 def get_kamas_price_from_kamas_facile_endpoint():
@@ -58,7 +62,12 @@ def get_kamas_price_from_leskamas():
 
 def get_daily_kamas_value():
     if response := backend_get_daily_kamas_value():
-        return response["kamas_dict"]
+        return response
+
+
+def get_yesterday_kamas_value():
+    if response := backend_get_yesterday_kamas_value():
+        return response
 
 
 def get_current_kamas_value():

@@ -8,7 +8,7 @@ def index_view() -> html.Div:
     header = html.Header(
         children=[
             html.Img(src="assets/ressources/logo.png", className="logo"),
-            html.H1(children="amas Dashboard"),
+            html.H1(children=NAME.upper()),
         ],
         className="header",
     )
@@ -20,7 +20,7 @@ def index_view() -> html.Div:
     top_menu = html.Div(
         [
             dcc.Link("Home", href="/"),
-            dcc.Link("Serveur Monocompte", href="/mono_server"),
+            dcc.Link("Serveur Boune", href="/mono_server"),
         ],
         className="top-menu",
     )

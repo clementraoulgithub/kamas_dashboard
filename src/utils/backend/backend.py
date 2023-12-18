@@ -9,6 +9,14 @@ def backend_get_daily_kamas_value():
         return response.json()[-1] if response.json() else None
 
 
+def backend_get_yesterday_kamas_value():
+    response = requests.get(url="http://127.0.0.1:8000/yesterday")
+    if response.status_code != 200:
+        raise Exception("Endpoint is not available")
+    else:
+        return response.json()[-1] if response.json() else None
+
+
 def backend_get_kamas_value():
     response = requests.get(url="http://127.0.0.1:8000/kamas")
     if response.status_code != 200:
