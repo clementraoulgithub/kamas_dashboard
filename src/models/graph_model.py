@@ -1,7 +1,8 @@
 import dataclasses
 
+
 @dataclasses.dataclass
-class GraphModel():
+class GraphModel:
     title: str
     description: str
     x_title: str

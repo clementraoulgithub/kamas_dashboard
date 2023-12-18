@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='kdashboard',
+    name="kdashboard",
     packages=find_packages(),
 )

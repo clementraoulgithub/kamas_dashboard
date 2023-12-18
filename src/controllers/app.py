@@ -6,7 +6,6 @@ from src.controllers.callbacks import callback
 
 app = dash.Dash(
     __name__,
-    assets_folder=os.path.join(PATH, 'assets'),
+    assets_folder=os.path.join(PATH, "assets"),
 )
 app.layout = index_view()
-
