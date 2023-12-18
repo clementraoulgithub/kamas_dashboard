@@ -19,6 +19,7 @@ p {
 }
 
 .header {
+    border-radius: 16px;
     background-color: #1c1e3a;
     display : flex;
     flex-direction: column;
@@ -54,7 +55,6 @@ p {
 }
 
 .top-menu {
-    border: 2px solid #1c1e3a;
     display: flex;
     flex-direction: row;
     justify-content: left;
@@ -192,6 +192,11 @@ input[type='radio'] {
 
 .rc-slider-step  {
     background-color: #1c1e3a;
+}
+
+.clickedStyle {
+    background-color: #FFEECF;
+    color: #161833;
 }
 
 

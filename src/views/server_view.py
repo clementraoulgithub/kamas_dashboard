@@ -16,7 +16,7 @@ def server_view(
         [
             html.Div(
                 [
-                    html.H2(f"Serveur {name}"),
+                    html.H2(f"Serveur {name.capitalize()}"),
                     html.P(model_description),
                     html.Div(
                         [
@@ -24,14 +24,14 @@ def server_view(
                                 [
                                     html.Div(
                                         [
-                                            html.P("Moyenne:"),
+                                            html.P("Moyenne"),
                                             html.H1(f"{average} €/m"),
                                         ],
                                         className="graph-info",
                                     ),
                                     html.Div(
                                         [
-                                            html.P("Meilleur prix:"),
+                                            html.P("Meilleur prix"),
                                             html.H1(f"{best_price} €/m"),
                                         ],
                                         className="graph-info",

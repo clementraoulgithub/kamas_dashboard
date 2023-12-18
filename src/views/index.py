@@ -25,11 +25,11 @@ def index_view() -> html.Div:
     # Left Menu
     top_menu = html.Div(
         [
-            dcc.Link("Serveur Boune", href="/boune"),
-            dcc.Link("Serveur Crail", href="/crail"),
-            dcc.Link("Serveur Eratz", href="/eratz"),
-            dcc.Link("Serveur Galgarion", href="/galgarion"),
-            dcc.Link("Serveur Henual", href="/henual"),
+            dcc.Link("Serveur Boune", href="/boune", className="link"),
+            dcc.Link("Serveur Crail", href="/crail", className="link"),
+            dcc.Link("Serveur Eratz", href="/eratz", className="link"),
+            dcc.Link("Serveur Galgarion", href="/galgarion", className="link"),
+            dcc.Link("Serveur Henual", href="/henual", className="link"),
         ],
         className="top-menu",
     )

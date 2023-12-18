@@ -8,7 +8,7 @@ from src.views.error_view import error_view
 
 
 @dash.callback(dash.Output("main-content", "children"), [dash.Input("url", "pathname")])
-def callback(pathname):
+def routers(pathname: str):
     match pathname:
         case "/":
             return boune_server()

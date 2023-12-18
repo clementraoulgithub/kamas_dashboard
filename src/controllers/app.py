@@ -3,7 +3,7 @@ import os
 import dash
 
 from src import PATH
-from src.controllers.callbacks import callback
+from src.controllers.routers import routers # this import is necessary to register callbacks
 from src.views.index import index_view
 
 app = dash.Dash(
