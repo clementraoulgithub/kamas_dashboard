@@ -138,4 +138,4 @@ def get_kamas_value_from_websites_safully(kamas_dict: dict, name: str, callback:
     try:
         kamas_dict[name] = callback(server)
     except Exception as e:
-        print(f"Error while getting kamas value from {name}: {e}")
+        print(f"Error while getting kamas value from {name} for server {server}: {e}")
