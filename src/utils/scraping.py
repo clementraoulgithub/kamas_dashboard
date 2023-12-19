@@ -40,7 +40,7 @@ def get_kamas_price_from_fun_shop(server: str):
 
     soup = BeautifulSoup(response.text, "html.parser")
     product_prices = soup.find_all("span", class_="prc")
-    
+
     match server:
         case "boune":
             index = 0
@@ -50,7 +50,7 @@ def get_kamas_price_from_fun_shop(server: str):
             index = 3
         case _:
             raise Exception("Server not found")
-    
+
     kamas_value = product_prices[index].text
     kamas_value = kamas_value.split("\\")[0]
 
@@ -66,7 +66,7 @@ def get_kamas_price_from_leskamas(server: str):
 
     soup = BeautifulSoup(response.text, "html.parser")
     server = server.capitalize()
-    re_pattern = fr"<td>{server}<\/td>\s*<td>(.*?)<\/td>"
+    re_pattern = rf"<td>{server}<\/td>\s*<td>(.*?)<\/td>"
     match = re.search(re_pattern, str(soup))
     return float(match[1].replace("€/M", ""))
 
@@ -83,7 +83,7 @@ def get_kamas_price_from_mode_marchand(server: str):
             url = "https://www.mode-marchand.net/annonces/dofus-retro/kamas?server%5B%5D=129"
         case _:
             raise Exception("Server not found")
-    
+
     response = requests.get(url)
 
     if response.status_code != 200:
@@ -134,7 +134,9 @@ def get_current_kamas_value(server: str) -> None:
         backend_post_daily_kamas_value(kamas_dict, mean, max_, min_, server)
 
 
-def get_kamas_value_from_websites_safully(kamas_dict: dict, name: str, callback: Callable, server: str) -> None:
+def get_kamas_value_from_websites_safully(
+    kamas_dict: dict, name: str, callback: Callable, server: str
+) -> None:
     try:
         kamas_dict[name] = callback(server)
     except Exception as e:

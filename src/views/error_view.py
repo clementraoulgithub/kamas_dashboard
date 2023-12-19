@@ -1,5 +1,6 @@
 from dash import html
 
+
 def error_view():
     return html.Div(
         [

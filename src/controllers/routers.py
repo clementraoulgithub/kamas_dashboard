@@ -1,6 +1,7 @@
 import dash
-from src.controllers.crail_server import crail_server
+
 from src.controllers.boune_server import boune_server
+from src.controllers.crail_server import crail_server
 from src.controllers.eratz_server import eratz_server
 from src.controllers.galgarion_server import galgarion_server
 from src.controllers.henual_server import henual_server

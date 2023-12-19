@@ -14,13 +14,15 @@ def index_view() -> html.Div:
                 ],
                 className="header-container",
             ),
-            html.P("Visualisation de valeurs de kamas")
+            html.P("Visualisation de valeurs de kamas"),
         ],
         className="header",
     )
 
     # Footer
-    footer = html.Footer(html.P(children=f"© {NAME} 2023, work in progress", className="footer"))
+    footer = html.Footer(
+        html.P(children=f"© {NAME} 2023, work in progress", className="footer")
+    )
 
     # Left Menu
     top_menu = html.Div(
@@ -38,6 +40,12 @@ def index_view() -> html.Div:
 
     # Layout with all components
     return html.Div(
-        children=[header, dcc.Location(id="url", refresh=False), top_menu, content, footer],
+        children=[
+            header,
+            dcc.Location(id="url", refresh=False),
+            top_menu,
+            content,
+            footer,
+        ],
         className="body",
     )

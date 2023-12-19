@@ -9,7 +9,7 @@ body, html {
 }
 
 h1, h2, h3, h4, h5, h6 {
-    color: orange;
+    color: white;
     font-weight: bold;
     font-family: Arial;
 }
@@ -19,7 +19,6 @@ p {
 }
 
 .header {
-    border-radius: 16px;
     background-color: #1c1e3a;
     display : flex;
     flex-direction: column;
@@ -48,7 +47,7 @@ p {
 
 .footer {
     background-color: #161833;
-    color: #a1a1a1;
+    color: white;
     text-align: center;
     bottom: 0;
     width: 100%;
@@ -79,7 +78,6 @@ p {
 
 .graph-body-content {
     display: flex;
-    flex-direction: row;
 }
 
 .graph-main-content {
@@ -108,6 +106,12 @@ p {
 
 .graphs-content > * {
     flex: 1;
+}
+
+.graph-day-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .radio-items-container {
@@ -168,10 +172,6 @@ input[type='radio'] {
     font-weight: bold;
 }
 
-.graph-info dash-graph {
-    padding: 0px;
-}
-
 .graph-info-container {
     display: flex;
     flex-direction: column;
@@ -197,6 +197,11 @@ input[type='radio'] {
 .clickedStyle {
     background-color: #FFEECF;
     color: #161833;
+}
+
+.graphs-container {
+    display: flex;
+    flex-direction: row;
 }
 
 

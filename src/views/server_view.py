@@ -51,35 +51,42 @@ def server_view(
                             ),
                             html.Div(
                                 [
-                                    dcc.Graph(
-                                        figure=fig_day,
-                                        config={
-                                            "displayModeBar": False,
-                                            "displaylogo": False,
-                                        },
-                                    ),
                                     html.Div(
                                         [
-                                            html.P("Nombre de sites"),
-                                            html.H1(nb_site),
+                                            dcc.Graph(
+                                                figure=fig_day,
+                                                config={
+                                                    "displayModeBar": False,
+                                                    "displaylogo": False,
+                                                },
+                                                id="graph-day",
+                                            ),
+                                            html.Div(
+                                                [
+                                                    html.P("Nombre de sites"),
+                                                    html.H1(nb_site),
+                                                ],
+                                                className="graph-info",
+                                            ),
                                         ],
-                                        className="graph-info",
+                                        className="graph-day-container",
                                     ),
-                                ]
-                            ),
-                            html.Div(
-                                [
-                                    dcc.Graph(
-                                        figure=fig_average,
-                                        config={
-                                            "displayModeBar": False,
-                                            "displaylogo": False,
-                                        },
-                                    ),
-                                ]
+                                ],
+                                className="graphs-content",
                             ),
                         ],
-                        className="graphs-content",
+                        className="graphs-container",
+                    ),
+                    html.Div(
+                        [
+                            dcc.Graph(
+                                figure=fig_average,
+                                config={
+                                    "displayModeBar": False,
+                                    "displaylogo": False,
+                                },
+                            ),
+                        ]
                     ),
                 ],
                 className="graph-main-content",

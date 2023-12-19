@@ -12,11 +12,13 @@ def eratz_server() -> html.Div:
     kamas_dict = backend_get_kamas_value(server=name)
     day_kamas_dict = get_daily_kamas_value(server=name)
     yesterday_kamas_dict = get_yesterday_kamas_value(server=name)
-    
-    if not day_kamas_dict: # Case for the first fetch of the day
+
+    if not day_kamas_dict:  # Case for the first fetch of the day
         day_kamas_dict = yesterday_kamas_dict
-        
-    fig_day, fig_avg, fig_gauge, best_price = view_graph(day_kamas_dict, yesterday_kamas_dict, kamas_dict)
+
+    fig_day, fig_avg, fig_gauge, best_price = view_graph(
+        day_kamas_dict, yesterday_kamas_dict, kamas_dict
+    )
 
     return server_view(
         name,
