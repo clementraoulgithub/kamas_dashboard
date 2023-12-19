@@ -83,9 +83,8 @@ def create_graph(
     y_max_values: list,
     y_min_values: list,
 ) -> px.line:
-    offset = get_offset_time_zone()
     x_values = [
-        datetime.datetime.strptime(date, "%Y-%m-%dT%H:%M:%S.%f%z") + offset
+        datetime.datetime.strptime(date, "%Y-%m-%dT%H:%M:%S.%f%z")
         for date in x_values
     ]
 
