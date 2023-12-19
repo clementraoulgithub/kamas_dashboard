@@ -11,4 +11,4 @@ if __name__ == "__main__":
             lambda server=server: get_current_kamas_value(server), "interval", hours=0.1
         )
     scheduler.start()
-    app.run_server(debug=True, use_reloader=True)
+    app.run_server(debug=False, host='0.0.0.0', port=8050)

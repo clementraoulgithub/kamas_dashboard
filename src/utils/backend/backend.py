@@ -1,8 +1,9 @@
 import requests
 
+host = "backend"
 
 def backend_get_daily_kamas_value(server: str):
-    response = requests.get(url=f"http://127.0.0.1:8000/today?server={server}")
+    response = requests.get(url=f"http://{host}:8000/today?server={server}")
     if response.status_code != 200:
         raise Exception("Endpoint is not available")
     else:
@@ -10,7 +11,7 @@ def backend_get_daily_kamas_value(server: str):
 
 
 def backend_get_yesterday_kamas_value(server: str):
-    response = requests.get(url=f"http://127.0.0.1:8000/yesterday?server={server}")
+    response = requests.get(url=f"http://{host}:8000/yesterday?server={server}")
     if response.status_code != 200:
         raise Exception("Endpoint is not available")
     else:
@@ -18,7 +19,7 @@ def backend_get_yesterday_kamas_value(server: str):
 
 
 def backend_get_kamas_value(server: str):
-    response = requests.get(url=f"http://127.0.0.1:8000/kamas?server={server}")
+    response = requests.get(url=f"http://{host}:8000/kamas?server={server}")
     if response.status_code != 200:
         raise Exception("Endpoint is not available")
     else:
@@ -35,6 +36,6 @@ def backend_post_daily_kamas_value(
         "min": min_,
         "server": server,
     }
-    response = requests.post(url="http://127.0.0.1:8000/kamas", json=body)
+    response = requests.post(url=f"http://{host}:8000/kamas", json=body)
     if response.status_code != 200:
         raise Exception("Endpoint is not available")
