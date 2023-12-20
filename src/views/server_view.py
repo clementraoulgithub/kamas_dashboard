@@ -10,6 +10,7 @@ def server_view(
     fig_gauge: go.Figure,
     best_price: float,
     average: float,
+    deviation: float,
     nb_site: int,
 ) -> html.Div:
     return html.Div(
@@ -24,11 +25,24 @@ def server_view(
                                 [
                                     html.Div(
                                         [
-                                            html.P("Moyenne"),
-                                            html.H1(f"{average}"),
-                                            html.H2("EUR/m"),
+                                            html.Div(
+                                                [
+                                                    html.P("Moyenne"),
+                                                    html.H1(f"{average}"),
+                                                    html.H2("EUR/m"),
+                                                ],
+                                                className="graph-info",
+                                            ),
+                                            html.Div(
+                                                [
+                                                    html.P("Ecart type"),
+                                                    html.H1(f"{deviation}"),
+                                                    html.H2("EUR/m"),
+                                                ],
+                                                className="graph-info",
+                                            ),
                                         ],
-                                        className="graph-info",
+                                        className="graph-info-avg",
                                     ),
                                     html.Div(
                                         [

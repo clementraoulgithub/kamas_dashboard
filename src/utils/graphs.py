@@ -7,7 +7,8 @@ import plotly.graph_objects as go
 
 from src.models.graph_model import GraphModel
 
-def create_daily_graph(
+
+def create_bar_graph(
     title: str, description: str, x_title: str, y_title: str, x_values: dict
 ) -> px.line:
     """
@@ -32,6 +33,7 @@ def create_daily_graph(
         y_values=list(x_values.keys()),
     )
     average_value = round(np.mean(list(x_values.values())), 2)
+    deviation_value = round(np.std(list(x_values.values())), 2)
 
     dataframe = pd.DataFrame(
         data={
@@ -47,6 +49,7 @@ def create_daily_graph(
         y="Valeurs",
         title=f"<b>{model.title}</b>",
         text="Valeurs",
+        labels={"Valeurs": "Valeurs estimées (million)"},
     )
 
     fig.add_hline(
@@ -64,6 +67,13 @@ def create_daily_graph(
             font=dict(family="Courier New, monospace", size=16, color="white"),
         ),
     )
+    fig.add_hrect(
+        y0=average_value - deviation_value,
+        y1=average_value + deviation_value,
+        line_width=0,
+        fillcolor="rgba(255, 255, 255, 0.2)",
+        opacity=0.2,
+    )
 
     fig.update_layout(
         template="plotly_dark",
@@ -78,12 +88,12 @@ def create_daily_graph(
         ],
     )
     fig.update_xaxes(title_text="Sites de ventes")
-    fig.update_yaxes(title_text="Valeurs estimées")
+    fig.update_yaxes(title_text="Valeurs estimées (million)")
 
     return fig
 
 
-def create_graph(
+def create_line_graph(
     title: str,
     description: str,
     x_title: str,
@@ -144,7 +154,7 @@ def create_graph(
     create_h_line(fig, min_value, label="Minimum")
     create_h_line(fig, max_value, label="Maximum")
 
-    fig.update_yaxes(title_text="Valeurs estimées")
+    fig.update_yaxes(title_text="Valeurs estimées (million)")
     fig.update_layout(
         template="plotly_dark",
         plot_bgcolor="rgba(0, 0, 0, 0)",
@@ -171,7 +181,7 @@ def create_gauche_graph(yesterday_value: float, today_value: float) -> go.Figure
         go.Indicator(
             mode="gauge+number+delta",
             value=today_value,
-            title={"text": f"<b>+{value} %</b>" if value > 0 else f"<b>{value} %</b>"},
+            title={"text": f"<b>+{value} %/jour</b>" if value > 0 else f"<b>{value} %/jour</b>"},
             domain={"x": [0, 1], "y": [0, 1]},
             delta={"reference": yesterday_value},
             gauge={
@@ -197,7 +207,9 @@ def create_gauche_graph(yesterday_value: float, today_value: float) -> go.Figure
     return fig
 
 
-def view_graph(day_kamas_dict: dict, yesterday_kamas_dict: dict, kamas_dict: dict) -> tuple:
+def view_graph(
+    day_kamas_dict: dict, yesterday_kamas_dict: dict, kamas_dict: dict
+) -> tuple:
     """
     return all the graph for the server
 
@@ -210,9 +222,10 @@ def view_graph(day_kamas_dict: dict, yesterday_kamas_dict: dict, kamas_dict: dic
         tuple: all the graph for the server
     """
     best_price = min(list(day_kamas_dict["kamas_dict"].values()))
+    deviation_value = round(np.std(list(day_kamas_dict["kamas_dict"].values())), 2)
 
-    fig_avg = create_graph(
-        "Evolution du cours du kamas (million)",
+    fig_avg = create_line_graph(
+        "Evolution du million de kamas",
         "",
         "Tps",
         "Valeur estimée moyenne",
@@ -222,8 +235,8 @@ def view_graph(day_kamas_dict: dict, yesterday_kamas_dict: dict, kamas_dict: dic
         [dict["min"] for dict in kamas_dict],
     )
 
-    fig_day = create_daily_graph(
-        "Valeur journalière du kamas (million)",
+    fig_day = create_bar_graph(
+        "Valeur journalière du million de kamas",
         "",
         "Jour",
         "Valeur estimée journalière",
@@ -239,7 +252,7 @@ def view_graph(day_kamas_dict: dict, yesterday_kamas_dict: dict, kamas_dict: dic
             day_kamas_dict["average"], day_kamas_dict["average"]
         )
 
-    return fig_day, fig_avg, fig_gauge, best_price
+    return fig_day, fig_avg, fig_gauge, best_price, deviation_value
 
 
 def create_h_line(fig: go.Figure, value: float, label: str) -> None:

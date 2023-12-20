@@ -22,7 +22,7 @@ def boune_server() -> html.Div:
     if not day_kamas_dict:  # Case for the first fetch of the day
         day_kamas_dict = yesterday_kamas_dict
 
-    fig_day, fig_avg, fig_gauge, best_price = view_graph(
+    fig_day, fig_avg, fig_gauge, best_price, deviation = view_graph(
         day_kamas_dict, yesterday_kamas_dict, kamas_dict
     )
 
@@ -34,5 +34,6 @@ def boune_server() -> html.Div:
         fig_gauge,
         best_price,
         average=day_kamas_dict["average"],
+        deviation=deviation,
         nb_site=len(day_kamas_dict["kamas_dict"]),
     )

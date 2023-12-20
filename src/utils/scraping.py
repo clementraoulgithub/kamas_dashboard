@@ -84,6 +84,45 @@ def get_kamas_price_from_fun_shop(server: str) -> float:
     return float(kamas_value)
 
 
+def get_kamas_price_from_ig_play(server: str) -> float:
+    """
+    Get the kamas price from ig play
+
+    Args:
+        server (str): the server name
+
+    Raises:
+        Exception: if the endpoint is not available
+        Exception: if the server is not found
+
+    Returns:
+        float: the kamas price
+    """
+    url = "https://www.igplays.com/selltous.php?gclid=Cj0KCQiAm4WsBhCiARIsAEJIEzUwqjGYNyAMFJou72q-kjGsSxZb1Gsd5JML8AJ09kimevCf7JWUQ0gaApsWEALw_wcB"
+    response = requests.get(url)
+
+    if response.status_code != 200:
+        raise Exception("Endpoint is not available")
+
+    soup = BeautifulSoup(response.text, "html.parser")
+    product_prices = soup.find_all("span", class_="prc")
+
+    match server:
+        case "boune":
+            index = 0
+        case "crail":
+            index = 1
+        case "galgarion":
+            index = 3
+        case _:
+            raise Exception("Server not found")
+
+    kamas_value = product_prices[index].text
+    kamas_value = kamas_value.split("\\")[0]
+
+    return float(kamas_value)
+
+
 def get_kamas_price_from_leskamas(server: str) -> float:
     """
     Get the kamas price from leskamas
@@ -191,7 +230,7 @@ def get_kamas_from_try_and_judge(server: str) -> float:
     kamas_value = product_prices[0].text
 
     price = float(kamas_value.replace("€", "").replace(",", "."))
-    return price if server == "boune" else price / 3
+    return price if server == "boune" else round(price / 3, 2)
 
 
 def get_daily_kamas_value(server: str) -> dict | None:
@@ -236,6 +275,7 @@ def get_current_kamas_value(server: str) -> None:
         "Les kamas": get_kamas_price_from_leskamas,
         "Mode marchand": get_kamas_price_from_mode_marchand,
         "Try and judge": get_kamas_from_try_and_judge,
+        "Ig plays": get_kamas_price_from_ig_play,
     }.items():
         get_kamas_value_from_websites_safully(kamas_dict, name, callback, server)
 

@@ -8,7 +8,6 @@ body, html {
 }
 
 h1, h2, h3, h4, h5, h6 {
-    color: gray;
     font-weight: bold;
     font-family: Arial;
 }
@@ -24,7 +23,9 @@ p {
 }
 
 .header h3 {
+    color: #EC5C28;
     margin: 0px;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
 }
 
 .header p {
@@ -62,11 +63,13 @@ p {
     color: white;
     font-weight: bold;
     text-decoration: none;
+    padding: 5px;
     margin: 10px;
 }
 
 .top-menu a:hover {
-    text-decoration: underline;
+    border-radius: 16px;
+    background-color: #1c1e3a;
 }
 
 .main-content {
@@ -76,14 +79,14 @@ p {
 
 .graph-main-content {
     padding-left: 30px;
+    padding-right: 30px;
     border-radius: 16px;
     background-color: #161833;
 }
 
-.graph-main-content h3 {
-    color: #FFEECF;
+.graph-main-content h2 {
+    color: #EC5C28;
 }
-
 
 .graphs-content {
     display : flex;
@@ -100,24 +103,6 @@ p {
     display: flex;
     flex-direction: column;
     justify-content: center;
-}
-
-.radio-items-container {
-    padding: 15px;
-    background-color: #1c1e3a;
-    border-top: none;
-}
-
-.radio-items-container h4 {
-    margin: 0;
-    padding: 0;
-    text-align: left;
-    padding: 10px;
-    color: #a1a1a1;
-}
-
-.radio-items-container label {
-    color: white;
 }
 
 input[type='radio'] {
@@ -149,32 +134,44 @@ input[type='radio'] {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    text-align: left;
     background-color: #1c1e3a;
     border-radius: 16px;
     margin: 10px;
 }
 
+.graph-info-avg {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+}
+
+.graph-info-avg > * {
+    flex: 1;
+}
+
 .graph-info p {
-    text-align: left;
     margin-left: 20px;
 }
 
 .graph-info h1 {
-    color: white;
+    color: #EC5C28;;
     font-weight: bold;
-    text-align: left;
     font-size: 40px;
     margin: 0px;
     margin-left: 20px;
 }
 
 .graph-info h2 {
+    color: grey;
     margin-left: 20px;
 }
 
 #nb-site {
     text-align: center;
-    margin: 10px;
+    margin: 0px;
+    color: white;
+    margin-bottom: 20px;
 }
 
 .graph-info-container {
@@ -197,11 +194,6 @@ input[type='radio'] {
 
 .rc-slider-step  {
     background-color: #1c1e3a;
-}
-
-.clickedStyle {
-    background-color: #FFEECF;
-    color: #161833;
 }
 
 .graphs-container {

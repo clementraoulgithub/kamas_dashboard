@@ -8,7 +8,7 @@ scheduler = BackgroundScheduler()
 if __name__ == "__main__":
     for server in ["boune", "crail", "eratz", "galgarion", "henual"]:
         scheduler.add_job(
-            lambda server=server: get_current_kamas_value(server), "interval", hours=0.1
+            lambda server=server: get_current_kamas_value(server), "interval", hours=1
         )
     scheduler.start()
     app.run_server(debug=True, host="0.0.0.0", port=8050)
