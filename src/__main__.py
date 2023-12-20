@@ -1,5 +1,5 @@
 from apscheduler.schedulers.background import BackgroundScheduler
-
+import os
 from src.controllers.app import app
 from src.utils.scraping import get_current_kamas_value
 
@@ -11,4 +11,6 @@ if __name__ == "__main__":
             lambda server=server: get_current_kamas_value(server), "interval", hours=1
         )
     scheduler.start()
-    app.run_server(debug=True, host="0.0.0.0", port=8050)
+    
+    debug = os.environ.get("BACKEND_HOST", "localhost") == "localhost"
+    app.run_server(debug=debug, host="0.0.0.0", port=80)
