@@ -11,5 +11,5 @@ app = dash.Dash(
     assets_folder=os.path.join(PATH, "assets"),
     suppress_callback_exceptions=True,
 )
-
+server = app.server
 app.layout = index_view()

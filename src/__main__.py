@@ -1,16 +1,21 @@
 from apscheduler.schedulers.background import BackgroundScheduler
-import os
-from src.controllers.app import app
-from src.utils.scraping import get_current_kamas_value
 
+from src.utils.scraping import get_current_kamas_value
+from src.utils.utils import logger_config
+
+logger_config()
 scheduler = BackgroundScheduler()
 
+for server in ["boune", "crail", "eratz", "galgarion", "henual"]:
+    scheduler.add_job(
+        get_current_kamas_value,
+        "interval",
+        args=[server],
+        minutes=10,
+    )
+scheduler.start()
+
+from src.controllers.app import app, server
+
 if __name__ == "__main__":
-    for server in ["boune", "crail", "eratz", "galgarion", "henual"]:
-        scheduler.add_job(
-            lambda server=server: get_current_kamas_value(server), "interval", hours=1
-        )
-    scheduler.start()
-    
-    debug = os.environ.get("BACKEND_HOST", "localhost") == "localhost"
-    app.run_server(debug=debug, host="0.0.0.0", port=80)
+    app.run(debug=True, host="0.0.0.0", port=80)

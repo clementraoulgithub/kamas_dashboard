@@ -8,4 +8,4 @@ RUN apt-get update \
     && python3 -m pip install --upgrade pip \
     && pip install -r requirements.txt
 
-ENTRYPOINT [ "python", "-m", "src" ]
+ENTRYPOINT [ "python", "-m", "gunicorn", "src.__main__:server", "-b", ":80" ]

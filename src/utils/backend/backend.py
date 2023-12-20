@@ -1,4 +1,5 @@
 import os
+
 import requests
 
 host = os.environ.get("BACKEND_HOST", "localhost")

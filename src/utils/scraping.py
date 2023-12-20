@@ -1,3 +1,4 @@
+import logging
 import re
 from typing import Callable, Dict, List
 
@@ -5,11 +6,9 @@ import numpy as np
 import requests
 from bs4 import BeautifulSoup
 
-from src.utils.backend.backend import (
-    backend_get_daily_kamas_value,
-    backend_get_yesterday_kamas_value,
-    backend_post_daily_kamas_value,
-)
+from src.utils.backend.backend import (backend_get_daily_kamas_value,
+                                       backend_get_yesterday_kamas_value,
+                                       backend_post_daily_kamas_value)
 
 
 def get_kamas_price_from_kamas_facile_endpoint(server: str) -> float:
@@ -29,7 +28,7 @@ def get_kamas_price_from_kamas_facile_endpoint(server: str) -> float:
     response = requests.get(url)
 
     if response.status_code != 200:
-        raise Exception("Endpoint is not available")
+        requests.exceptions.RequestException("Endpoint is not available")
 
     soup = BeautifulSoup(response.text, "html.parser")
 
@@ -63,7 +62,7 @@ def get_kamas_price_from_fun_shop(server: str) -> float:
     response = requests.get(url)
 
     if response.status_code != 200:
-        raise Exception("Endpoint is not available")
+        raise requests.exceptions.RequestException("Endpoint is not available")
 
     soup = BeautifulSoup(response.text, "html.parser")
     product_prices = soup.find_all("span", class_="prc")
@@ -76,7 +75,7 @@ def get_kamas_price_from_fun_shop(server: str) -> float:
         case "galgarion":
             index = 3
         case _:
-            raise Exception("Server not found")
+            raise ValueError("Server not found")
 
     kamas_value = product_prices[index].text
     kamas_value = kamas_value.split("\\")[0]
@@ -102,7 +101,7 @@ def get_kamas_price_from_ig_play(server: str) -> float:
     response = requests.get(url)
 
     if response.status_code != 200:
-        raise Exception("Endpoint is not available")
+        raise requests.exceptions.RequestException("Endpoint is not available")
 
     soup = BeautifulSoup(response.text, "html.parser")
     product_prices = soup.find_all("span", class_="prc")
@@ -115,7 +114,7 @@ def get_kamas_price_from_ig_play(server: str) -> float:
         case "galgarion":
             index = 3
         case _:
-            raise Exception("Server not found")
+            raise ValueError("Server not found")
 
     kamas_value = product_prices[index].text
     kamas_value = kamas_value.split("\\")[0]
@@ -140,7 +139,7 @@ def get_kamas_price_from_leskamas(server: str) -> float:
     response = requests.get(url)
 
     if response.status_code != 200:
-        raise Exception("Endpoint is not available")
+        raise requests.exceptions.RequestException("Endpoint is not available")
 
     soup = BeautifulSoup(response.text, "html.parser")
     server = server.capitalize()
@@ -173,12 +172,12 @@ def get_kamas_price_from_mode_marchand(server: str) -> float:
         case "galgarion":
             url = "https://www.mode-marchand.net/annonces/dofus-retro/kamas?server%5B%5D=129"
         case _:
-            raise Exception("Server not found")
+            raise ValueError("Server not found")
 
     response = requests.get(url)
 
     if response.status_code != 200:
-        raise Exception("Endpoint is not available")
+        raise requests.exceptions.RequestException("Endpoint is not available")
 
     soup = BeautifulSoup(response.text, "html.parser")
     product_prices = soup.find_all("div", class_="card-footer")
@@ -218,12 +217,12 @@ def get_kamas_from_try_and_judge(server: str) -> float:
         case "galgarion":
             url = "https://www.tryandjudge.com/fr/retro-kamas/galgarion/3m-kamas-galgarion"
         case _:
-            raise Exception("Server not found")
+            raise ValueError("Server not found")
 
     response = requests.get(url)
 
     if response.status_code != 200:
-        raise Exception("Endpoint is not available")
+        raise requests.exceptions.RequestException("Endpoint is not available")
 
     soup = BeautifulSoup(response.text, "html.parser")
     product_prices = soup.find_all("span", class_="current-price")
@@ -268,6 +267,7 @@ def get_current_kamas_value(server: str) -> None:
     Args:
         server (str): the server name
     """
+    logging.info(f"Getting kamas value for server {server}")
     kamas_dict: Dict[str, float] = {}
     for name, callback in {
         "Kamas facile": get_kamas_price_from_kamas_facile_endpoint,
@@ -302,5 +302,9 @@ def get_kamas_value_from_websites_safully(
     """
     try:
         kamas_dict[name] = callback(server)
-    except Exception as e:
-        print(f"Error while getting kamas value from {name} for server {server}: {e}")
+    except ValueError:
+        pass
+    except requests.exceptions.RequestException as e:
+        logging.warning(
+            f"Error while getting kamas value from {name} for server {server}: {e}"
+        )

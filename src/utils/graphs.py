@@ -181,7 +181,11 @@ def create_gauche_graph(yesterday_value: float, today_value: float) -> go.Figure
         go.Indicator(
             mode="gauge+number+delta",
             value=today_value,
-            title={"text": f"<b>+{value} %/jour</b>" if value > 0 else f"<b>{value} %/jour</b>"},
+            title={
+                "text": f"<b>+{value} %/jour</b>"
+                if value > 0
+                else f"<b>{value} %/jour</b>"
+            },
             domain={"x": [0, 1], "y": [0, 1]},
             delta={"reference": yesterday_value},
             gauge={

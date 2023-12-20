@@ -1,8 +1,8 @@
 from dash import html
 
 from src.utils.backend.backend import backend_get_kamas_value
-from src.utils.scraping import get_daily_kamas_value, get_yesterday_kamas_value
 from src.utils.graphs import view_graph
+from src.utils.scraping import get_daily_kamas_value, get_yesterday_kamas_value
 from src.views.server_view import server_view
 
 
