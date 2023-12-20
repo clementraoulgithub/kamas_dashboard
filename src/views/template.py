@@ -10,7 +10,7 @@ def index_view() -> html.Div:
             html.Div(
                 [
                     html.Img(src="/assets/ressources/logo.png", className="logo"),
-                    html.H1(children=NAME.capitalize()),
+                    html.H3(children=NAME.capitalize()),
                 ],
                 className="header-container",
             ),

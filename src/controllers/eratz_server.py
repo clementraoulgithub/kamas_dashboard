@@ -2,11 +2,17 @@ from dash import html
 
 from src.utils.backend.backend import backend_get_kamas_value
 from src.utils.scraping import get_daily_kamas_value, get_yesterday_kamas_value
-from src.utils.utils import view_graph
+from src.utils.graphs import view_graph
 from src.views.server_view import server_view
 
 
 def eratz_server() -> html.Div:
+    """
+    return the html.Div for the eratz server
+
+    Returns:
+        html.Div: the html.Div for the boune server
+    """
     name = "eratz"
     description = f"Ces graphiques représentent les valeurs estimée du kamas en euros pour le serveur multi compte {name}"
     kamas_dict = backend_get_kamas_value(server=name)

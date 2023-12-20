@@ -8,7 +8,7 @@ body, html {
 }
 
 h1, h2, h3, h4, h5, h6 {
-    color: white;
+    color: gray;
     font-weight: bold;
     font-family: Arial;
 }
@@ -23,7 +23,7 @@ p {
     padding: 10px;
 }
 
-.header h1 {
+.header h3 {
     margin: 0px;
 }
 
@@ -207,7 +207,6 @@ input[type='radio'] {
 .graphs-container {
     display: flex;
     flex-direction: row;
-    align-items: stretch;
 }
 
 
