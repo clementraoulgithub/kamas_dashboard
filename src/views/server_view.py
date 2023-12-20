@@ -25,14 +25,16 @@ def server_view(
                                     html.Div(
                                         [
                                             html.P("Moyenne"),
-                                            html.H1(f"{average} €/m"),
+                                            html.H1(f"{average}"),
+                                            html.H2("EUR/m"),
                                         ],
                                         className="graph-info",
                                     ),
                                     html.Div(
                                         [
                                             html.P("Meilleur prix"),
-                                            html.H1(f"{best_price} €/m"),
+                                            html.H1(f"{best_price}"),
+                                            html.H2("EUR/m"),
                                         ],
                                         className="graph-info",
                                     ),
@@ -64,7 +66,7 @@ def server_view(
                                             html.Div(
                                                 [
                                                     html.P("Nombre de sites"),
-                                                    html.H1(nb_site),
+                                                    html.H1(nb_site, id="nb-site"),
                                                 ],
                                                 className="graph-info",
                                             ),

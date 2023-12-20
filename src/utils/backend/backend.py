@@ -1,6 +1,7 @@
+import os
 import requests
 
-host = "backend"
+host = os.environ.get("BACKEND_HOST", "localhost")
 
 def backend_get_daily_kamas_value(server: str):
     response = requests.get(url=f"http://{host}:8000/today?server={server}")

@@ -38,8 +38,9 @@ def create_daily_graph(
     )
 
     fig = px.bar(
-        dataframe, x="Site", y="Valeurs", title=f"<b>{model.title}</b>", text="Valeurs"
+        dataframe, x="Site", y="Valeurs", title=f"<b>{model.title}</b>", text="Valeurs",
     )
+    
     fig.add_hline(
         y=average_value,
         line_dash="dash",
@@ -61,6 +62,7 @@ def create_daily_graph(
         plot_bgcolor="rgba(0, 0, 0, 0)",
         paper_bgcolor="rgba(0, 0, 0, 0)",
     )
+    
     fig.update_traces(
         marker_color=[
             "#00C58E" if value < average_value else "#FA4B3A"
@@ -98,7 +100,7 @@ def create_graph(
     )
     dataframe = pd.DataFrame(
         data={
-            "Date": x_values,
+            "Date UTC": x_values,
             "Moyenne": y_values,
             "Max": y_max_values,
             "Min": y_min_values,
@@ -106,7 +108,7 @@ def create_graph(
     )
     fig = px.line(
         dataframe,
-        x="Date",
+        x="Date UTC",
         y=["Moyenne", "Max", "Min"],
         title=f"<b>{model.title}</b>",
     )

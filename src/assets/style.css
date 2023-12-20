@@ -3,9 +3,8 @@
 body, html {
     font-family: Helvetica;
     height: 100%;
-    display : flex;
-    flex-direction: column;
     background-color: #161833;
+    margin: 0px;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -20,11 +19,10 @@ p {
 
 .header {
     background-color: #1c1e3a;
-    display : flex;
-    flex-direction: column;
     color: white; 
     padding: 10px;
 }
+
 .header h1 {
     margin: 0px;
 }
@@ -35,8 +33,7 @@ p {
 }
 
 .header-container {
-    display : flex;
-    flex-direction: row;
+    display : inline-flex;
     align-items: center;
 }
 
@@ -73,15 +70,11 @@ p {
 }
 
 .main-content {
-    padding-top: 0px;
+    padding: 0px;
 }
 
-.graph-body-content {
-    display: flex;
-}
 
 .graph-main-content {
-    flex: 1;
     padding-left: 30px;
     border-radius: 16px;
     background-color: #161833;
@@ -91,11 +84,6 @@ p {
     color: #FFEECF;
 }
 
-.radio-items {
-    margin: 10px;
-    display : flex;
-    flex-direction: column;
-}
 
 .graphs-content {
     display : flex;
@@ -161,15 +149,32 @@ input[type='radio'] {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
     background-color: #1c1e3a;
     border-radius: 16px;
     margin: 10px;
 }
 
+.graph-info p {
+    text-align: left;
+    margin-left: 20px;
+}
+
 .graph-info h1 {
     color: white;
     font-weight: bold;
+    text-align: left;
+    font-size: 40px;
+    margin: 0px;
+    margin-left: 20px;
+}
+
+.graph-info h2 {
+    margin-left: 20px;
+}
+
+#nb-site {
+    text-align: center;
+    margin: 10px;
 }
 
 .graph-info-container {
@@ -202,6 +207,7 @@ input[type='radio'] {
 .graphs-container {
     display: flex;
     flex-direction: row;
+    align-items: stretch;
 }
 
 
