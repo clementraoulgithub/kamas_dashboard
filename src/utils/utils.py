@@ -1,10 +1,24 @@
 import datetime
 import logging
 from logging.handlers import RotatingFileHandler
-
+from apscheduler.schedulers.background import BackgroundScheduler
 import pytz
 import tzlocal
 
+from src.utils.scraping import get_current_kamas_value
+
+def schedule_scrapping():
+    scheduler = BackgroundScheduler()
+
+    for server in ["boune", "crail", "eratz", "galgarion", "henual"]:
+        scheduler.add_job(
+            get_current_kamas_value,
+            "interval",
+            args=[server],
+            minutes=10,
+        )
+    print("Start the scheduler")
+    scheduler.start()
 
 def get_offset_time_zone() -> datetime.timedelta | None:
     """

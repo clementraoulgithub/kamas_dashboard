@@ -1,18 +1,9 @@
-from apscheduler.schedulers.background import BackgroundScheduler
 
 from src.utils.scraping import get_current_kamas_value
-from src.utils.utils import logger_config
+from src.utils.utils import logger_config, schedule_scrapping
 
-scheduler = BackgroundScheduler()
 
-for server in ["boune", "crail", "eratz", "galgarion", "henual"]:
-    scheduler.add_job(
-        get_current_kamas_value,
-        "interval",
-        args=[server],
-        minutes=10,
-    )
-scheduler.start()
+schedule_scrapping()
 
 from src.controllers.app import app, server
 

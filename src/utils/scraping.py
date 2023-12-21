@@ -289,7 +289,6 @@ def get_current_kamas_value(server: str) -> None:
     Args:
         server (str): the server name
     """
-    logging.info(f"Getting kamas value for server {server}")
     kamas_dict: Dict[str, float] = {}
     for name, callback in {
         "Kamas facile": get_kamas_price_from_kamas_facile_endpoint,
