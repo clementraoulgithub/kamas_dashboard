@@ -1,10 +1,5 @@
 import dash
-
-from src.controllers.boune_server import boune_server
-from src.controllers.crail_server import crail_server
-from src.controllers.eratz_server import eratz_server
-from src.controllers.galgarion_server import galgarion_server
-from src.controllers.henual_server import henual_server
+from src.controllers.server import server
 from src.views.error_view import error_view
 
 
@@ -21,16 +16,16 @@ def routers(pathname: str) -> dash.html.Div:
     """
     match pathname:
         case "/":
-            return boune_server()
+            return server("boune")
         case "/boune":
-            return boune_server()
+            return server("boune")
         case "/crail":
-            return crail_server()
+            return server("crail")
         case "/eratz":
-            return eratz_server()
+            return server("eratz")
         case "/galgarion":
-            return galgarion_server()
+            return server("galgarion")
         case "/henual":
-            return henual_server()
+            return server("henual")
         case _:
             return error_view()

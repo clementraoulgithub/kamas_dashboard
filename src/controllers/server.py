@@ -1,21 +1,19 @@
 from dash import html
 
-from src.utils.backend.backend import backend_get_kamas_value
 from src.utils.graphs import view_graph
-from src.utils.scraping import get_daily_kamas_value, get_yesterday_kamas_value
+from src.utils.scraping import get_all_kamas_value, get_daily_kamas_value, get_yesterday_kamas_value
 from src.views.server_view import server_view
 
 
-def boune_server() -> html.Div:
+def server(name: str) -> html.Div:
     """
-    return the html.Div for the boune server
+    return the html.Div for server
 
     Returns:
         html.Div: the html.Div for the boune server
     """
-    name = "boune"
-    description = f"Ces graphiques représentent les valeurs estimée du kamas en euros pour le serveur mono compte {name}"
-    kamas_dict = backend_get_kamas_value(server=name)
+    description = f"Ces graphiques représentent les valeurs estimée du kamas en euros pour le serveur {name}"
+    kamas_dict = get_all_kamas_value(server=name)
     day_kamas_dict = get_daily_kamas_value(server=name)
     yesterday_kamas_dict = get_yesterday_kamas_value(server=name)
 
@@ -33,7 +31,7 @@ def boune_server() -> html.Div:
         fig_avg,
         fig_gauge,
         best_price,
-        average=day_kamas_dict["average"],
+        average=day_kamas_dict["average"] if day_kamas_dict else 0,
         deviation=deviation,
-        nb_site=len(day_kamas_dict["kamas_dict"]),
+        nb_site=len(day_kamas_dict["kamas_dict"]) if day_kamas_dict else 0,
     )

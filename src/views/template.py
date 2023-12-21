@@ -24,7 +24,7 @@ def index_view() -> html.Div:
         html.P(children=f"© {NAME} 2023, work in progress", className="footer")
     )
 
-    # Left Menu
+    # Top Menu
     top_menu = html.Div(
         [
             dcc.Link("Serveur Boune", href="/boune", className="link"),
@@ -42,7 +42,7 @@ def index_view() -> html.Div:
     return html.Div(
         children=[
             header,
-            dcc.Location(id="url", refresh=False),
+            dcc.Location(id="url"),
             top_menu,
             content,
             footer,

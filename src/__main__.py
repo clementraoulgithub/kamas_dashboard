@@ -3,7 +3,6 @@ from apscheduler.schedulers.background import BackgroundScheduler
 from src.utils.scraping import get_current_kamas_value
 from src.utils.utils import logger_config
 
-logger_config()
 scheduler = BackgroundScheduler()
 
 for server in ["boune", "crail", "eratz", "galgarion", "henual"]:

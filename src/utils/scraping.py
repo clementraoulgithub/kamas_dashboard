@@ -1,3 +1,4 @@
+import datetime
 import logging
 import re
 from typing import Callable, Dict, List
@@ -6,9 +7,11 @@ import numpy as np
 import requests
 from bs4 import BeautifulSoup
 
-from src.utils.backend.backend import (backend_get_daily_kamas_value,
-                                       backend_get_yesterday_kamas_value,
-                                       backend_post_daily_kamas_value)
+from src.utils.backend.backend import (
+    backend_get_daily_kamas_value, backend_get_kamas_value,
+    backend_get_yesterday_kamas_value,
+    backend_post_daily_kamas_value
+)
 
 
 def get_kamas_price_from_kamas_facile_endpoint(server: str) -> float:
@@ -244,6 +247,8 @@ def get_daily_kamas_value(server: str) -> dict | None:
     """
     if response := backend_get_daily_kamas_value(server):
         return response
+    else:
+        return {"timestamp": "1970-01-01T00:00:00.0+00:00", "average": 0, "max": 0, "min": 0, "kamas_dict": {"None": 0}, "server": server}
 
 
 def get_yesterday_kamas_value(server: str) -> dict | None:
@@ -258,6 +263,23 @@ def get_yesterday_kamas_value(server: str) -> dict | None:
     """
     if response := backend_get_yesterday_kamas_value(server):
         return response
+    else:
+        return {"timestamp": "1970-01-01T00:00:00.0+00:00", "average": 0, "max": 0, "min": 0, "kamas_dict": {"None": 0}, "server": server}
+    
+def get_all_kamas_value(server: str) -> dict | None:
+    """
+    Get all kamas value
+
+    Args:
+        server (str): the server name
+
+    Returns:
+        dict | None: all kamas value
+    """
+    if response := backend_get_kamas_value(server):
+        return response
+    else:
+        return [{"timestamp": "1970-01-01T00:00:00.0+00:00", "average": 0, "max": 0, "min": 0, "kamas_dict": {"None": 0}, "server": server}]
 
 
 def get_current_kamas_value(server: str) -> None:

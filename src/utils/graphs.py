@@ -174,7 +174,10 @@ def create_gauche_graph(yesterday_value: float, today_value: float) -> go.Figure
     Returns:
         go.Figure: the gauche graph
     """
-    value = (today_value - yesterday_value) / yesterday_value * 100
+    try:
+        value = (today_value - yesterday_value) / yesterday_value * 100
+    except ZeroDivisionError:
+        value = 0
     value = round(value, 2)
     max_value = max(today_value, yesterday_value)
     fig = go.Figure(
