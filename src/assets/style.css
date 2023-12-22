@@ -64,12 +64,14 @@ p {
     font-weight: bold;
     text-decoration: none;
     padding: 5px;
+    border-radius: 8px;
+    border: 1px solid #1c1e3a;
     margin: 10px;
 }
 
 .top-menu a:hover {
-    border-radius: 16px;
     background-color: #1c1e3a;
+    border: 1px solid #EC5C28;
 }
 
 .main-content {
