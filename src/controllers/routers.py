@@ -1,4 +1,5 @@
 import dash
+
 from src.controllers.server import server
 from src.views.error_view import error_view
 

@@ -1,11 +1,13 @@
 import datetime
 import logging
 from logging.handlers import RotatingFileHandler
-from apscheduler.schedulers.background import BackgroundScheduler
+
 import pytz
 import tzlocal
+from apscheduler.schedulers.background import BackgroundScheduler
 
 from src.utils.scraping import get_current_kamas_value
+
 
 def schedule_scrapping():
     scheduler = BackgroundScheduler()
@@ -19,6 +21,7 @@ def schedule_scrapping():
         )
     print("Start the scheduler")
     scheduler.start()
+
 
 def get_offset_time_zone() -> datetime.timedelta | None:
     """
