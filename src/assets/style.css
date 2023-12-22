@@ -76,7 +76,6 @@ p {
     padding: 0px;
 }
 
-
 .graph-main-content {
     padding-left: 30px;
     padding-right: 30px;
@@ -134,7 +133,7 @@ input[type='radio'] {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    text-align: left;
+    text-align: center;
     background-color: #1c1e3a;
     border-radius: 16px;
     margin: 10px;
@@ -150,21 +149,15 @@ input[type='radio'] {
     flex: 1;
 }
 
-.graph-info p {
-    margin-left: 20px;
-}
-
 .graph-info h1 {
     color: #EC5C28;;
     font-weight: bold;
     font-size: 40px;
     margin: 0px;
-    margin-left: 20px;
 }
 
 .graph-info h2 {
     color: grey;
-    margin-left: 20px;
 }
 
 #nb-site {
@@ -172,6 +165,11 @@ input[type='radio'] {
     margin: 0px;
     color: white;
     margin-bottom: 20px;
+}
+
+#best-price {
+    text-align: center;
+    margin-left: 0px;
 }
 
 .graph-info-container {

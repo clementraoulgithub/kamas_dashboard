@@ -47,8 +47,8 @@ def server_view(
                                     html.Div(
                                         [
                                             html.P("Meilleur prix"),
-                                            html.H1(f"{best_price}"),
-                                            html.H2("EUR/m"),
+                                            html.H1(f"{best_price}", id="best-price"),
+                                            html.H2("EUR/m", id="best-price"),
                                         ],
                                         className="graph-info",
                                     ),
