@@ -6,6 +6,3 @@ run-prod:
 
 docker-build:
 	docker build --pull --rm -f "dockerfile" -t kamasdashboard:latest "."
-
-docker-tag:
-	docker tag kamasdashboard:latest clementraoul/dockerhub:kamasdashboard
