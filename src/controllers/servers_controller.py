@@ -1,3 +1,6 @@
+"""Server controller"""
+
+
 from dash import html
 
 from src.utils.graphs import view_graph

@@ -1,3 +1,5 @@
+"""Return Server view."""
+
 import plotly.graph_objs as go
 from dash import dcc, html
 
@@ -13,6 +15,24 @@ def server_view(
     deviation: float,
     nb_site: int,
 ) -> html.Div:
+    """
+    Return the html.Div for server
+
+    Args:
+        name (str): the server name
+        model_description (str): the model description
+        fig_day (go.Figure): the figure for the day
+        fig_average (go.Figure): the figure for the average
+        fig_gauge (go.Figure): the figure for the gauge
+        best_price (float): the best price
+        average (float): the average price
+        deviation (float): the deviation price
+        nb_site (int): the number of site
+
+    Returns:
+        html.Div: the html.Div for the server
+    """
+    #TODO: split this function
     return html.Div(
         [
             html.Div(

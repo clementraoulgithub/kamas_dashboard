@@ -1,27 +1,24 @@
+"""Utils functions"""
+
 import datetime
+from enum import Enum, unique
 import logging
 from logging.handlers import RotatingFileHandler
 
 import pytz
 import tzlocal
-from apscheduler.schedulers.background import BackgroundScheduler
-
-from src.utils.scraping import get_current_kamas_value
 
 
-def schedule_scrapping():
-    scheduler = BackgroundScheduler()
+@unique
+class Server(Enum):
+    """Enum of the differents servers"""
 
-    for server in ["boune", "crail", "eratz", "galgarion", "henual"]:
-        scheduler.add_job(
-            get_current_kamas_value,
-            "interval",
-            args=[server],
-            minutes=10,
-        )
-    print("Start the scheduler")
-    scheduler.start()
-
+    BOUNE = "boune"
+    CRAIL = "crail"
+    ERATZ = "eratz"
+    GALGARION = "galgarion"
+    HENUAL = "henual"
+    
 
 def get_offset_time_zone() -> datetime.timedelta | None:
     """

@@ -1,5 +1,6 @@
-from src.utils.scraping import get_current_kamas_value
-from src.utils.utils import logger_config, schedule_scrapping
+"""Entry point of the application."""
+
+from src.utils.scraping import schedule_scrapping
 
 schedule_scrapping()
 

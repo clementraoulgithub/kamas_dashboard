@@ -1,4 +1,5 @@
-import datetime
+"""Main module for scraping functions."""
+
 import logging
 import re
 from typing import Callable, Dict, List
@@ -7,12 +8,26 @@ import numpy as np
 import requests
 from bs4 import BeautifulSoup
 
-from src.utils.backend.backend import (backend_get_daily_kamas_value,
-                                       backend_get_kamas_value,
-                                       backend_get_yesterday_kamas_value,
-                                       backend_post_daily_kamas_value)
+from src.utils.backend import Backend
+from src.utils.tools import Server
+from apscheduler.schedulers.background import BackgroundScheduler
 
+def schedule_scrapping() -> None:
+    """
+    Schedule the scrapping of the kamas values
+    """
+    scheduler = BackgroundScheduler()
 
+    for server in Server.__members__.values():
+        scheduler.add_job(
+            get_current_kamas_value,
+            "interval",
+            args=[server],
+            minutes=10,
+        )
+    print("Start the scheduler")
+    scheduler.start()
+    
 def get_kamas_price_from_kamas_facile_endpoint(server: str) -> float:
     """
     Get the kamas price from kamas facile endpoint
@@ -70,11 +85,11 @@ def get_kamas_price_from_fun_shop(server: str) -> float:
     product_prices = soup.find_all("span", class_="prc")
 
     match server:
-        case "boune":
+        case Server.BOUNE.value:
             index = 0
-        case "crail":
+        case Server.CRAIL.value:
             index = 1
-        case "galgarion":
+        case Server.GALGARION.value:
             index = 3
         case _:
             raise ValueError("Server not found")
@@ -109,11 +124,11 @@ def get_kamas_price_from_ig_play(server: str) -> float:
     product_prices = soup.find_all("span", class_="prc")
 
     match server:
-        case "boune":
+        case Server.BOUNE.value:
             index = 0
-        case "crail":
+        case Server.CRAIL.value:
             index = 1
-        case "galgarion":
+        case Server.GALGARION.value:
             index = 3
         case _:
             raise ValueError("Server not found")
@@ -147,6 +162,7 @@ def get_kamas_price_from_leskamas(server: str) -> float:
     server = server.capitalize()
     re_pattern = rf"<td>{server}<\/td>\s*<td>(.*?)<\/td>"
     match = re.search(re_pattern, str(soup))
+    
     return float(match[1].replace("€/M", ""))
 
 
@@ -165,13 +181,13 @@ def get_kamas_price_from_mode_marchand(server: str) -> float:
         float: the kamas price
     """
     match server:
-        case "boune":
+        case Server.BOUNE.value:
             url = "https://www.mode-marchand.net/annonces/dofus-retro/kamas?server%5B%5D=130"
-        case "crail":
+        case Server.CRAIL.value:
             url = "https://www.mode-marchand.net/annonces/dofus-retro/kamas?server%5B%5D=128"
-        case "eratz":
+        case Server.ERATZ.value:
             url = "https://www.mode-marchand.net/annonces/dofus-retro/kamas?server%5B%5D=126"
-        case "galgarion":
+        case Server.GALGARION.value:
             url = "https://www.mode-marchand.net/annonces/dofus-retro/kamas?server%5B%5D=129"
         case _:
             raise ValueError("Server not found")
@@ -212,11 +228,11 @@ def get_kamas_from_try_and_judge(server: str) -> float:
         float: the kamas price
     """
     match server:
-        case "boune":
+        case Server.BOUNE.value:
             url = "https://www.tryandjudge.com/fr/retro-kamas/boune/1m-kamas-boune"
-        case "crail":
+        case Server.CRAIL.value:
             url = "https://www.tryandjudge.com/fr/retro-kamas/crail/3m-kamas-crail"
-        case "galgarion":
+        case Server.GALGARION.value:
             url = "https://www.tryandjudge.com/fr/retro-kamas/galgarion/3m-kamas-galgarion"
         case _:
             raise ValueError("Server not found")
@@ -244,17 +260,12 @@ def get_daily_kamas_value(server: str) -> dict | None:
     Returns:
         dict | None: the daily kamas value
     """
-    if response := backend_get_daily_kamas_value(server):
-        return response
-    else:
-        return {
-            "timestamp": "1970-01-01T00:00:00.0+00:00",
-            "average": 0,
-            "max": 0,
-            "min": 0,
-            "kamas_dict": {"None": 0},
-            "server": server,
-        }
+    backend = Backend()
+    try:
+        if response := backend.backend_get_daily_kamas_value(server):
+            return response
+    except requests.exceptions.RequestException as e:
+        logging.error(f"Error while getting daily kamas value: {e}")
 
 
 def get_yesterday_kamas_value(server: str) -> dict | None:
@@ -267,17 +278,21 @@ def get_yesterday_kamas_value(server: str) -> dict | None:
     Returns:
         dict | None: the yesterday kamas value
     """
-    if response := backend_get_yesterday_kamas_value(server):
-        return response
-    else:
-        return {
-            "timestamp": "1970-01-01T00:00:00.0+00:00",
-            "average": 0,
-            "max": 0,
-            "min": 0,
-            "kamas_dict": {"None": 0},
-            "server": server,
-        }
+    backend = Backend()
+    try:
+        if response := backend.backend_get_yesterday_kamas_value(server):
+            return response
+    except requests.exceptions.RequestException as e:
+        logging.error(f"Error while getting yesterday kamas value: {e}")
+        
+    return {
+        "timestamp": "1970-01-01T00:00:00.0+00:00",
+        "average": 0,
+        "max": 0,
+        "min": 0,
+        "kamas_dict": {"None": 0},
+        "server": server,
+    }
 
 
 def get_all_kamas_value(server: str) -> dict | None:
@@ -290,19 +305,23 @@ def get_all_kamas_value(server: str) -> dict | None:
     Returns:
         dict | None: all kamas value
     """
-    if response := backend_get_kamas_value(server):
-        return response
-    else:
-        return [
-            {
-                "timestamp": "1970-01-01T00:00:00.0+00:00",
-                "average": 0,
-                "max": 0,
-                "min": 0,
-                "kamas_dict": {"None": 0},
-                "server": server,
-            }
-        ]
+    backend = Backend()
+    try:
+        if response := backend.backend_get_kamas_value(server):
+            return response
+    except requests.exceptions.RequestException as e:
+        logging.error(f"Error while getting yesterday kamas value: {e}")
+
+    return [
+        {
+            "timestamp": "1970-01-01T00:00:00.0+00:00",
+            "average": 0,
+            "max": 0,
+            "min": 0,
+            "kamas_dict": {"None": 0},
+            "server": server,
+        }
+    ]
 
 
 def get_current_kamas_value(server: str) -> None:
@@ -312,7 +331,9 @@ def get_current_kamas_value(server: str) -> None:
     Args:
         server (str): the server name
     """
+    backend = Backend()
     kamas_dict: Dict[str, float] = {}
+    
     for name, callback in {
         "Kamas facile": get_kamas_price_from_kamas_facile_endpoint,
         "Fun shop": get_kamas_price_from_fun_shop,
@@ -329,7 +350,7 @@ def get_current_kamas_value(server: str) -> None:
     min_ = min(kamas_lst)
 
     if mean and max_ and min_:
-        backend_post_daily_kamas_value(kamas_dict, mean, max_, min_, server)
+        backend.backend_post_daily_kamas_value(kamas_dict, mean, max_, min_, server)
 
 
 def get_kamas_value_from_websites_safully(

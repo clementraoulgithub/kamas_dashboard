@@ -1,11 +1,12 @@
-import os
+"""The Dash application."""
 
 import dash
 
 from src import NAME
-from src.controllers.layout import create_layout
-from src.controllers.routers import routers
-from src.views.template import index_view
+
+# This import is needed to make the app work with Dash
+from src.controllers.routers_controller import routers
+from src.views.template_view import template_view
 
 app = dash.Dash(
     __name__,
@@ -13,4 +14,4 @@ app = dash.Dash(
 )
 app.title = NAME
 server = app.server
-app.layout = create_layout()
+app.layout = template_view()
