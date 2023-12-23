@@ -1,6 +1,7 @@
 """Entry point of the application."""
 
 import os
+
 from src.utils.scraping import schedule_scrapping
 
 schedule_scrapping()

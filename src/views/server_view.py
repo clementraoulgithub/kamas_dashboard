@@ -8,12 +8,12 @@ def server_view(
     name: str,
     model_description: str,
     fig_day: go.Figure,
-    fig_average: go.Figure,
     fig_gauge: go.Figure,
     best_price: float,
     average: float,
     deviation: float,
     nb_site: int,
+    graph_slider: dcc.Slider,
 ) -> html.Div:
     """
     Return the html.Div for server
@@ -22,7 +22,6 @@ def server_view(
         name (str): the server name
         model_description (str): the model description
         fig_day (go.Figure): the figure for the day
-        fig_average (go.Figure): the figure for the average
         fig_gauge (go.Figure): the figure for the gauge
         best_price (float): the best price
         average (float): the average price
@@ -115,14 +114,16 @@ def server_view(
                     ),
                     html.Div(
                         [
+                            graph_slider,
                             dcc.Graph(
-                                figure=fig_average,
                                 config={
                                     "displayModeBar": False,
                                     "displaylogo": False,
                                 },
+                                id="graph-line",
                             ),
-                        ]
+                        ],
+                        className="graph-line-container",
                     ),
                 ],
                 className="graph-main-content",

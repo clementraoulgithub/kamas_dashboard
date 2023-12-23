@@ -185,6 +185,10 @@ input[type='radio'] {
 
 .rc-slider-mark-text {
     color: white;
+    margin-left: 10px;
+    font-weight: bold;
+    margin: 10px;
+    margin-left: 20px;
 }
 
 .rc-slider-rail,
@@ -196,13 +200,42 @@ input[type='radio'] {
     background-color: #1c1e3a;
 }
 
+.rc-slider-dot {
+    background-color: #EC5C28;
+    border: 2px solid #EC5C28;
+    width: 12px;
+    height: 12px;
+}
+
+.rc-slider-handle {
+    background-color: white;
+    border: 2px solid #EC5C28;
+    width: 18px;
+    height: 18px;
+}
+
+.rc-slider-handle:hover,
+.rc-slider-handle:focus {
+    background-color: white;
+    border: 2px solid #EC5C28;
+}
+
 .graphs-container {
     display: flex;
     flex-direction: row;
 }
 
+.graph-line-container {
+    display: flex;
+    flex: 2;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
 
-
-
-
+#graph-slider {
+    padding: 0px;
+    margin: 10px;
+    margin-right: 100px;
+}
 

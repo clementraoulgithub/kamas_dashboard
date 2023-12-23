@@ -217,33 +217,19 @@ def create_gauche_graph(yesterday_value: float, today_value: float) -> go.Figure
     return fig
 
 
-def view_graph(
-    day_kamas_dict: dict, yesterday_kamas_dict: dict, kamas_dict: dict
-) -> tuple:
+def create_graphs(day_kamas_dict: dict, yesterday_kamas_dict: dict) -> tuple:
     """
     return all the graph for the server
 
     Args:
         day_kamas_dict (dict): dict of the day kamas value
         yesterday_kamas_dict (dict): dict of the yesterday kamas value
-        kamas_dict (dict): dict of all kamas value
 
     Returns:
         tuple: all the graph for the server
     """
     best_price = min(list(day_kamas_dict["kamas_dict"].values()))
     deviation_value = round(np.std(list(day_kamas_dict["kamas_dict"].values())), 2)
-
-    fig_avg = create_line_graph(
-        "Evolution du million de kamas",
-        "",
-        "Tps",
-        "Valeur estimée moyenne",
-        [dict["timestamp"] for dict in kamas_dict],
-        [dict["average"] for dict in kamas_dict],
-        [dict["max"] for dict in kamas_dict],
-        [dict["min"] for dict in kamas_dict],
-    )
 
     fig_day = create_bar_graph(
         "Valeur journalière du million de kamas",
@@ -262,7 +248,7 @@ def view_graph(
             day_kamas_dict["average"], day_kamas_dict["average"]
         )
 
-    return fig_day, fig_avg, fig_gauge, best_price, deviation_value
+    return fig_day, fig_gauge, best_price, deviation_value
 
 
 def create_h_line(fig: go.Figure, value: float, label: str) -> None:

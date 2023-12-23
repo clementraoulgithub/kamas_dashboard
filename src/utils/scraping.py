@@ -251,6 +251,7 @@ def get_kamas_from_try_and_judge(server: str) -> float:
     price = float(kamas_value.replace("€", "").replace(",", "."))
     return price if server == "boune" else round(price / 3, 2)
 
+
 def get_D2_gateway_price(server: str) -> float:
     """
     Get the kamas price from D2 gateway
@@ -279,9 +280,9 @@ def get_D2_gateway_price(server: str) -> float:
 
     if response.status_code != 200:
         raise requests.exceptions.RequestException("Endpoint is not available")
-      
+
     response = response.json()
-    
+
     return float(response["result"][0]["price"])
 
 
@@ -330,7 +331,7 @@ def get_yesterday_kamas_value(server: str) -> dict | None:
     }
 
 
-def get_all_kamas_value(server: str) -> dict | None:
+def get_scope_kamas_value(server: str, scope: str) -> dict | None:
     """
     Get all kamas value
 
@@ -342,7 +343,7 @@ def get_all_kamas_value(server: str) -> dict | None:
     """
     backend = Backend()
     try:
-        if response := backend.backend_get_kamas_value(server):
+        if response := backend.backend_get_scope_kamas_value(server, scope):
             return response
     except requests.exceptions.RequestException as e:
         logging.error(f"Error while getting yesterday kamas value: {e}")
@@ -370,7 +371,7 @@ def get_current_kamas_value(server: str) -> None:
     kamas_dict: Dict[str, float] = {}
 
     for name, callback in {
-        "D2gate" : get_D2_gateway_price,
+        "D2gate": get_D2_gateway_price,
         "Kamas facile": get_kamas_price_from_kamas_facile_endpoint,
         "Fun shop": get_kamas_price_from_fun_shop,
         "Les kamas": get_kamas_price_from_leskamas,
@@ -404,11 +405,8 @@ def get_kamas_value_from_websites_safully(
     try:
         kamas_dict[name] = callback(server)
     except requests.exceptions.RequestException as e:
-        logging.warning(
-            f"Endpoint error from {name} for server {server}: {e}"
-        )
+        logging.warning(f"Endpoint error from {name} for server {server}: {e}")
     except Exception as e:
         logging.error(
             f"Error while getting kamas value from {name} for server {server}: {e}"
         )
-

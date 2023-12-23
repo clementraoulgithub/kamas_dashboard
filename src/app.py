@@ -3,6 +3,7 @@
 import dash
 
 from src import NAME
+from src.controllers.graph_line_controller import graph_line_controller
 
 # This import is needed to make the app work with Dash
 from src.controllers.routers_controller import routers
