@@ -74,14 +74,24 @@ def create_bar_graph(
         fillcolor="rgba(255, 255, 255, 0.2)",
         opacity=0.2,
     )
-    
-    min_value, max_value = min(x_values, key=x_values.get), max(x_values, key=x_values.get)
+
+    min_value, max_value = min(x_values, key=x_values.get), max(
+        x_values, key=x_values.get
+    )
     if min_value and max_value and min_value != max_value:
         fig.add_annotation(
-            text="Vendeur le moins cher", x=min_value, y=x_values[min_value], arrowhead=1, showarrow=True
+            text="Vendeur le moins cher",
+            x=min_value,
+            y=x_values[min_value],
+            arrowhead=1,
+            showarrow=True,
         )
         fig.add_annotation(
-            text="Vendeur le plus cher", x=max_value, y=x_values[max_value], arrowhead=1, showarrow=True
+            text="Vendeur le plus cher",
+            x=max_value,
+            y=x_values[max_value],
+            arrowhead=1,
+            showarrow=True,
         )
 
     fig.update_layout(
@@ -168,13 +178,7 @@ def create_line_graph(
         template="plotly_dark",
         plot_bgcolor="rgba(0, 0, 0, 0)",
         paper_bgcolor="rgba(0, 0, 0, 0)",
-        legend=dict(
-            orientation='h',
-            x=0.5,
-            xanchor='center',
-            y=1.1,
-            yanchor='bottom'
-        )
+        legend=dict(orientation="h", x=0.5, xanchor="center", y=1.1, yanchor="bottom"),
     )
     return fig
 
