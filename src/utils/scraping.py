@@ -19,7 +19,7 @@ def schedule_scrapping() -> None:
     """
     scheduler = BackgroundScheduler()
 
-    for server in Server.__members__.values():
+    for server in [server.value for server in Server.__members__.values()]:
         scheduler.add_job(
             get_current_kamas_value,
             "interval",

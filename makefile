@@ -9,10 +9,10 @@ lint:
 	python -m black .
 
 run-prod:
-	python -m gunicorn src.__main__:server -b :80
+	python -m gunicorn src.__main__:server -b :80 --log-level=debug
 
 docker-build:
-	docker build --pull --rm -f "dockerfile" -t kamasdashboard:latest "." --platform linux/amd64 -t ghcr.io/clementraoulastek/kamasdashboard:latest
+	docker build . --tag ghcr.io/clementraoulastek/kamasdashboard:latest --platform linux/amd64
 
 docker-push:
 	docker push ghcr.io/clementraoulastek/kamasdashboard:latest
