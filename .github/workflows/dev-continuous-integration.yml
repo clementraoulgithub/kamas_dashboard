@@ -1,7 +1,8 @@
 name: Run Linter and Tests
 
 on: 
-  push
+  push:
+  pull_request:
 
 jobs:
   linter-and-tests:
@@ -23,4 +24,4 @@ jobs:
           python -m black --check .
       - name: Tests
         run: |
-          python -m pytest src -v -s
+          python -m pytest . -v -s
