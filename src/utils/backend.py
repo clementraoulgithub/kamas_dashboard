@@ -26,7 +26,6 @@ class Backend:
         else:
             return response.json() or None
 
-
     def backend_get_yesterday_kamas_value(self, server: str) -> dict | None:
         """
         backend endpoint to get the yesterday kamas value
@@ -40,12 +39,13 @@ class Backend:
         Returns:
             dict | None: the yesterday kamas value
         """
-        response = requests.get(url=f"http://{self.host}:8000/yesterday?server={server}")
+        response = requests.get(
+            url=f"http://{self.host}:8000/yesterday?server={server}"
+        )
         if response.status_code != 200:
             raise requests.exceptions.RequestException("Endpoint is not available")
         else:
             return response.json() or None
-
 
     def backend_get_kamas_value(self, server: str) -> dict | None:
         """
@@ -65,7 +65,6 @@ class Backend:
             raise requests.exceptions.RequestException("Endpoint is not available")
         else:
             return response.json() or None
-
 
     def backend_post_daily_kamas_value(
         self, values: list, mean: float, max_: float, min_: float, server: str

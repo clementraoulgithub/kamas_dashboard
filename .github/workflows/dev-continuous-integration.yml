@@ -19,8 +19,8 @@ jobs:
           python -m pip install -r requirements-dev.txt
       - name: Linter
         run: |
+          python -m isort --check . --profile black
           python -m black --check .
-          python -m isort --check-only .
       - name: Tests
         run: |
           python -m pytest src -v -s

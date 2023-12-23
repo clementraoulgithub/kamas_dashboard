@@ -1,8 +1,8 @@
 """Utils functions"""
 
 import datetime
-from enum import Enum, unique
 import logging
+from enum import Enum, unique
 from logging.handlers import RotatingFileHandler
 
 import pytz
@@ -18,7 +18,7 @@ class Server(Enum):
     ERATZ = "eratz"
     GALGARION = "galgarion"
     HENUAL = "henual"
-    
+
 
 def get_offset_time_zone() -> datetime.timedelta | None:
     """

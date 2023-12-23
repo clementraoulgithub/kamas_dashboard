@@ -26,6 +26,7 @@ def header() -> dash.html.Header:
         className="header",
     )
 
+
 def footer() -> dash.html.Footer:
     """
     return the footer of the app
@@ -36,7 +37,8 @@ def footer() -> dash.html.Footer:
     return dash.html.Footer(
         dash.html.P(children=f"© {NAME} 2023, work in progress", className="footer")
     )
-    
+
+
 def top_menu() -> dash.html.Div:
     """
     return the top menu of the app
@@ -55,7 +57,7 @@ def top_menu() -> dash.html.Div:
         className="top-menu",
     )
 
-    
+
 def template_view() -> dash.html.Div:
     """
     return the template view of the app

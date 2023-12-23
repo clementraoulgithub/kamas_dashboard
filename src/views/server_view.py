@@ -32,7 +32,7 @@ def server_view(
     Returns:
         html.Div: the html.Div for the server
     """
-    #TODO: split this function
+    # TODO: split this function
     return html.Div(
         [
             html.Div(

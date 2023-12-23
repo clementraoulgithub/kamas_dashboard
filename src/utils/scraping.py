@@ -6,11 +6,12 @@ from typing import Callable, Dict, List
 
 import numpy as np
 import requests
+from apscheduler.schedulers.background import BackgroundScheduler
 from bs4 import BeautifulSoup
 
 from src.utils.backend import Backend
 from src.utils.tools import Server
-from apscheduler.schedulers.background import BackgroundScheduler
+
 
 def schedule_scrapping() -> None:
     """
@@ -27,7 +28,8 @@ def schedule_scrapping() -> None:
         )
     print("Start the scheduler")
     scheduler.start()
-    
+
+
 def get_kamas_price_from_kamas_facile_endpoint(server: str) -> float:
     """
     Get the kamas price from kamas facile endpoint
@@ -162,7 +164,7 @@ def get_kamas_price_from_leskamas(server: str) -> float:
     server = server.capitalize()
     re_pattern = rf"<td>{server}<\/td>\s*<td>(.*?)<\/td>"
     match = re.search(re_pattern, str(soup))
-    
+
     return float(match[1].replace("€/M", ""))
 
 
@@ -284,7 +286,7 @@ def get_yesterday_kamas_value(server: str) -> dict | None:
             return response
     except requests.exceptions.RequestException as e:
         logging.error(f"Error while getting yesterday kamas value: {e}")
-        
+
     return {
         "timestamp": "1970-01-01T00:00:00.0+00:00",
         "average": 0,
@@ -333,7 +335,7 @@ def get_current_kamas_value(server: str) -> None:
     """
     backend = Backend()
     kamas_dict: Dict[str, float] = {}
-    
+
     for name, callback in {
         "Kamas facile": get_kamas_price_from_kamas_facile_endpoint,
         "Fun shop": get_kamas_price_from_fun_shop,

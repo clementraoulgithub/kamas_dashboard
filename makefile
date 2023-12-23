@@ -4,9 +4,9 @@ tests:
 run:
 	python -m src 
 
-check-lint:
-	python -m black src
-	python -m isort src
+lint:
+	python -m isort . --profile black
+	python -m black .
 
 run-prod:
 	python -m gunicorn src.__main__:server -b :80
