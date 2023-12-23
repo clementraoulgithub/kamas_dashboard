@@ -1,8 +1,7 @@
 name: Run Linter and Tests
 
 on: 
-  push:
-  pull_request:
+  push
 
 jobs:
   linter-and-tests:
