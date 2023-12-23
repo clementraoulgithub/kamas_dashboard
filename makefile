@@ -1,3 +1,6 @@
+test:
+	python -m pytest -v --cov=src --cov-report=term-missing --cov-fail-under=100
+
 run:
 	python -m src 
 

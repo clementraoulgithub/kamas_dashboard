@@ -55,7 +55,7 @@ def server_view(
                                             ),
                                             html.Div(
                                                 [
-                                                    html.P("Ecart type"),
+                                                    html.P("Ecart-type"),
                                                     html.H1(f"{deviation}"),
                                                     html.H2("EUR/m"),
                                                 ],
