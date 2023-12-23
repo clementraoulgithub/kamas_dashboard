@@ -25,6 +25,7 @@ p {
 .header h3 {
     color: #EC5C28;
     margin: 0px;
+    margin-left: 10px;
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
 }
 
@@ -65,12 +66,12 @@ p {
     text-decoration: none;
     padding: 5px;
     border-radius: 8px;
-    border: 1px solid #1c1e3a;
+    border: 1px solid #161833;
     margin: 10px;
 }
 
 .top-menu a:hover {
-    background-color: #1c1e3a;
+    background-color: #161833;
     border: 1px solid #EC5C28;
 }
 
@@ -187,6 +188,7 @@ input[type='radio'] {
     color: white;
     margin-left: 10px;
     font-weight: bold;
+    font-size: medium;
     margin: 10px;
     margin-left: 20px;
 }
@@ -197,18 +199,18 @@ input[type='radio'] {
 }
 
 .rc-slider-step  {
-    background-color: #1c1e3a;
+    background-color: gray;
 }
 
 .rc-slider-dot {
-    background-color: #EC5C28;
-    border: 2px solid #EC5C28;
-    width: 12px;
-    height: 12px;
+    background-color: white;
+    border: 2px solid white;
+    width: 10px;
+    height: 10px;
 }
 
 .rc-slider-handle {
-    background-color: white;
+    background-color: #EC5C28;
     border: 2px solid #EC5C28;
     width: 18px;
     height: 18px;
@@ -216,7 +218,7 @@ input[type='radio'] {
 
 .rc-slider-handle:hover,
 .rc-slider-handle:focus {
-    background-color: white;
+    background-color: #EC5C28;
     border: 2px solid #EC5C28;
 }
 
@@ -236,6 +238,7 @@ input[type='radio'] {
 #graph-slider {
     padding: 0px;
     margin: 10px;
+    padding-left: 5px;
     margin-right: 100px;
 }
 

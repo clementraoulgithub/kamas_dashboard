@@ -10,9 +10,10 @@ from src.utils.tools import LineGraphScope
     dash.Output("graph-line", "figure"), [dash.Input("graph-slider", "value")]
 )
 def graph_line_controller(value):
+    scope = LineGraphScope(value).name.lower()
     kamas_dict = get_scope_kamas_value(
         server=global_variables.current_server_name,
-        scope=LineGraphScope(value).name.lower(),
+        scope=scope,
     )
 
     return create_line_graph(
