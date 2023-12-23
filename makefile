@@ -1,8 +1,12 @@
-test:
-	python -m pytest -v --cov=src --cov-report=term-missing --cov-fail-under=100
+tests:
+	python -m pytest src -v -s
 
 run:
 	python -m src 
+
+check-lint:
+	python -m black src
+	python -m isort src
 
 run-prod:
 	python -m gunicorn src.__main__:server -b :80

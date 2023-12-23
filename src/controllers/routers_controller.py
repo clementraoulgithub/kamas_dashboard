@@ -1,6 +1,7 @@
 import dash
 
 from src.controllers.servers_controller import server
+from src.utils.tools import Server
 from src.views.error_view import error_view
 
 
@@ -17,16 +18,16 @@ def routers(pathname: str) -> dash.html.Div:
     """
     match pathname:
         case "/":
-            return server("boune")
+            return server(Server.BOUNE.value)
         case "/boune":
-            return server("boune")
+            return server(Server.BOUNE.value)
         case "/crail":
-            return server("crail")
+            return server(Server.CRAIL.value)
         case "/eratz":
-            return server("eratz")
+            return server(Server.ERATZ.value)
         case "/galgarion":
-            return server("galgarion")
+            return server(Server.GALGARION.value)
         case "/henual":
-            return server("henual")
+            return server(Server.HENUAL.value)
         case _:
             return error_view()

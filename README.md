@@ -34,7 +34,7 @@ make run-prod
 # Run the tests
 
 ```bash
-make test
+make tests
 ```
 
 # Deploy the app
