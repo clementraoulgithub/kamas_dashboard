@@ -1,27 +1,41 @@
 /* style.css */
 
 body, html {
-    font-family: Arial;
+    font-family: Helvetica;
     height: 100%;
-    display : flex;
-    flex-direction: column;
+    background-color: #161833;
+    margin: 0px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: bold;
+    font-family: Arial;
+}
+
+p {
+    color: white;
 }
 
 .header {
-    border: 1px solid #333;
-    border-bottom: none;
-    display : flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    background-color: #92090F;
+    background-color: #1c1e3a;
     color: white; 
-    text-align: center;
-    padding-right: 50px;
+    padding: 10px;
 }
 
-.header h1 {
-    color: #FFEECF;
+.header h3 {
+    color: #EC5C28;
+    margin: 0px;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+}
+
+.header p {
+    font-style: italic;
+    margin-top: 0px;
+}
+
+.header-container {
+    display : inline-flex;
+    align-items: center;
 }
 
 .logo {
@@ -30,53 +44,49 @@ body, html {
 }
 
 .footer {
-    border: 1px solid #333;
-    background-color: #92090F;
-    color: #FFEECF;
-    padding: 10px;
+    background-color: #161833;
+    color: white;
     text-align: center;
     bottom: 0;
     width: 100%;
 }
 
 .top-menu {
-    border: 1px solid #333;
-    display : flex;
+    display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: left;
     align-items: center;
-    background-color: #f0f0f0;
+    background-color: #161833;
 }
 
 .top-menu a {
-    color: #333;
+    color: white;
     font-weight: bold;
     text-decoration: none;
+    padding: 5px;
+    border-radius: 8px;
+    border: 1px solid #1c1e3a;
     margin: 10px;
 }
 
 .top-menu a:hover {
-    text-decoration: underline;
+    background-color: #1c1e3a;
+    border: 1px solid #EC5C28;
 }
 
 .main-content {
-    padding-top: 0px;
-}
-
-.graph-body-content {
-    display: flex;
-    flex-direction: row;
+    padding: 0px;
 }
 
 .graph-main-content {
-    flex: 1;
-    margin: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+    border-radius: 16px;
+    background-color: #161833;
 }
 
-.radio-items {
-    margin: 10px;
-    display : flex;
-    flex-direction: column;
+.graph-main-content h2 {
+    color: #EC5C28;
 }
 
 .graphs-content {
@@ -90,27 +100,109 @@ body, html {
     flex: 1;
 }
 
-.radio-items-container {
-    padding: 10px;
-    border: 1px solid #333;
-    border-top: none;
-    background-color: #f0f0f0;
-}
-
-.radio-items-container h4 {
-    margin: 0;
-    padding: 0;
-    text-align: left;
-    padding: 10px;
-    color: #333;
-}
-
-.radio-items-container label {
-    color: #333;
-    margin-bottom: 10px;
+.graph-day-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 input[type='radio'] {
-    accent-color: #92090F;
-  }
+    accent-color: white;
+    margin-right: 10px;
+}
+
+.graph-metrics {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.graph-metrics p {
+    margin: 0;
+    padding: 0;
+    margin-right: 50px;
+}
+
+.dash-graph {
+    border-radius: 16px;
+    background-color: #1c1e3a;
+    margin: 10px;
+    flex: 1;
+}
+
+.graph-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    background-color: #1c1e3a;
+    border-radius: 16px;
+    margin: 10px;
+}
+
+.graph-info-avg {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+}
+
+.graph-info-avg > * {
+    flex: 1;
+}
+
+.graph-info h1 {
+    color: #EC5C28;;
+    font-weight: bold;
+    font-size: 40px;
+    margin: 0px;
+}
+
+.graph-info h2 {
+    color: grey;
+}
+
+#nb-site {
+    text-align: center;
+    margin: 0px;
+    color: white;
+    margin-bottom: 20px;
+}
+
+#best-price {
+    text-align: center;
+    margin-left: 0px;
+}
+
+.graph-info-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.graph-info-container > * {
+    flex: 1;
+}
+
+.rc-slider-mark-text {
+    color: white;
+}
+
+.rc-slider-rail,
+.rc-slider-track  {
+    background-color: #1c1e3a;
+}
+
+.rc-slider-step  {
+    background-color: #1c1e3a;
+}
+
+.graphs-container {
+    display: flex;
+    flex-direction: row;
+}
+
+
+
+
+
 
