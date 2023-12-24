@@ -128,6 +128,7 @@ def bottom_line_graph(graph_slider: dcc.Slider) -> html.Div:
     )
 
 
+# pylint: disable=too-many-arguments
 def server_view(
     name: str,
     model_description: str,

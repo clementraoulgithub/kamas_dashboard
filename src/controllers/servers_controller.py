@@ -15,6 +15,7 @@ def server(name: str) -> dash.html.Div:
     Returns:
         html.Div: the html.Div for the boune server
     """
+    # pylint: disable=line-too-long
     description = f"Ces graphiques représentent les valeurs estimée du kamas en euros pour le serveur {name}"
 
     day_kamas_dict = get_daily_kamas_value(server=name)

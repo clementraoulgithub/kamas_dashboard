@@ -48,7 +48,7 @@ def top_menu() -> dash.html.Div:
     """
     return dash.html.Div(
         [
-            dash.dcc.Link("Serveur Boune", href="/boune", className="link", id="link"),
+            dash.dcc.Link("Serveur Boune", href="/boune", className="link"),
             dash.dcc.Link("Serveur Crail", href="/crail", className="link"),
             dash.dcc.Link("Serveur Eratz", href="/eratz", className="link"),
             dash.dcc.Link("Serveur Galgarion", href="/galgarion", className="link"),

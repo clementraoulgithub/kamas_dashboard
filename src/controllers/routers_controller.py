@@ -1,7 +1,9 @@
+"""Routers controller module."""
+
 import dash
 
-import src.utils.global_variables as global_variables
 from src.controllers.servers_controller import server
+from src.utils import global_variables
 from src.utils.tools import Server
 from src.views.error_view import error_view
 
@@ -17,6 +19,7 @@ def set_server(server_name: str) -> None:
     return server(server_name)
 
 
+# pylint: disable=too-many-return-statements
 @dash.callback(dash.Output("main-content", "children"), [dash.Input("url", "pathname")])
 def routers(pathname: str) -> dash.html.Div:
     """
