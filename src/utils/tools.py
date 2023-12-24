@@ -20,6 +20,15 @@ class Server(Enum):
     HENUAL = "henual"
 
 
+@unique
+class LineGraphScope(Enum):
+    """Enum of the differents line graph scope"""
+
+    MONTH = 0
+    WEEK = 1
+    DAY = 2
+
+
 def get_offset_time_zone() -> datetime.timedelta | None:
     """
     Get the offset of the local timezone

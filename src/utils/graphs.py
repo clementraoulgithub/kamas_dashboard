@@ -58,13 +58,13 @@ def create_bar_graph(
         line_color="white",
         name="Moyenne",
         annotation=dict(
-            text=f"Moyenne: {average_value}",
+            text=average_value,
             xref="paper",
             yref="y",
             x=1.0,
             y=average_value,
             showarrow=False,
-            font=dict(family="Courier New, monospace", size=16, color="white"),
+            font=dict(family="Courier New, monospace", size=18, color="white"),
         ),
     )
     fig.add_hrect(
@@ -74,6 +74,25 @@ def create_bar_graph(
         fillcolor="rgba(255, 255, 255, 0.2)",
         opacity=0.2,
     )
+
+    min_value, max_value = min(x_values, key=x_values.get), max(
+        x_values, key=x_values.get
+    )
+    if min_value and max_value and min_value != max_value:
+        fig.add_annotation(
+            text="Vendeur le moins cher",
+            x=min_value,
+            y=x_values[min_value],
+            arrowhead=1,
+            showarrow=True,
+        )
+        fig.add_annotation(
+            text="Vendeur le plus cher",
+            x=max_value,
+            y=x_values[max_value],
+            arrowhead=1,
+            showarrow=True,
+        )
 
     fig.update_layout(
         template="plotly_dark",
@@ -159,6 +178,7 @@ def create_line_graph(
         template="plotly_dark",
         plot_bgcolor="rgba(0, 0, 0, 0)",
         paper_bgcolor="rgba(0, 0, 0, 0)",
+        legend=dict(orientation="h", x=0.5, xanchor="center", y=1.1, yanchor="bottom"),
     )
     return fig
 
@@ -188,9 +208,9 @@ def create_gauche_graph(yesterday_value: float, today_value: float) -> go.Figure
             mode="gauge+number+delta",
             value=today_value,
             title={
-                "text": f"<b>+{value} %/jour</b>"
+                "text": f"<b>+{value} % journalier</b>"
                 if value > 0
-                else f"<b>{value} %/jour</b>"
+                else f"<b>{value} % journalier</b>"
             },
             domain={"x": [0, 1], "y": [0, 1]},
             delta={"reference": yesterday_value},
@@ -217,33 +237,19 @@ def create_gauche_graph(yesterday_value: float, today_value: float) -> go.Figure
     return fig
 
 
-def view_graph(
-    day_kamas_dict: dict, yesterday_kamas_dict: dict, kamas_dict: dict
-) -> tuple:
+def create_graphs(day_kamas_dict: dict, yesterday_kamas_dict: dict) -> tuple:
     """
     return all the graph for the server
 
     Args:
         day_kamas_dict (dict): dict of the day kamas value
         yesterday_kamas_dict (dict): dict of the yesterday kamas value
-        kamas_dict (dict): dict of all kamas value
 
     Returns:
         tuple: all the graph for the server
     """
     best_price = min(list(day_kamas_dict["kamas_dict"].values()))
     deviation_value = round(np.std(list(day_kamas_dict["kamas_dict"].values())), 2)
-
-    fig_avg = create_line_graph(
-        "Evolution du million de kamas",
-        "",
-        "Tps",
-        "Valeur estimée moyenne",
-        [dict["timestamp"] for dict in kamas_dict],
-        [dict["average"] for dict in kamas_dict],
-        [dict["max"] for dict in kamas_dict],
-        [dict["min"] for dict in kamas_dict],
-    )
 
     fig_day = create_bar_graph(
         "Valeur journalière du million de kamas",
@@ -262,7 +268,7 @@ def view_graph(
             day_kamas_dict["average"], day_kamas_dict["average"]
         )
 
-    return fig_day, fig_avg, fig_gauge, best_price, deviation_value
+    return fig_day, fig_gauge, best_price, deviation_value
 
 
 def create_h_line(fig: go.Figure, value: float, label: str) -> None:

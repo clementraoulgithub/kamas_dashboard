@@ -47,12 +47,13 @@ class Backend:
         else:
             return response.json() or None
 
-    def backend_get_kamas_value(self, server: str) -> dict | None:
+    def backend_get_scope_kamas_value(self, server: str, scope: str) -> dict | None:
         """
         backend endpoint to get all kamas value
 
         Args:
             server (str): the server name
+            scope (str): the scope (day, week, month)
 
         Raises:
             Exception: if the endpoint is not available
@@ -60,7 +61,9 @@ class Backend:
         Returns:
             dict | None: all kamas value
         """
-        response = requests.get(url=f"http://{self.host}:8000/kamas?server={server}")
+        response = requests.get(
+            url=f"http://{self.host}:8000/kamas?server={server}&scope={scope}"
+        )
         if response.status_code != 200:
             raise requests.exceptions.RequestException("Endpoint is not available")
         else:

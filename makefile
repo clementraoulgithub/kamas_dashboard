@@ -7,6 +7,7 @@ run:
 lint:
 	python -m isort . --profile black
 	python -m black .
+	python -m pylint src
 
 run-prod:
 	python -m gunicorn src.__main__:server -b :80 --log-level=debug

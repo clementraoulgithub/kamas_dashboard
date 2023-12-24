@@ -252,6 +252,40 @@ def get_kamas_from_try_and_judge(server: str) -> float:
     return price if server == "boune" else round(price / 3, 2)
 
 
+def get_D2_gateway_price(server: str) -> float:
+    """
+    Get the kamas price from D2 gateway
+
+    Args:
+        server (str): the server name
+
+    Raises:
+        Exception: if the endpoint is not available
+
+    Returns:
+        float: the kamas price
+    """
+    match server:
+        case Server.BOUNE.value:
+            url = "https://fr.d2gate.net/api/offers?finalEntityId=34&initialEntityIds=55%2C54%2C6%2C9%2C4%2C3%2C7%2C69%2C47%2C5%2C57%2C8%2C70&max=1&min=1&onlyConnected=1&order=price"
+        case Server.CRAIL.value:
+            url = "https://fr.d2gate.net/api/offers?finalEntityId=35&initialEntityIds=55%2C54%2C6%2C9%2C4%2C3%2C7%2C69%2C47%2C5%2C57%2C8%2C70&max=1&min=1&onlyConnected=1&order=price"
+        case Server.ERATZ.value:
+            url = "https://fr.d2gate.net/api/offers?finalEntityId=36&initialEntityIds=55%2C54%2C6%2C9%2C4%2C3%2C7%2C69%2C47%2C5%2C57%2C8%2C70&max=1&min=1&onlyConnected=1&order=price"
+        case Server.GALGARION.value:
+            url = "https://fr.d2gate.net/api/offers?finalEntityId=37&initialEntityIds=55%2C54%2C6%2C9%2C4%2C3%2C7%2C69%2C47%2C5%2C57%2C8%2C70&max=1&min=1&onlyConnected=1&order=price"
+        case Server.HENUAL.value:
+            url = "https://fr.d2gate.net/api/offers?finalEntityId=38&initialEntityIds=55%2C54%2C6%2C9%2C4%2C3%2C7%2C69%2C47%2C5%2C57%2C8%2C70&max=1&min=1&onlyConnected=1&order=price"
+    response = requests.get(url)
+
+    if response.status_code != 200:
+        raise requests.exceptions.RequestException("Endpoint is not available")
+
+    response = response.json()
+
+    return float(response["result"][0]["price"])
+
+
 def get_daily_kamas_value(server: str) -> dict | None:
     """
     Get the daily kamas value
@@ -297,7 +331,7 @@ def get_yesterday_kamas_value(server: str) -> dict | None:
     }
 
 
-def get_all_kamas_value(server: str) -> dict | None:
+def get_scope_kamas_value(server: str, scope: str) -> dict | None:
     """
     Get all kamas value
 
@@ -309,7 +343,7 @@ def get_all_kamas_value(server: str) -> dict | None:
     """
     backend = Backend()
     try:
-        if response := backend.backend_get_kamas_value(server):
+        if response := backend.backend_get_scope_kamas_value(server, scope):
             return response
     except requests.exceptions.RequestException as e:
         logging.error(f"Error while getting yesterday kamas value: {e}")
@@ -337,6 +371,7 @@ def get_current_kamas_value(server: str) -> None:
     kamas_dict: Dict[str, float] = {}
 
     for name, callback in {
+        "D2gate": get_D2_gateway_price,
         "Kamas facile": get_kamas_price_from_kamas_facile_endpoint,
         "Fun shop": get_kamas_price_from_fun_shop,
         "Les kamas": get_kamas_price_from_leskamas,
@@ -369,9 +404,9 @@ def get_kamas_value_from_websites_safully(
     """
     try:
         kamas_dict[name] = callback(server)
-    except ValueError:
-        pass
     except requests.exceptions.RequestException as e:
-        logging.warning(
+        logging.warning(f"Endpoint error from {name} for server {server}: {e}")
+    except Exception as e:
+        logging.error(
             f"Error while getting kamas value from {name} for server {server}: {e}"
         )

@@ -4,7 +4,9 @@ import dash
 
 from src import NAME
 
-# This import is needed to make the app work with Dash
+# This import are needed to make the app work
+# pylint: disable=unused-import
+from src.controllers.graph_line_controller import graph_line_controller
 from src.controllers.routers_controller import routers
 from src.views.template_view import template_view
 
