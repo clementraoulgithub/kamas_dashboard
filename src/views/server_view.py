@@ -116,7 +116,14 @@ def bottom_line_graph() -> html.Div:
         max=5,
         step=1,
         value=3,
-        marks={0: "Année", 1: "6 mois", 2: "3 mois", 3: "Ce mois", 4: "Cette semaine", 5: "Aujourd'hui"},
+        marks={
+            0: "Année",
+            1: "6 mois",
+            2: "3 mois",
+            3: "Ce mois",
+            4: "Cette semaine",
+            5: "Aujourd'hui",
+        },
         vertical=True,
     )
 

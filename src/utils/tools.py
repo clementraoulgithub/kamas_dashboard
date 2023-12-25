@@ -23,7 +23,7 @@ class Server(Enum):
 @unique
 class LineGraphScope(Enum):
     """Enum of the differents line graph scope"""
-    
+
     YEAR = 0
     SIX_MONTHS = 1
     THREE_MONTHS = 2
