@@ -266,7 +266,7 @@ def create_graphs(day_kamas_dict: dict, yesterday_kamas_dict: dict) -> tuple:
         fig_gauge = create_gauche_graph(
             day_kamas_dict["average"], day_kamas_dict["average"]
         )
-    
+
     return fig_day, fig_gauge, best_price, deviation_value
 
 
