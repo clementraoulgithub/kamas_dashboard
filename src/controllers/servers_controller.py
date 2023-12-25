@@ -28,16 +28,6 @@ def server(name: str) -> dash.html.Div:
         day_kamas_dict, yesterday_kamas_dict
     )
 
-    slider = dash.dcc.Slider(
-        id="graph-slider",
-        min=0,
-        max=2,
-        step=1,
-        value=1,
-        marks={0: "30 jours", 1: "7 jours", 2: "Aujourd'hui"},
-        vertical=True,
-    )
-
     return server_view(
         name,
         description,
@@ -47,5 +37,4 @@ def server(name: str) -> dash.html.Div:
         average=day_kamas_dict["average"] if day_kamas_dict else 0,
         deviation=deviation,
         nb_site=len(day_kamas_dict["kamas_dict"]) if day_kamas_dict else 0,
-        graph_slider=slider,
     )
