@@ -178,7 +178,6 @@ def create_line_graph(
         template="plotly_dark",
         plot_bgcolor="rgba(0, 0, 0, 0)",
         paper_bgcolor="rgba(0, 0, 0, 0)",
-        legend=dict(orientation="h", x=0.5, xanchor="center", y=1.1, yanchor="bottom"),
     )
     return fig
 
@@ -229,7 +228,7 @@ def create_gauche_graph(yesterday_value: float, today_value: float) -> go.Figure
         template="plotly_dark",
         plot_bgcolor="rgba(0, 0, 0, 0)",
         paper_bgcolor="rgba(0, 0, 0, 0)",
-        margin=dict(t=0, b=0, r=5, l=5, pad=0),
+        margin=dict(t=0, b=0, r=0, l=0, pad=0),
         height=250,
         width=250,
     )
@@ -252,7 +251,7 @@ def create_graphs(day_kamas_dict: dict, yesterday_kamas_dict: dict) -> tuple:
     deviation_value = round(np.std(list(day_kamas_dict["kamas_dict"].values())), 2)
 
     fig_day = create_bar_graph(
-        "Valeur journalière du million de kamas",
+        "Valeur journalière<br>du million de kamas",
         "",
         "Jour",
         "Valeur estimée journalière",

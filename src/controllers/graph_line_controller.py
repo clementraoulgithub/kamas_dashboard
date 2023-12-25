@@ -28,7 +28,7 @@ def graph_line_controller(value: int):
     )
 
     return create_line_graph(
-        "Evolution du million de kamas",
+        "Evolution<br>du million de kamas",
         "",
         "Tps",
         "Valeur estimée moyenne",
