@@ -119,7 +119,7 @@ def bottom_line_graph() -> html.Div:
         marks={0: "Mois", 1: "Semaine", 2: "Aujourd'hui"},
         vertical=True,
     )
-        
+
     return html.Div(
         [
             slider,
