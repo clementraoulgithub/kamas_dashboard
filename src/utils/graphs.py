@@ -231,7 +231,7 @@ def create_gauche_graph(yesterday_value: float, today_value: float) -> go.Figure
         paper_bgcolor="rgba(0, 0, 0, 0)",
         margin=dict(t=0, b=0, r=5, l=5, pad=0),
         height=250,
-        width=250,
+        width=220,
     )
 
     return fig
