@@ -103,19 +103,26 @@ def right_daily_graph(fig_day: go.Figure, nb_site: int) -> html.Div:
     )
 
 
-def bottom_line_graph(graph_slider: dcc.Slider) -> html.Div:
+def bottom_line_graph() -> html.Div:
     """
     Return the html.Div for the bottom line graph
-
-    Args:
-        graph_slider (dcc.Slider): the slider for the graph
 
     Returns:
         html.Div: the html.Div for the bottom line graph
     """
+    slider = dcc.Slider(
+        id="graph-slider",
+        min=0,
+        max=2,
+        step=1,
+        value=1,
+        marks={0: "Mois", 1: "Semaine", 2: "Aujourd'hui"},
+        vertical=True,
+    )
+        
     return html.Div(
         [
-            graph_slider,
+            slider,
             dcc.Graph(
                 config={
                     "displayModeBar": False,
@@ -138,7 +145,6 @@ def server_view(
     average: float,
     deviation: float,
     nb_site: int,
-    graph_slider: dcc.Slider,
 ) -> html.Div:
     """
     Return the html.Div for server
@@ -169,7 +175,7 @@ def server_view(
                         ],
                         className="graphs-container",
                     ),
-                    bottom_line_graph(graph_slider),
+                    bottom_line_graph(),
                 ],
                 className="graph-main-content",
             ),
