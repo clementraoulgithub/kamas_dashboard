@@ -23,10 +23,13 @@ class Server(Enum):
 @unique
 class LineGraphScope(Enum):
     """Enum of the differents line graph scope"""
-
-    MONTH = 0
-    WEEK = 1
-    DAY = 2
+    
+    YEAR = 0
+    SIX_MONTHS = 1
+    THREE_MONTHS = 2
+    MONTH = 3
+    WEEK = 4
+    DAY = 5
 
 
 def get_offset_time_zone() -> datetime.timedelta | None:

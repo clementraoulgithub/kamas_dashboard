@@ -113,10 +113,10 @@ def bottom_line_graph() -> html.Div:
     slider = dcc.Slider(
         id="graph-slider",
         min=0,
-        max=2,
+        max=5,
         step=1,
-        value=1,
-        marks={0: "Mois", 1: "Semaine", 2: "Aujourd'hui"},
+        value=3,
+        marks={0: "Année", 1: "6 mois", 2: "3 mois", 3: "Ce mois", 4: "Cette semaine", 5: "Aujourd'hui"},
         vertical=True,
     )
 
