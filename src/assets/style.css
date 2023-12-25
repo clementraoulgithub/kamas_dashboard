@@ -268,4 +268,10 @@ input[type='radio'] {
     margin-right: 100px;
 }
 
+.plot-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 
