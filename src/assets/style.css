@@ -114,9 +114,9 @@ p {
     justify-content: center;
 }
 
-@media (max-width: 400px) {
+@media (max-width: 450px) {
     .graph-day-container  {
-        display: none;
+        display: block;
     }
 }
 
@@ -240,7 +240,7 @@ input[type='radio'] {
     flex-direction: row;
 }
 
-@media (max-width: 400px) {
+@media (max-width: 450px) {
     .graphs-container {
         display: flex;
         flex-direction: column;
@@ -254,11 +254,12 @@ input[type='radio'] {
     align-items: center;
 }
 
-@media (max-width: 400px) {
+@media (max-width: 450px) {
     .graph-line-container {
-        display: none;
+        display: block;
     }
 }
+
 
 #graph-slider {
     padding: 0px;
