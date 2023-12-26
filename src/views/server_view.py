@@ -5,7 +5,7 @@ from dash import dcc, html
 
 
 def left_metrics(
-    average: float, deviation: float, best_price: float, fig_gauge: go.Figure
+    average: float, mediane: float, deviation: float, best_price: float, fig_gauge: go.Figure
 ) -> html.Div:
     """
     Return the html.Div for the left metrics
@@ -43,12 +43,25 @@ def left_metrics(
                 className="graph-info-avg",
             ),
             html.Div(
-                [
-                    html.P("Meilleur prix"),
-                    html.H1(f"{best_price}", id="best-price"),
-                    html.H2("EUR/m", id="best-price"),
+                [   
+                    html.Div(
+                        [
+                            html.P("Médiane"),
+                            html.H1(f"{mediane}", id="best-price"),
+                            html.H2("EUR/m", id="best-price"),
+                        ],
+                        className="graph-info",
+                    ),
+                    html.Div(
+                        [
+                            html.P("Meilleur prix"),
+                            html.H1(f"{best_price}", id="best-price"),
+                            html.H2("EUR/m", id="best-price"),
+                        ],
+                        className="graph-info",
+                    ),
                 ],
-                className="graph-info",
+                className="graph-info-avg",
             ),
             html.Div(
                 dcc.Graph(
@@ -150,6 +163,7 @@ def server_view(
     fig_gauge: go.Figure,
     best_price: float,
     average: float,
+    mediane: float,
     deviation: float,
     nb_site: int,
 ) -> html.Div:
@@ -163,6 +177,7 @@ def server_view(
         fig_gauge (go.Figure): the figure for the gauge
         best_price (float): the best price
         average (float): the average price
+        mediane (float): the mediane price
         deviation (float): the deviation price
         nb_site (int): the number of site
 
@@ -177,7 +192,7 @@ def server_view(
                     html.P(model_description),
                     html.Div(
                         [
-                            left_metrics(average, deviation, best_price, fig_gauge),
+                            left_metrics(average, mediane, deviation, best_price, fig_gauge),
                             right_daily_graph(fig_day, nb_site),
                         ],
                         className="graphs-container",
