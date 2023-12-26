@@ -17,7 +17,18 @@ def server(name: str) -> dash.html.Div:
         html.Div: the html.Div for the boune server
     """
     # pylint: disable=line-too-long
-    description = f"Ces graphiques représentent les valeurs estimée du kamas en euros pour le serveur {name}"
+    description_lst = [
+        "Les graphiques suivants illustrent les estimations du kamas en euros pour le serveur ",
+        dash.html.B(name.capitalize()),
+        " sur les différents sites de vente de kamas.",
+        dash.html.Br(),
+        "Les valeurs sont évaluées en se basant sur ",
+        dash.html.B("les offres de vente les plus basses."),
+        dash.html.Br(),
+        dash.html.B(
+            "Les sites avec plusieurs vendeurs ne prennent en compte que les vendeurs connectés."
+        ),
+    ]
 
     day_kamas_dict = get_daily_kamas_value(server=name)
     yesterday_kamas_dict = get_yesterday_kamas_value(server=name)
@@ -37,7 +48,7 @@ def server(name: str) -> dash.html.Div:
 
     return server_view(
         name,
-        description,
+        description_lst,
         fig_day,
         fig_gauge,
         best_price,

@@ -51,16 +51,16 @@ def left_metrics(
                     html.Div(
                         [
                             html.P("Médiane"),
-                            html.H1(f"{mediane}", id="best-price"),
-                            html.H2("EUR/m", id="best-price"),
+                            html.H1(f"{mediane}", className="best-price"),
+                            html.H2("EUR/m", className="best-price"),
                         ],
                         className="graph-info",
                     ),
                     html.Div(
                         [
                             html.P("Meilleur prix"),
-                            html.H1(f"{best_price}", id="best-price"),
-                            html.H2("EUR/m", id="best-price"),
+                            html.H1(f"{best_price}", className="best-price"),
+                            html.H2("EUR/m", className="best-price"),
                         ],
                         className="graph-info",
                     ),
@@ -162,7 +162,7 @@ def bottom_line_graph() -> html.Div:
 # pylint: disable=too-many-arguments
 def server_view(
     name: str,
-    model_description: str,
+    model_description_lst: list,
     fig_day: go.Figure,
     fig_gauge: go.Figure,
     best_price: float,
@@ -176,7 +176,7 @@ def server_view(
 
     Args:
         name (str): the server name
-        model_description (str): the model description
+        model_description_lst (list): the model description
         fig_day (go.Figure): the figure for the day
         fig_gauge (go.Figure): the figure for the gauge
         best_price (float): the best price
@@ -193,7 +193,7 @@ def server_view(
             html.Div(
                 [
                     html.H2(f"Serveur {name.capitalize()}"),
-                    html.P(model_description),
+                    html.P(model_description_lst),
                     html.Div(
                         [
                             left_metrics(
