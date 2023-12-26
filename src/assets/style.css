@@ -183,7 +183,7 @@ input[type='radio'] {
     margin-bottom: 20px;
 }
 
-#best-price {
+.best-price {
     text-align: center;
     margin-left: 0px;
 }

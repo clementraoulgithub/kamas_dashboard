@@ -141,33 +141,6 @@ def get_kamas_price_from_ig_play(server: str) -> float:
     return float(kamas_value)
 
 
-def get_kamas_price_from_leskamas(server: str) -> float:
-    """
-    Get the kamas price from leskamas
-
-    Args:
-        server (str): the server name
-
-    Raises:
-        Exception: if the endpoint is not available
-
-    Returns:
-        float: the kamas price
-    """
-    url = "https://www.leskamas.com/vendre-des-kamas.html"
-    response = requests.get(url)
-
-    if response.status_code != 200:
-        raise requests.exceptions.RequestException("Endpoint is not available")
-
-    soup = BeautifulSoup(response.text, "html.parser")
-    server = server.capitalize()
-    re_pattern = rf"<td>{server}<\/td>\s*<td>(.*?)<\/td>"
-    match = re.search(re_pattern, str(soup))
-
-    return float(match[1].replace("€/M", ""))
-
-
 def get_kamas_price_from_mode_marchand(server: str) -> float:
     """
     Get the kamas price from mode marchand
@@ -184,13 +157,13 @@ def get_kamas_price_from_mode_marchand(server: str) -> float:
     """
     match server:
         case Server.BOUNE.value:
-            url = "https://www.mode-marchand.net/annonces/dofus-retro/kamas?server%5B%5D=130"
+            url = "https://www.mode-marchand.net/annonces/dofus-retro/kamas?online=1&server%5B%5D=130"
         case Server.CRAIL.value:
-            url = "https://www.mode-marchand.net/annonces/dofus-retro/kamas?server%5B%5D=128"
+            url = "https://www.mode-marchand.net/annonces/dofus-retro/kamas?online=1&server%5B%5D=128"
         case Server.ERATZ.value:
-            url = "https://www.mode-marchand.net/annonces/dofus-retro/kamas?server%5B%5D=126"
+            url = "https://www.mode-marchand.net/annonces/dofus-retro/kamas?online=1&server%5B%5D=126"
         case Server.GALGARION.value:
-            url = "https://www.mode-marchand.net/annonces/dofus-retro/kamas?server%5B%5D=129"
+            url = "https://www.mode-marchand.net/annonces/dofus-retro/kamas?online=1&server%5B%5D=129"
         case _:
             raise ValueError("Server not found")
 
@@ -374,7 +347,6 @@ def get_current_kamas_value(server: str) -> None:
         "D2gate": get_D2_gateway_price,
         "Kamas facile": get_kamas_price_from_kamas_facile_endpoint,
         "Fun shop": get_kamas_price_from_fun_shop,
-        "Les kamas": get_kamas_price_from_leskamas,
         "Mode marchand": get_kamas_price_from_mode_marchand,
         "Try and judge": get_kamas_from_try_and_judge,
         "Ig plays": get_kamas_price_from_ig_play,
