@@ -116,7 +116,7 @@ class BarGraph:
             line_color="red",
             name="Moyenne",
             annotation=dict(
-                text=average_value,
+                text=f"Moy: {average_value}",
                 xref="paper",
                 yref="y",
                 x=1.0,
