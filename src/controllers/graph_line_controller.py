@@ -3,7 +3,7 @@
 import dash
 
 from src.utils import global_variables
-from src.utils.graphs import create_line_graph
+from src.utils.graphs import LineGraph
 from src.utils.scraping import get_scope_kamas_value
 from src.utils.tools import LineGraphScope
 
@@ -27,7 +27,7 @@ def graph_line_controller(value: int):
         scope=scope,
     )
 
-    return create_line_graph(
+    line_graph = LineGraph(
         "Evolution<br>du million de kamas",
         "",
         "Tps",
@@ -37,3 +37,5 @@ def graph_line_controller(value: int):
         [dict["max"] for dict in kamas_dict],
         [dict["min"] for dict in kamas_dict],
     )
+
+    return line_graph.create_line_graph()

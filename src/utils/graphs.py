@@ -8,178 +8,297 @@ import plotly.graph_objects as go
 from src.models.graph_model import GraphModel
 
 
-def create_bar_graph(
-    title: str, description: str, x_title: str, y_title: str, x_values: dict
-) -> px.line:
+def create_graphs(day_kamas_dict: dict, yesterday_kamas_dict: dict) -> tuple:
     """
-    Create a daily graph
+    return all the graph for the server
 
     Args:
-        title (str): the title of the graph
-        description (str): the description of the graph
-        x_title (str): the x title of the graph
-        y_title (str): the y title of the graph
-        x_values (dict): the x values of the graph
+        day_kamas_dict (dict): dict of the day kamas value
+        yesterday_kamas_dict (dict): dict of the yesterday kamas value
 
     Returns:
-        px.line: the daily graph
+        tuple: all the graph for the server
     """
-    model = GraphModel(
-        title=title,
-        description=description,
-        x_title=x_title,
-        y_title=y_title,
-        x_values=list(x_values.values()),
-        y_values=list(x_values.keys()),
-    )
-    average_value = round(np.mean(list(x_values.values())), 2)
-    deviation_value = round(np.std(list(x_values.values())), 2)
+    best_price = min(list(day_kamas_dict["kamas_dict"].values()))
+    deviation_value = round(np.std(list(day_kamas_dict["kamas_dict"].values())), 2)
 
-    dataframe = pd.DataFrame(
-        data={
-            "Site": list(x_values.keys()),
-            "Valeurs": list(x_values.values()),
-            "Moyenne": average_value,
-        }
+    bar_graph = BarGraph(
+        "Valeur journalière<br>du million de kamas",
+        "",
+        "Jour",
+        "Valeur estimée journalière",
+        day_kamas_dict["kamas_dict"],
     )
+    fig_day = bar_graph.create_bar_graph()
 
-    fig = px.bar(
-        dataframe,
-        x="Site",
-        y="Valeurs",
-        title=f"<b>{model.title}</b>",
-        text="Valeurs",
-        labels={"Valeurs": "Valeurs estimées (million)"},
-    )
+    if yesterday_kamas_dict:
+        fig_gauge = create_gauche_graph(
+            yesterday_kamas_dict["average"], day_kamas_dict["average"]
+        )
+    else:
+        fig_gauge = create_gauche_graph(
+            day_kamas_dict["average"], day_kamas_dict["average"]
+        )
 
-    fig.add_hline(
-        y=average_value,
-        line_dash="dash",
-        line_color="white",
-        name="Moyenne",
-        annotation=dict(
-            text=average_value,
-            xref="paper",
-            yref="y",
-            x=1.0,
+    return fig_day, fig_gauge, best_price, deviation_value
+
+
+class BarGraph:
+    """
+    Daily bar graph, with average value and deviation value
+    """
+
+    def __init__(
+        self, title: str, description: str, x_title: str, y_title: str, x_values: dict
+    ):
+        self.title = title
+        self.description = description
+        self.x_title = x_title
+        self.y_title = y_title
+        self.x_values = x_values
+
+    def create_bar_graph(
+        self,
+    ) -> px.line:
+        """
+        Create a daily graph
+        Returns:
+            px.line: the daily graph
+        """
+        model = GraphModel(
+            title=self.title,
+            description=self.description,
+            x_title=self.x_title,
+            y_title=self.y_title,
+            x_values=list(self.x_values.values()),
+            y_values=list(self.x_values.keys()),
+        )
+        average_value = round(np.mean(list(self.x_values.values())), 2)
+        deviation_value = round(np.std(list(self.x_values.values())), 2)
+
+        dataframe = pd.DataFrame(
+            data={
+                "Site": list(self.x_values.keys()),
+                "Valeurs": list(self.x_values.values()),
+                "Moyenne": average_value,
+            }
+        )
+        fig = px.bar(
+            dataframe,
+            x="Site",
+            y="Valeurs",
+            title=f"<b>{model.title}</b>",
+            text="Valeurs",
+            labels={"Valeurs": "Valeurs estimées (million)"},
+        )
+
+        self.add_average_values(fig, average_value, deviation_value)
+        self.add_price_annotations(fig)
+        self.update_layout(fig, average_value)
+
+        return fig
+
+    def add_average_values(
+        self, fig: go.Figure, average_value: float, deviation_value: float
+    ) -> None:
+        """
+        Add average values to the graph
+
+        Args:
+            fig (go.Figure): the figure
+            average_value (float): the average value
+            deviation_value (float): the deviation value
+        """
+        # Add average value
+        fig.add_hline(
             y=average_value,
-            showarrow=False,
-            font=dict(family="Courier New, monospace", size=18, color="white"),
-        ),
-    )
-    fig.add_hrect(
-        y0=average_value - deviation_value,
-        y1=average_value + deviation_value,
-        line_width=0,
-        fillcolor="rgba(255, 255, 255, 0.2)",
-        opacity=0.2,
-    )
-
-    min_value, max_value = min(x_values, key=x_values.get), max(
-        x_values, key=x_values.get
-    )
-    if min_value and max_value and min_value != max_value:
-        fig.add_annotation(
-            text="Vendeur le moins cher",
-            x=min_value,
-            y=x_values[min_value],
-            arrowhead=1,
-            showarrow=True,
+            line_dash="dash",
+            line_color="red",
+            name="Moyenne",
+            annotation=dict(
+                text=average_value,
+                xref="paper",
+                yref="y",
+                x=1.0,
+                y=average_value,
+                showarrow=False,
+            ),
         )
-        fig.add_annotation(
-            text="Vendeur le plus cher",
-            x=max_value,
-            y=x_values[max_value],
-            arrowhead=1,
-            showarrow=True,
+        # Add deviation rectangle value
+        fig.add_hrect(
+            y0=average_value - deviation_value,
+            y1=average_value + deviation_value,
+            line_width=0,
+            fillcolor="rgba(255, 255, 255, 0.2)",
+            opacity=0.2,
         )
 
-    fig.update_layout(
-        template="plotly_dark",
-        plot_bgcolor="rgba(0, 0, 0, 0)",
-        paper_bgcolor="rgba(0, 0, 0, 0)",
-    )
+    def add_price_annotations(self, fig: go.Figure) -> None:
+        """
+        Add price annotations to the graph
 
-    fig.update_traces(
-        marker_color=[
-            "#00C58E" if value < average_value else "#FA4B3A"
-            for value in list(x_values.values())
-        ],
-    )
-    fig.update_xaxes(title_text="Sites de ventes")
-    fig.update_yaxes(title_text="Valeurs estimées (million)")
+        Args:
+            fig (go.Figure): the figure
+        """
+        min_value, max_value = min(self.x_values.values()), max(self.x_values.values())
+        min_lst = [key for key, value in self.x_values.items() if value == min_value]
+        max_lst = [key for key, value in self.x_values.items() if value == max_value]
 
-    return fig
+        if min_value and max_value and min_value != max_value:
+            for value in min_lst:
+                fig.add_annotation(
+                    text="Vendeur le moins cher",
+                    x=value,
+                    y=min_value,
+                    arrowhead=1,
+                    showarrow=True,
+                )
+            for value in max_lst:
+                fig.add_annotation(
+                    text="Vendeur le plus cher",
+                    x=value,
+                    y=max_value,
+                    arrowhead=1,
+                    showarrow=True,
+                )
+
+    def update_layout(self, fig: go.Figure, average_value: float) -> None:
+        """
+        Update the layout of the graph
+
+        Args:
+            fig (go.Figure): the figure
+            average_value (float): the average value
+        """
+        fig.update_layout(
+            template="plotly_dark",
+            plot_bgcolor="rgba(0, 0, 0, 0)",
+            paper_bgcolor="rgba(0, 0, 0, 0)",
+        )
+
+        fig.update_traces(
+            marker_color=[
+                "#00C58E" if value < average_value else "#FA4B3A"
+                for value in list(self.x_values.values())
+            ],
+        )
+        fig.update_xaxes(title_text="Sites de ventes")
+        fig.update_yaxes(title_text="Valeurs estimées (million)")
 
 
-def create_line_graph(
-    title: str,
-    description: str,
-    x_title: str,
-    y_title: str,
-    x_values: list,
-    y_values: list,
-    y_max_values: list,
-    y_min_values: list,
-) -> px.line:
-    """
-    Create a line graph
+class LineGraph:
+    def __init__(
+        self,
+        title: str,
+        description: str,
+        x_title: str,
+        y_title: str,
+        x_values: list,
+        y_values: list,
+        y_max_values: list,
+        y_min_values: list,
+    ):
+        self.title = title
+        self.description = description
+        self.x_title = x_title
+        self.y_title = y_title
+        self.x_values = x_values
+        self.y_values = y_values
+        self.y_max_values = y_max_values
+        self.y_min_values = y_min_values
 
-    Args:
-        title (str): the title of the graph
-        description (str): the description of the graph
-        x_title (str): the x title of the graph
-        y_title (str): the y title of the graph
-        x_values (list): list of x values
-        y_values (list): list of y values
-        y_max_values (list): list of y max values
-        y_min_values (list): list of y min values
+    def create_line_graph(self) -> px.line:
+        """
+        Create a line graph
 
-    Returns:
-        px.line: the line graph
-    """
-    x_values = [
-        datetime.datetime.strptime(date, "%Y-%m-%dT%H:%M:%S.%f%z") for date in x_values
-    ]
+        Returns:
+            px.line: the line graph
+        """
+        x_values = [
+            datetime.datetime.strptime(date, "%Y-%m-%dT%H:%M:%S.%f%z")
+            for date in self.x_values
+        ]
 
-    model = GraphModel(
-        title=title,
-        description=description,
-        x_title=x_title,
-        y_title=y_title,
-        x_values=x_values,
-        y_values=y_values,
-    )
-    dataframe = pd.DataFrame(
-        data={
-            "Date UTC": x_values,
-            "Moyenne": y_values,
-            "Max": y_max_values,
-            "Min": y_min_values,
-        }
-    )
-    fig = px.line(
-        dataframe,
-        x="Date UTC",
-        y=["Moyenne", "Max", "Min"],
-        title=f"<b>{model.title}</b>",
-    )
+        model = GraphModel(
+            title=self.title,
+            description=self.description,
+            x_title=self.x_title,
+            y_title=self.y_title,
+            x_values=x_values,
+            y_values=self.y_values,
+        )
+        dataframe = pd.DataFrame(
+            data={
+                "Date UTC": x_values,
+                "Moyenne": self.y_values,
+                "Max": self.y_max_values,
+                "Min": self.y_min_values,
+            }
+        )
+        fig = px.line(
+            dataframe,
+            x="Date UTC",
+            y=["Moyenne", "Max", "Min"],
+            title=f"<b>{model.title}</b>",
+        )
+        self.add_average_values(fig)
+        self.update_layout(fig)
 
-    average_value = round(np.mean(y_values), 2)
-    min_value = round(min(y_min_values), 2)
-    max_value = round(max(y_max_values), 2)
+        return fig
 
-    create_h_line(fig, average_value, label="Moyenne")
-    create_h_line(fig, min_value, label="Minimum")
-    create_h_line(fig, max_value, label="Maximum")
+    def create_h_line(self, fig: go.Figure, value: float, label: str) -> None:
+        """
+        Create a horizontal line
 
-    fig.update_yaxes(title_text="Valeurs estimées (million)")
-    fig.update_layout(
-        template="plotly_dark",
-        plot_bgcolor="rgba(0, 0, 0, 0)",
-        paper_bgcolor="rgba(0, 0, 0, 0)",
-    )
-    return fig
+        Args:
+            fig (go.Figure): the figure
+            value (float): the value of the line
+            label (str): the label of the line
+        """
+        fig.add_hline(
+            y=value,
+            line_dash="dash",
+            line_color="white",
+            name=label,
+            annotation=dict(
+                text=f"{label}: {value}",
+                xref="paper",
+                yref="y",
+                x=1.0,
+                y=value,
+                showarrow=False,
+                font=dict(family="Courier New, monospace", size=16, color="white"),
+            ),
+        )
+
+    def add_average_values(self, fig: go.Figure) -> None:
+        """
+        Add average values to the graph
+
+        Args:
+            fig (go.Figure): the figure
+        """
+        average_value = round(np.mean(self.y_values), 2)
+        min_value = round(min(self.y_min_values), 2)
+        max_value = round(max(self.y_max_values), 2)
+
+        self.create_h_line(fig, average_value, label="Moyenne")
+        self.create_h_line(fig, min_value, label="Minimum")
+        self.create_h_line(fig, max_value, label="Maximum")
+
+    def update_layout(self, fig: go.Figure) -> None:
+        """
+        Update the layout of the graph
+
+        Args:
+            fig (go.Figure): the figure
+        """
+        fig.update_layout(
+            template="plotly_dark",
+            plot_bgcolor="rgba(0, 0, 0, 0)",
+            paper_bgcolor="rgba(0, 0, 0, 0)",
+        )
+        fig.update_yaxes(title_text="Valeurs estimées (million)")
 
 
 def create_gauche_graph(yesterday_value: float, today_value: float) -> go.Figure:
@@ -234,63 +353,3 @@ def create_gauche_graph(yesterday_value: float, today_value: float) -> go.Figure
     )
 
     return fig
-
-
-def create_graphs(day_kamas_dict: dict, yesterday_kamas_dict: dict) -> tuple:
-    """
-    return all the graph for the server
-
-    Args:
-        day_kamas_dict (dict): dict of the day kamas value
-        yesterday_kamas_dict (dict): dict of the yesterday kamas value
-
-    Returns:
-        tuple: all the graph for the server
-    """
-    best_price = min(list(day_kamas_dict["kamas_dict"].values()))
-    deviation_value = round(np.std(list(day_kamas_dict["kamas_dict"].values())), 2)
-
-    fig_day = create_bar_graph(
-        "Valeur journalière<br>du million de kamas",
-        "",
-        "Jour",
-        "Valeur estimée journalière",
-        day_kamas_dict["kamas_dict"],
-    )
-
-    if yesterday_kamas_dict:
-        fig_gauge = create_gauche_graph(
-            yesterday_kamas_dict["average"], day_kamas_dict["average"]
-        )
-    else:
-        fig_gauge = create_gauche_graph(
-            day_kamas_dict["average"], day_kamas_dict["average"]
-        )
-
-    return fig_day, fig_gauge, best_price, deviation_value
-
-
-def create_h_line(fig: go.Figure, value: float, label: str) -> None:
-    """
-    Create a horizontal line
-
-    Args:
-        fig (go.Figure): the figure
-        value (float): the value of the line
-        label (str): the label of the line
-    """
-    fig.add_hline(
-        y=value,
-        line_dash="dash",
-        line_color="white",
-        name=label,
-        annotation=dict(
-            text=f"{label}: {value}",
-            xref="paper",
-            yref="y",
-            x=1.0,
-            y=value,
-            showarrow=False,
-            font=dict(family="Courier New, monospace", size=16, color="white"),
-        ),
-    )
