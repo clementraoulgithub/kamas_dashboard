@@ -166,7 +166,7 @@ input[type='radio'] {
 }
 
 .graph-info h1 {
-    color: #EC5C28;;
+    color: #EC5C28;
     font-weight: bold;
     font-size: 40px;
     margin: 0px;
@@ -179,7 +179,7 @@ input[type='radio'] {
 #nb-site {
     text-align: center;
     margin: 0px;
-    color: white;
+    color: #EC5C28;
     margin-bottom: 20px;
 }
 

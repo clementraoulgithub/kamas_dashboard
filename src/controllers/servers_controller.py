@@ -2,6 +2,7 @@
 
 
 import dash
+import numpy as np
 
 from src.utils.graphs import create_graphs
 from src.utils.scraping import get_daily_kamas_value, get_yesterday_kamas_value
@@ -28,6 +29,12 @@ def server(name: str) -> dash.html.Div:
         day_kamas_dict, yesterday_kamas_dict
     )
 
+    mediane = (
+        round(np.median(list(day_kamas_dict["kamas_dict"].values())), 2)
+        if day_kamas_dict
+        else 0
+    )
+
     return server_view(
         name,
         description,
@@ -35,6 +42,7 @@ def server(name: str) -> dash.html.Div:
         fig_gauge,
         best_price,
         average=day_kamas_dict["average"] if day_kamas_dict else 0,
+        mediane=mediane,
         deviation=deviation,
         nb_site=len(day_kamas_dict["kamas_dict"]) if day_kamas_dict else 0,
     )
