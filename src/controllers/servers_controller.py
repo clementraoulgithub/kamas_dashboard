@@ -28,8 +28,12 @@ def server(name: str) -> dash.html.Div:
     fig_day, fig_gauge, best_price, deviation = create_graphs(
         day_kamas_dict, yesterday_kamas_dict
     )
-    
-    mediane = round(np.median(list(day_kamas_dict["kamas_dict"].values())), 2) if day_kamas_dict else 0
+
+    mediane = (
+        round(np.median(list(day_kamas_dict["kamas_dict"].values())), 2)
+        if day_kamas_dict
+        else 0
+    )
 
     return server_view(
         name,
