@@ -148,6 +148,8 @@ def get_kamas_price_from_mode_marchand(server: str) -> float:
             url = f"{endpoint}?online=1&server%5B%5D=126"
         case Server.GALGARION.value:
             url = f"{endpoint}?online=1&server%5B%5D=129"
+        case Server.HENUAL.value:
+            url = f"{endpoint}?online=1&server%5B%5D=127"
         case _:
             raise ValueError("Server not found")
 
