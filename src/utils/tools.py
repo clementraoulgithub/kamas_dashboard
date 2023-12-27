@@ -40,7 +40,7 @@ class Website(Enum):
     MODE_MARCHAND = ("Mode marchand", "https://www.mode-marchand.net")
     TRY_AND_JUDGE = ("Try and judge", "https://www.tryandjudge.com")
     IG_PLAYS = ("Ig plays", "https://www.igplays.com")
-    LEKAMAS = ("Le kamas", "https://www.lekamas.fr/")
+    LE_KAMAS = ("Le kamas", "https://www.lekamas.fr/")
 
 
 def get_offset_time_zone() -> datetime.timedelta | None:
