@@ -10,7 +10,7 @@ from apscheduler.schedulers.background import BackgroundScheduler
 from bs4 import BeautifulSoup
 
 from src.utils.backend import Backend
-from src.utils.tools import Server
+from src.utils.tools import Server, Website
 
 
 def schedule_scrapping() -> None:
@@ -344,12 +344,11 @@ def get_current_kamas_value(server: str) -> None:
     kamas_dict: Dict[str, float] = {}
 
     for name, callback in {
-        "D2gate": get_D2_gateway_price,
-        "Kamas facile": get_kamas_price_from_kamas_facile_endpoint,
-        "Fun shop": get_kamas_price_from_fun_shop,
-        "Mode marchand": get_kamas_price_from_mode_marchand,
-        "Try and judge": get_kamas_from_try_and_judge,
-        "Ig plays": get_kamas_price_from_ig_play,
+        Website.D2GATE.value[0]: get_D2_gateway_price,
+        Website.KAMAS_FACILE.value[0]: get_kamas_price_from_kamas_facile_endpoint,
+        Website.FUN_SHOP.value[0]: get_kamas_price_from_fun_shop,
+        Website.MODE_MARCHAND.value[0]: get_kamas_price_from_mode_marchand,
+        Website.TRY_AND_JUDGE.value[0]: get_kamas_from_try_and_judge,
     }.items():
         get_kamas_value_from_websites_safully(kamas_dict, name, callback, server)
 
