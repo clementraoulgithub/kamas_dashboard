@@ -34,6 +34,13 @@ class LineGraphScope(Enum):
 
 @unique
 class Website(Enum):
+    """
+    Enum of the differents websites to scrap
+
+    Args:
+        Enum (Enum): the enum class
+    """
+
     D2GATE = ("D2gate", "https://fr.d2gate.net")
     KAMAS_FACILE = ("Kamas facile", "https://www.kamasfacile.com")
     FUN_SHOP = ("Fun shop", "https://www.funshopes.com")

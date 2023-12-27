@@ -1,9 +1,15 @@
+"""Module for backend requests."""
+
 import os
 
 import requests
 
 
 class Backend:
+    """
+    To make requests to the backend
+    """
+
     def __init__(self):
         self.host = os.environ.get("BACKEND_HOST", "localhost")
 
@@ -20,11 +26,7 @@ class Backend:
         Returns:
             dict | None: the daily kamas value
         """
-        response = requests.get(url=f"http://{self.host}:8000/today?server={server}")
-        if response.status_code != 200:
-            raise requests.exceptions.RequestException("Endpoint is not available")
-        else:
-            return response.json() or None
+        return self._get(":8000/today?server=", server)
 
     def backend_get_yesterday_kamas_value(self, server: str) -> dict | None:
         """
@@ -39,13 +41,26 @@ class Backend:
         Returns:
             dict | None: the yesterday kamas value
         """
-        response = requests.get(
-            url=f"http://{self.host}:8000/yesterday?server={server}"
-        )
+        return self._get(":8000/yesterday?server=", server)
+
+    def _get(self, query: str, server: str) -> dict | None:
+        """
+        Get the kamas value from the backend
+
+        Args:
+            query (str): query to the backend
+            server (str): the server name
+
+        Raises:
+            requests.exceptions.RequestException: if the endpoint is not available
+
+        Returns:
+            dict | None: the kamas value
+        """
+        response = requests.get(url=f"http://{self.host}{query}{server}", timeout=5)
         if response.status_code != 200:
             raise requests.exceptions.RequestException("Endpoint is not available")
-        else:
-            return response.json() or None
+        return response.json() or None
 
     def backend_get_scope_kamas_value(self, server: str, scope: str) -> dict | None:
         """
@@ -62,13 +77,14 @@ class Backend:
             dict | None: all kamas value
         """
         response = requests.get(
-            url=f"http://{self.host}:8000/kamas?server={server}&scope={scope}"
+            url=f"http://{self.host}:8000/kamas?server={server}&scope={scope}",
+            timeout=5,
         )
         if response.status_code != 200:
             raise requests.exceptions.RequestException("Endpoint is not available")
-        else:
-            return response.json() or None
+        return response.json() or None
 
+    # pylint: disable=too-many-arguments
     def backend_post_daily_kamas_value(
         self, values: list, mean: float, max_: float, min_: float, server: str
     ) -> None:
@@ -92,6 +108,8 @@ class Backend:
             "min": min_,
             "server": server,
         }
-        response = requests.post(url=f"http://{self.host}:8000/kamas", json=body)
+        response = requests.post(
+            url=f"http://{self.host}:8000/kamas", json=body, timeout=5
+        )
         if response.status_code != 200:
             raise requests.exceptions.RequestException("Endpoint is not available")

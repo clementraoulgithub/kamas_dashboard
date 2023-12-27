@@ -1,3 +1,5 @@
+"""Module for plotly graphs."""
+
 import datetime
 from typing import Dict
 
@@ -50,6 +52,7 @@ class BarGraph:
     Daily bar graph, with average value and deviation value
     """
 
+    # pylint: disable=too-many-arguments
     def __init__(
         self, title: str, description: str, x_title: str, y_title: str, x_values: dict
     ):
@@ -132,14 +135,14 @@ class BarGraph:
             line_dash="dash",
             line_color="red",
             name="Moyenne",
-            annotation=dict(
-                text=f"Moy: {average_value}",
-                xref="paper",
-                yref="y",
-                x=1.0,
-                y=average_value,
-                showarrow=False,
-            ),
+            annotation={
+                "text": f"Moy: {average_value}",
+                "xref": "paper",
+                "yref": "y",
+                "x": 1.0,
+                "y": average_value,
+                "showarrow": False,
+            },
         )
         # Add deviation rectangle value
         fig.add_hrect(
@@ -204,6 +207,12 @@ class BarGraph:
 
 
 class LineGraph:
+    """
+    Line graph, with average value and deviation value
+    """
+
+    # pylint: disable=too-many-arguments
+    # pylint: disable=too-many-instance-attributes
     def __init__(
         self,
         title: str,
@@ -277,15 +286,19 @@ class LineGraph:
             line_dash="dash",
             line_color="white",
             name=label,
-            annotation=dict(
-                text=f"{label}: {value}",
-                xref="paper",
-                yref="y",
-                x=1.0,
-                y=value,
-                showarrow=False,
-                font=dict(family="Courier New, monospace", size=16, color="white"),
-            ),
+            annotation={
+                "text": f"{label}: {value}",
+                "xref": "paper",
+                "yref": "y",
+                "x": 1.0,
+                "y": value,
+                "showarrow": False,
+                "font": {
+                    "family": "Courier New, monospace",
+                    "size": 16,
+                    "color": "white",
+                },
+            },
         )
 
     def add_average_values(self, fig: go.Figure) -> None:
@@ -364,7 +377,7 @@ def create_gauche_graph(yesterday_value: float, today_value: float) -> go.Figure
         template="plotly_dark",
         plot_bgcolor="rgba(0, 0, 0, 0)",
         paper_bgcolor="rgba(0, 0, 0, 0)",
-        margin=dict(t=0, b=0, r=0, l=0, pad=0),
+        margin={"t": 0, "b": 0, "r": 0, "l": 0, "pad": 0},
         height=250,
         width=250,
     )
