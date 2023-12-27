@@ -63,82 +63,65 @@ def get_kamas_price_from_kamas_facile_endpoint(server: str) -> float:
     return min(prices)
 
 
-def get_kamas_price_from_fun_shop(server: str) -> float:
+def get_kamas_from_lekamas(server: str) -> float:
     """
-    Get the kamas price from fun shop
+    Get the kamas price from lekamas
 
     Args:
         server (str): the server name
 
     Raises:
-        Exception: if the endpoint is not available
-        Exception: if the server is not found
+        ValueError: if the server is not found
 
     Returns:
         float: the kamas price
     """
-    url = "https://www.funshopes.com/purchaseServers.php?lang=fr&g=17"
-    response = requests.get(url)
-
-    if response.status_code != 200:
-        raise requests.exceptions.RequestException("Endpoint is not available")
-
-    soup = BeautifulSoup(response.text, "html.parser")
-    product_prices = soup.find_all("span", class_="prc")
-
     match server:
-        case Server.BOUNE.value:
-            index = 0
-        case Server.CRAIL.value:
-            index = 1
-        case Server.GALGARION.value:
-            index = 3
+        case "boune":
+            server_info = {
+                "option[389]": "1449",
+                "option[390]": "1453",
+            }
+            divide_by = 1
+        case "crail":  # /2
+            server_info = {
+                "option[389]": "1450",
+                "option[390]": "1062",
+            }
+            divide_by = 2
+        case "eratz":  # /10
+            server_info = {
+                "option[389]": "1052",
+                "option[390]": "1066",
+            }
+            divide_by = 10
+        case "galgarion":  # /2
+            server_info = {
+                "option[389]": "1451",
+                "option[390]": "1062",
+            }
+            divide_by = 2
+        case "henual":  # /2
+            server_info = {
+                "option[389]": "1054",
+                "option[390]": "1062",
+            }
+            divide_by = 2
         case _:
             raise ValueError("Server not found")
 
-    kamas_value = product_prices[index].text
-    kamas_value = kamas_value.split("\\")[0]
+    url = "https://www.lekamas.fr/index.php?route=journal2/ajax/price"
 
-    return float(kamas_value)
+    data = {"option[388]": "", "quantity": "1", "product_id": "136"}
+    payload = data | server_info
+    headers = {
+        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+    }
+    response = requests.post(url, headers=headers, data=payload)
 
-
-def get_kamas_price_from_ig_play(server: str) -> float:
-    """
-    Get the kamas price from ig play
-
-    Args:
-        server (str): the server name
-
-    Raises:
-        Exception: if the endpoint is not available
-        Exception: if the server is not found
-
-    Returns:
-        float: the kamas price
-    """
-    url = "https://www.igplays.com/selltous.php?gclid=Cj0KCQiAm4WsBhCiARIsAEJIEzUwqjGYNyAMFJou72q-kjGsSxZb1Gsd5JML8AJ09kimevCf7JWUQ0gaApsWEALw_wcB"
-    response = requests.get(url)
-
-    if response.status_code != 200:
-        raise requests.exceptions.RequestException("Endpoint is not available")
-
-    soup = BeautifulSoup(response.text, "html.parser")
-    product_prices = soup.find_all("span", class_="prc")
-
-    match server:
-        case Server.BOUNE.value:
-            index = 0
-        case Server.CRAIL.value:
-            index = 1
-        case Server.GALGARION.value:
-            index = 3
-        case _:
-            raise ValueError("Server not found")
-
-    kamas_value = product_prices[index].text
-    kamas_value = kamas_value.split("\\")[0]
-
-    return float(kamas_value)
+    value = response.json()["price"].replace("€", "").replace(",", ".")
+    value = float(value) / divide_by
+    return round(value, 2)
 
 
 def get_kamas_price_from_mode_marchand(server: str) -> float:
@@ -348,6 +331,7 @@ def get_current_kamas_value(server: str) -> None:
         Website.KAMAS_FACILE.value[0]: get_kamas_price_from_kamas_facile_endpoint,
         Website.MODE_MARCHAND.value[0]: get_kamas_price_from_mode_marchand,
         Website.TRY_AND_JUDGE.value[0]: get_kamas_from_try_and_judge,
+        Website.LEKAMAS.value[0]: get_kamas_from_lekamas,
     }.items():
         get_kamas_value_from_websites_safully(kamas_dict, name, callback, server)
 
