@@ -30,7 +30,7 @@ def schedule_scrapping() -> None:
             get_current_kamas_value,
             "interval",
             args=[server],
-            minutes=1,
+            minutes=10,
         )
     print("Start the scheduler")
     scheduler.start()
