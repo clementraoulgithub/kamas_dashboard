@@ -1,4 +1,5 @@
 import datetime
+from typing import Dict
 
 import numpy as np
 import pandas as pd
@@ -6,6 +7,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 
 from src.models.graph_model import GraphModel
+from src.utils.tools import Website
 
 
 def create_graphs(day_kamas_dict: dict, yesterday_kamas_dict: dict) -> tuple:
@@ -57,6 +59,20 @@ class BarGraph:
         self.y_title = y_title
         self.x_values = x_values
 
+    def create_links(self) -> None:
+        """
+        Create links for the graph
+        """
+        web_dict: Dict[str, float] = {}
+        for key, value in self.x_values.items():
+            try:
+                key = Website[key.upper().replace(" ", "_")]
+                web_dict[f'<a href="{key.value[1]}">{key.value[0]}</a>'] = value
+            except KeyError:
+                web_dict[key] = value
+
+        self.x_values = web_dict
+
     def create_bar_graph(
         self,
     ) -> px.line:
@@ -65,6 +81,7 @@ class BarGraph:
         Returns:
             px.line: the daily graph
         """
+        self.create_links()
         model = GraphModel(
             title=self.title,
             description=self.description,

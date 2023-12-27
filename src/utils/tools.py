@@ -32,6 +32,16 @@ class LineGraphScope(Enum):
     DAY = 5
 
 
+@unique
+class Website(Enum):
+    D2GATE = ("D2gate", "https://fr.d2gate.net")
+    KAMAS_FACILE = ("Kamas facile", "https://www.kamasfacile.com")
+    FUN_SHOP = ("Fun shop", "https://www.funshopes.com")
+    MODE_MARCHAND = ("Mode marchand", "https://www.mode-marchand.net")
+    TRY_AND_JUDGE = ("Try and judge", "https://www.tryandjudge.com")
+    IG_PLAYS = ("Ig plays", "https://www.igplays.com")
+
+
 def get_offset_time_zone() -> datetime.timedelta | None:
     """
     Get the offset of the local timezone
