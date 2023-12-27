@@ -2,7 +2,7 @@
 
 import os
 
-from src.utils.scraping import schedule_scrapping
+from src.utils.scraping.scraping import schedule_scrapping
 
 schedule_scrapping()
 debug = os.environ.get("BACKEND_HOST", "localhost") == "localhost"

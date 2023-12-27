@@ -4,7 +4,7 @@ import dash
 
 from src.utils import global_variables
 from src.utils.graphs import LineGraph
-from src.utils.scraping import get_scope_kamas_value
+from src.utils.scraping.scraping import get_scope_kamas_value
 from src.utils.tools import LineGraphScope
 
 

@@ -5,7 +5,7 @@ import dash
 import numpy as np
 
 from src.utils.graphs import create_graphs
-from src.utils.scraping import get_daily_kamas_value, get_yesterday_kamas_value
+from src.utils.scraping.scraping import get_daily_kamas_value, get_yesterday_kamas_value
 from src.views.server_view import server_view
 
 
