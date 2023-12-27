@@ -331,7 +331,7 @@ def get_current_kamas_value(server: str) -> None:
         Website.KAMAS_FACILE.value[0]: get_kamas_price_from_kamas_facile_endpoint,
         Website.MODE_MARCHAND.value[0]: get_kamas_price_from_mode_marchand,
         Website.TRY_AND_JUDGE.value[0]: get_kamas_from_try_and_judge,
-        Website.LEKAMAS.value[0]: get_kamas_from_lekamas,
+        Website.LE_KAMAS.value[0]: get_kamas_from_lekamas,
     }.items():
         get_kamas_value_from_websites_safully(kamas_dict, name, callback, server)
 
