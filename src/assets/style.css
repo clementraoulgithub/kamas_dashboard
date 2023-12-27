@@ -5,6 +5,12 @@ body, html {
     height: 100%;
     background-color: #161833;
     margin: 0px;
+    display: flex;
+    flex-direction: column;
+}
+
+.body-container {
+    margin-top: 140px;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -16,10 +22,30 @@ p {
     color: white;
 }
 
+a {
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 5px;
+    border-radius: 8px;
+    border: 1px solid transparent;
+}
+
+a:hover {
+    background-color: #161833;
+    border: 1px solid #EC5C28;
+}
+
 .header {
     background-color: #1c1e3a;
     color: white; 
     padding: 10px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 102;
+    height: 70px;
 }
 
 .header h3 {
@@ -32,6 +58,12 @@ p {
 .header p {
     font-style: italic;
     margin-top: 0px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .header-container {
@@ -57,29 +89,21 @@ p {
     flex-direction: row;
     justify-content: left;
     align-items: center;
-    background-color: #161833;
+    width: 100%;
+    position: fixed;
+    z-index: 101;
+    left: 0;
+    top: 90px;
+    height: 40px;
+    background-color: #1c1e3a;
+    padding-left: 10px;
+    border-bottom: 1px solid grey;
 }
 
 @media (max-width: 400px) {
     .top-menu {
-        display: flex;
-        flex-direction: column;
+        display: inline-block;
     }
-}
-
-.top-menu a {
-    color: white;
-    font-weight: bold;
-    text-decoration: none;
-    padding: 5px;
-    border-radius: 8px;
-    border: 1px solid #161833;
-    margin: 10px;
-}
-
-.top-menu a:hover {
-    background-color: #161833;
-    border: 1px solid #EC5C28;
 }
 
 .main-content {
@@ -274,4 +298,5 @@ input[type='radio'] {
     justify-content: center;
     align-items: center;
 }
+
 

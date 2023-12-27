@@ -44,10 +44,10 @@ def get_kamas_price_from_kamas_facile_endpoint(server: str) -> float:
         float: the kamas price
     """
     url = f"https://www.kamasfacile.com/fr/{server}"
-    response = requests.get(url)
+    response = requests.get(url, timeout=5)
 
     if response.status_code != 200:
-        requests.exceptions.RequestException("Endpoint is not available")
+        raise requests.exceptions.RequestException("Endpoint is not available")
 
     soup = BeautifulSoup(response.text, "html.parser")
 
@@ -117,7 +117,7 @@ def get_kamas_from_lekamas(server: str) -> float:
     headers = {
         "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
     }
-    response = requests.post(url, headers=headers, data=payload)
+    response = requests.post(url, headers=headers, data=payload, timeout=5)
 
     value = response.json()["price"].replace("€", "").replace(",", ".")
     value = float(value) / divide_by
@@ -138,19 +138,20 @@ def get_kamas_price_from_mode_marchand(server: str) -> float:
     Returns:
         float: the kamas price
     """
+    endpoint = "https://www.mode-marchand.net/annonces/dofus-retro/kamas"
     match server:
         case Server.BOUNE.value:
-            url = "https://www.mode-marchand.net/annonces/dofus-retro/kamas?online=1&server%5B%5D=130"
+            url = f"{endpoint}?online=1&server%5B%5D=130"
         case Server.CRAIL.value:
-            url = "https://www.mode-marchand.net/annonces/dofus-retro/kamas?online=1&server%5B%5D=128"
+            url = f"{endpoint}?online=1&server%5B%5D=128"
         case Server.ERATZ.value:
-            url = "https://www.mode-marchand.net/annonces/dofus-retro/kamas?online=1&server%5B%5D=126"
+            url = f"{endpoint}?online=1&server%5B%5D=126"
         case Server.GALGARION.value:
-            url = "https://www.mode-marchand.net/annonces/dofus-retro/kamas?online=1&server%5B%5D=129"
+            url = f"{endpoint}?online=1&server%5B%5D=129"
         case _:
             raise ValueError("Server not found")
 
-    response = requests.get(url)
+    response = requests.get(url, timeout=5)
 
     if response.status_code != 200:
         raise requests.exceptions.RequestException("Endpoint is not available")
@@ -159,9 +160,9 @@ def get_kamas_price_from_mode_marchand(server: str) -> float:
     product_prices = soup.find_all("div", class_="card-footer")
 
     prices: List[float] = []
+    regex_pattern = r"\d+\.\d+€(?: - \d+\.\d+€)?"
     for price in product_prices:
         price = price.text
-        regex_pattern = r"\d+\.\d+€(?: - \d+\.\d+€)?"
         match = re.search(regex_pattern, price)
         if not match:
             continue
@@ -185,17 +186,18 @@ def get_kamas_from_try_and_judge(server: str) -> float:
     Returns:
         float: the kamas price
     """
+    endpoint = "https://www.tryandjudge.com/fr/retro-kamas"
     match server:
         case Server.BOUNE.value:
-            url = "https://www.tryandjudge.com/fr/retro-kamas/boune/1m-kamas-boune"
+            url = f"{endpoint}/boune/1m-kamas-boune"
         case Server.CRAIL.value:
-            url = "https://www.tryandjudge.com/fr/retro-kamas/crail/3m-kamas-crail"
+            url = f"{endpoint}/crail/3m-kamas-crail"
         case Server.GALGARION.value:
-            url = "https://www.tryandjudge.com/fr/retro-kamas/galgarion/3m-kamas-galgarion"
+            url = f"{endpoint}/galgarion/3m-kamas-galgarion"
         case _:
             raise ValueError("Server not found")
 
-    response = requests.get(url)
+    response = requests.get(url, timeout=5)
 
     if response.status_code != 200:
         raise requests.exceptions.RequestException("Endpoint is not available")
@@ -208,7 +210,7 @@ def get_kamas_from_try_and_judge(server: str) -> float:
     return price if server == "boune" else round(price / 3, 2)
 
 
-def get_D2_gateway_price(server: str) -> float:
+def get_d_two_gateway_price(server: str) -> float:
     """
     Get the kamas price from D2 gateway
 
@@ -221,18 +223,26 @@ def get_D2_gateway_price(server: str) -> float:
     Returns:
         float: the kamas price
     """
+    endpoint = "https://fr.d2gate.net/api/offers"
+    start_query = "?finalEntityId="
+    end_query = (
+        "&initialEntityIds=55%2C54%2C6%2C9%2C4%2C3%2C7%2C69%2C47%2C5%2C57%2C8%2C70"
+        + "&max=1&min=1&onlyConnected=1&order=price"
+    )
     match server:
         case Server.BOUNE.value:
-            url = "https://fr.d2gate.net/api/offers?finalEntityId=34&initialEntityIds=55%2C54%2C6%2C9%2C4%2C3%2C7%2C69%2C47%2C5%2C57%2C8%2C70&max=1&min=1&onlyConnected=1&order=price"
+            url = f"{endpoint}{start_query}34{end_query}"
         case Server.CRAIL.value:
-            url = "https://fr.d2gate.net/api/offers?finalEntityId=35&initialEntityIds=55%2C54%2C6%2C9%2C4%2C3%2C7%2C69%2C47%2C5%2C57%2C8%2C70&max=1&min=1&onlyConnected=1&order=price"
+            url = f"{endpoint}{start_query}35{end_query}"
         case Server.ERATZ.value:
-            url = "https://fr.d2gate.net/api/offers?finalEntityId=36&initialEntityIds=55%2C54%2C6%2C9%2C4%2C3%2C7%2C69%2C47%2C5%2C57%2C8%2C70&max=1&min=1&onlyConnected=1&order=price"
+            url = f"{endpoint}{start_query}36{end_query}"
         case Server.GALGARION.value:
-            url = "https://fr.d2gate.net/api/offers?finalEntityId=37&initialEntityIds=55%2C54%2C6%2C9%2C4%2C3%2C7%2C69%2C47%2C5%2C57%2C8%2C70&max=1&min=1&onlyConnected=1&order=price"
+            url = f"{endpoint}{start_query}37{end_query}"
         case Server.HENUAL.value:
-            url = "https://fr.d2gate.net/api/offers?finalEntityId=38&initialEntityIds=55%2C54%2C6%2C9%2C4%2C3%2C7%2C69%2C47%2C5%2C57%2C8%2C70&max=1&min=1&onlyConnected=1&order=price"
-    response = requests.get(url)
+            url = f"{endpoint}{start_query}36{end_query}"
+        case _:
+            raise ValueError("Server not found")
+    response = requests.get(url, timeout=5)
 
     if response.status_code != 200:
         raise requests.exceptions.RequestException("Endpoint is not available")
@@ -257,7 +267,8 @@ def get_daily_kamas_value(server: str) -> dict | None:
         if response := backend.backend_get_daily_kamas_value(server):
             return response
     except requests.exceptions.RequestException as e:
-        logging.error(f"Error while getting daily kamas value: {e}")
+        logging.error("Error while getting daily kamas value: %s", e)
+    return None
 
 
 def get_yesterday_kamas_value(server: str) -> dict | None:
@@ -275,7 +286,7 @@ def get_yesterday_kamas_value(server: str) -> dict | None:
         if response := backend.backend_get_yesterday_kamas_value(server):
             return response
     except requests.exceptions.RequestException as e:
-        logging.error(f"Error while getting yesterday kamas value: {e}")
+        logging.error("Error while getting yesterday kamas value: %s", e)
 
     return {
         "timestamp": "1970-01-01T00:00:00.0+00:00",
@@ -302,7 +313,7 @@ def get_scope_kamas_value(server: str, scope: str) -> dict | None:
         if response := backend.backend_get_scope_kamas_value(server, scope):
             return response
     except requests.exceptions.RequestException as e:
-        logging.error(f"Error while getting yesterday kamas value: {e}")
+        logging.error("Error while getting yesterday kamas value: %s", e)
 
     return [
         {
@@ -327,7 +338,7 @@ def get_current_kamas_value(server: str) -> None:
     kamas_dict: Dict[str, float] = {}
 
     for name, callback in {
-        Website.D2GATE.value[0]: get_D2_gateway_price,
+        Website.D2GATE.value[0]: get_d_two_gateway_price,
         Website.KAMAS_FACILE.value[0]: get_kamas_price_from_kamas_facile_endpoint,
         Website.MODE_MARCHAND.value[0]: get_kamas_price_from_mode_marchand,
         Website.TRY_AND_JUDGE.value[0]: get_kamas_from_try_and_judge,
@@ -341,9 +352,13 @@ def get_current_kamas_value(server: str) -> None:
     min_ = min(kamas_lst)
 
     if mean and max_ and min_:
-        backend.backend_post_daily_kamas_value(kamas_dict, mean, max_, min_, server)
+        try:
+            backend.backend_post_daily_kamas_value(kamas_dict, mean, max_, min_, server)
+        except requests.exceptions.RequestException as e:
+            logging.error("Error while posting daily kamas value: %s", e)
 
 
+# pylint: disable=broad-exception-caught
 def get_kamas_value_from_websites_safully(
     kamas_dict: dict, name: str, callback: Callable, server: str
 ) -> None:
@@ -359,8 +374,8 @@ def get_kamas_value_from_websites_safully(
     try:
         kamas_dict[name] = callback(server)
     except requests.exceptions.RequestException as e:
-        logging.warning(f"Endpoint error from {name} for server {server}: {e}")
+        logging.warning("Endpoint error from %s for server %s: %s", name, server, e)
     except Exception as e:
         logging.error(
-            f"Error while getting kamas value from {name} for server {server}: {e}"
+            "Error while getting kamas value from %s for server %s: %s", name, server, e
         )
