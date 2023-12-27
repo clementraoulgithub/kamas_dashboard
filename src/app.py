@@ -11,8 +11,7 @@ from src.controllers.routers_controller import routers
 from src.views.template_view import template_view
 
 app = dash.Dash(
-    __name__,
-    suppress_callback_exceptions=True,
+    __name__, suppress_callback_exceptions=True, update_title="Chargement ..."
 )
 app.title = NAME
 server = app.server
