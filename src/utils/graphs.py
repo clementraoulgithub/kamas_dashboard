@@ -81,6 +81,7 @@ class BarGraph:
         Returns:
             px.line: the daily graph
         """
+        self.create_links()
         model = GraphModel(
             title=self.title,
             description=self.description,

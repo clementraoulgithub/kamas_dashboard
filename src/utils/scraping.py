@@ -346,7 +346,6 @@ def get_current_kamas_value(server: str) -> None:
     for name, callback in {
         Website.D2GATE.value[0]: get_D2_gateway_price,
         Website.KAMAS_FACILE.value[0]: get_kamas_price_from_kamas_facile_endpoint,
-        Website.FUN_SHOP.value[0]: get_kamas_price_from_fun_shop,
         Website.MODE_MARCHAND.value[0]: get_kamas_price_from_mode_marchand,
         Website.TRY_AND_JUDGE.value[0]: get_kamas_from_try_and_judge,
     }.items():
