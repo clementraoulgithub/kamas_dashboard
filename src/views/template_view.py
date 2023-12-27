@@ -72,12 +72,12 @@ def template_view() -> dash.html.Div:
             dash.dcc.Location(id="url"),
             top_menu(),
             dash.html.Div(
-            children=[
-                content,
-                footer(),
-            ],
-            className="body-container",
-        ) 
+                children=[
+                    content,
+                    footer(),
+                ],
+                className="body-container",
+            ),
         ],
         className="container",
-    ) 
+    )
