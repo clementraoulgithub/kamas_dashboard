@@ -77,31 +77,31 @@ def get_kamas_from_lekamas(server: str) -> float:
         float: the kamas price
     """
     match server:
-        case "boune":
+        case Server.BOUNE.value:
             server_info = {
                 "option[389]": "1449",
                 "option[390]": "1453",
             }
             divide_by = 1
-        case "crail":  # /2
+        case Server.CRAIL.value:
             server_info = {
                 "option[389]": "1450",
                 "option[390]": "1062",
             }
             divide_by = 2
-        case "eratz":  # /10
+        case Server.ERATZ.value:
             server_info = {
                 "option[389]": "1052",
                 "option[390]": "1066",
             }
             divide_by = 10
-        case "galgarion":  # /2
+        case Server.GALGARION.value:
             server_info = {
                 "option[389]": "1451",
                 "option[390]": "1062",
             }
             divide_by = 2
-        case "henual":  # /2
+        case Server.HENUAL.value:
             server_info = {
                 "option[389]": "1054",
                 "option[390]": "1062",
