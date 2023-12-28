@@ -22,18 +22,23 @@ p {
     color: white;
 }
 
-a {
+a, button {
     color: white;
+    background-color: #1c1e3a;
     font-weight: bold;
     text-decoration: none;
     padding: 5px;
-    border-radius: 8px;
     border: 1px solid transparent;
+    font-size: medium;
+}
+
+a:hover, button:hover {
+    background-color: #EC5C28;
+    color: black;
 }
 
 a:hover {
-    background-color: #161833;
-    border: 1px solid #EC5C28;
+    width: 110%; 
 }
 
 .header {

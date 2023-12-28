@@ -8,7 +8,9 @@ from src.utils.tools import Server
 from src.views.error_view import error_view
 
 
-def set_server(server_name: str) -> None:
+def set_server(
+    server_name: str,
+) -> tuple[dash.html.Div, dict[str, str], dict[str, str]]:
     """
     Set the current server name
 
@@ -16,11 +18,19 @@ def set_server(server_name: str) -> None:
         server_name (str): the server name
     """
     global_variables.current_server_name = server_name
-    return server(server_name)
+    return server(server_name), {"display": "none"}, {"display": "none"}
 
 
 # pylint: disable=too-many-return-statements
-@dash.callback(dash.Output("main-content", "children"), [dash.Input("url", "pathname")])
+@dash.callback(
+    [
+        dash.Output("main-content", "children"),
+        dash.Output("top-menu-retro", "style", allow_duplicate=True),
+        dash.Output("top-menu-classic", "style", allow_duplicate=True),
+    ],
+    [dash.Input("url", "pathname")],
+    prevent_initial_call=True,
+)
 def routers(pathname: str) -> dash.html.Div:
     """
     Route the url to the correct server
