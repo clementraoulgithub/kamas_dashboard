@@ -10,14 +10,26 @@ import tzlocal
 
 
 @unique
-class Server(Enum):
-    """Enum of the differents servers"""
+class ServerRetro(Enum):
+    """Enum of the differents RETRO servers"""
 
     BOUNE = "boune"
     CRAIL = "crail"
     ERATZ = "eratz"
     GALGARION = "galgarion"
     HENUAL = "henual"
+
+
+class ServerClassic(Enum):
+    """Enum of the differents CLASSIC servers"""
+
+    DRACONIROS = "draconiros"
+    HELLMINA = "hellmina"
+    IMAGIRO = "imagiro"
+    OMBRE = "ombre"
+    ORUKAM = "orukam"
+    TALKASHA = "talkasha"
+    TYLEZIA = "tylezia"
 
 
 @unique

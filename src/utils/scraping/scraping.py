@@ -16,7 +16,7 @@ from src.utils.scraping.websites import (
     get_kamas_price_from_kamas_facile_endpoint,
     get_kamas_price_from_mode_marchand,
 )
-from src.utils.tools import Server, Website
+from src.utils.tools import ServerClassic, ServerRetro, Website
 
 
 def schedule_scrapping() -> None:
@@ -25,13 +25,22 @@ def schedule_scrapping() -> None:
     """
     scheduler = BackgroundScheduler()
 
-    for server in [server.value for server in Server.__members__.values()]:
+    for server in [server.value for server in ServerRetro.__members__.values()]:
         scheduler.add_job(
             get_current_kamas_value,
             "interval",
             args=[server],
-            minutes=10,
+            minutes=9,
         )
+
+    for server in [server.value for server in ServerClassic.__members__.values()]:
+        scheduler.add_job(
+            get_current_kamas_value,
+            "interval",
+            args=[server],
+            minutes=11,
+        )
+
     print("Start the scheduler")
     scheduler.start()
 

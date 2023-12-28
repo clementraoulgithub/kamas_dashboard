@@ -4,11 +4,13 @@ import dash
 
 from src.controllers.servers_controller import server
 from src.utils import global_variables
-from src.utils.tools import Server
+from src.utils.tools import ServerClassic, ServerRetro
 from src.views.error_view import error_view
 
 
-def set_server(server_name: str) -> None:
+def set_server(
+    server_name: str,
+) -> tuple[dash.html.Div, dict[str, str], dict[str, str]]:
     """
     Set the current server name
 
@@ -16,11 +18,19 @@ def set_server(server_name: str) -> None:
         server_name (str): the server name
     """
     global_variables.current_server_name = server_name
-    return server(server_name)
+    return server(server_name), {"display": "none"}, {"display": "none"}
 
 
 # pylint: disable=too-many-return-statements
-@dash.callback(dash.Output("main-content", "children"), [dash.Input("url", "pathname")])
+@dash.callback(
+    [
+        dash.Output("main-content", "children"),
+        dash.Output("top-menu-retro", "style", allow_duplicate=True),
+        dash.Output("top-menu-classic", "style", allow_duplicate=True),
+    ],
+    [dash.Input("url", "pathname")],
+    prevent_initial_call=True,
+)
 def routers(pathname: str) -> dash.html.Div:
     """
     Route the url to the correct server
@@ -33,16 +43,30 @@ def routers(pathname: str) -> dash.html.Div:
     """
     match pathname:
         case "/":
-            return set_server(Server.BOUNE.value)
+            return set_server(ServerRetro.BOUNE.value)
         case "/boune":
-            return set_server(Server.BOUNE.value)
+            return set_server(ServerRetro.BOUNE.value)
         case "/crail":
-            return set_server(Server.CRAIL.value)
+            return set_server(ServerRetro.CRAIL.value)
         case "/eratz":
-            return set_server(Server.ERATZ.value)
+            return set_server(ServerRetro.ERATZ.value)
         case "/galgarion":
-            return set_server(Server.GALGARION.value)
+            return set_server(ServerRetro.GALGARION.value)
         case "/henual":
-            return set_server(Server.HENUAL.value)
+            return set_server(ServerRetro.HENUAL.value)
+        case "/draconiros":
+            return set_server(ServerClassic.DRACONIROS.value)
+        case "/hellmina":
+            return set_server(ServerClassic.HELLMINA.value)
+        case "/imagiro":
+            return set_server(ServerClassic.IMAGIRO.value)
+        case "/ombre":
+            return set_server(ServerClassic.OMBRE.value)
+        case "/orukam":
+            return set_server(ServerClassic.ORUKAM.value)
+        case "/talkasha":
+            return set_server(ServerClassic.TALKASHA.value)
+        case "/tylezia":
+            return set_server(ServerClassic.TYLEZIA.value)
         case _:
             return error_view()

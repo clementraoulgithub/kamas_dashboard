@@ -8,6 +8,10 @@ from src import NAME
 # pylint: disable=unused-import
 from src.controllers.graph_line_controller import graph_line_controller
 from src.controllers.routers_controller import routers
+from src.controllers.top_menu_buttons_controller import (
+    toggle_menu_dofus_classic,
+    toggle_menu_dofus_retro,
+)
 from src.views.template_view import template_view
 
 app = dash.Dash(
