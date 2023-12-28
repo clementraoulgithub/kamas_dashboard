@@ -9,7 +9,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 
 from src.models.graph_model import GraphModel
-from src.utils.tools import Website
+from src.utils.enums import Website
 
 
 def create_graphs(day_kamas_dict: dict, yesterday_kamas_dict: dict) -> tuple:

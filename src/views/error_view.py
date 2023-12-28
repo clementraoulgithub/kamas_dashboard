@@ -25,4 +25,5 @@ def error_view() -> tuple[html.Div, dict[str, str], dict[str, str]]:
         ),
         {"display": "none"},
         {"display": "none"},
+        {"display": "none"},
     )
