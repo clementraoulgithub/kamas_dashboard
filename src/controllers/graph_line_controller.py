@@ -34,8 +34,6 @@ def graph_line_controller(value: int):
         "Valeur estimée moyenne",
         [dict["timestamp"] for dict in kamas_dict],
         [dict["average"] for dict in kamas_dict],
-        [dict["max"] for dict in kamas_dict],
-        [dict["min"] for dict in kamas_dict],
     )
 
     return line_graph.create_line_graph()
