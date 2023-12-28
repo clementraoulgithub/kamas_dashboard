@@ -37,10 +37,6 @@ a:hover, button:hover {
     color: black;
 }
 
-a:hover {
-    width: 110%; 
-}
-
 .header {
     background-color: #1c1e3a;
     color: white; 
@@ -298,4 +294,7 @@ input[type='radio'] {
     align-items: center;
 }
 
+.plot-container a {
+    font-size: x-small;
+}
 

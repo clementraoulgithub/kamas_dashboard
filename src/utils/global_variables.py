@@ -1,6 +1,6 @@
 """Module for global variables."""
 
-from src.utils.tools import Server
+from src.utils.tools import ServerRetro
 
 # pylint: disable=invalid-name
-current_server_name = Server.BOUNE.value
+current_server_name = ServerRetro.BOUNE.value
