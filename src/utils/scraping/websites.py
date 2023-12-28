@@ -6,7 +6,7 @@ from typing import List
 import requests
 from bs4 import BeautifulSoup
 
-from src.utils.tools import ServerClassic, ServerRetro
+from src.utils.enums import ServerClassic, ServerRetro, ServerTouch
 
 
 def get_kamas_price_from_kamas_facile_endpoint(server: str) -> float:
@@ -57,42 +57,81 @@ def get_kamas_from_lekamas(server: str) -> float:
         server_info["option[390]"] = arg2
         return divided_by
 
+    def _setup_payload_touch(arg0: str, server_info, arg2: str, divided_by: int) -> int:
+        server_info["option[392]"] = arg0
+        server_info["option[393]"] = arg2
+        return divided_by
+
     server_info = {
         "option[389]": "",
         "option[390]": "",
     }
+    data = {"option[388]": "", "quantity": "1", "product_id": "136"}
+
+    touch_serve_info = {
+        "option[392]": "",
+        "option[393]": "",
+    }
+    touch_data = {"option[391]": "", "quantity": "1", "product_id": "137"}
+
     match server:
         case ServerRetro.BOUNE.value:
             divided_by = _setup_payload("1449", server_info, "1453", 1)
+            payload = data | server_info
         case ServerRetro.CRAIL.value:
             divided_by = _setup_payload("1450", server_info, "1062", 2)
+            payload = data | server_info
         case ServerRetro.ERATZ.value:
             divided_by = _setup_payload("1052", server_info, "1066", 10)
         case ServerRetro.GALGARION.value:
             divided_by = _setup_payload("1451", server_info, "1062", 2)
+            payload = data | server_info
         case ServerRetro.HENUAL.value:
             divided_by = _setup_payload("1054", server_info, "1062", 2)
+            payload = data | server_info
         case ServerClassic.DRACONIROS.value:
             divided_by = _setup_payload("1055", server_info, "1062", 2)
+            payload = data | server_info
         case ServerClassic.HELLMINA.value:
             divided_by = _setup_payload("1053", server_info, "1063", 3)
+            payload = data | server_info
         case ServerClassic.IMAGIRO.value:
             divided_by = _setup_payload("1047", server_info, "1063", 3)
+            payload = data | server_info
         case ServerClassic.OMBRE.value:
             divided_by = _setup_payload("1445", server_info, "1063", 3)
+            payload = data | server_info
         case ServerClassic.ORUKAM.value:
             divided_by = _setup_payload("1057", server_info, "1063", 3)
+            payload = data | server_info
         case ServerClassic.TALKASHA.value:
             divided_by = _setup_payload("1455", server_info, "1063", 3)
         case ServerClassic.TYLEZIA.value:
             divided_by = _setup_payload("1448", server_info, "1063", 3)
+            payload = data | server_info
+        case ServerTouch.BRUTAS.value:
+            divided_by = _setup_payload_touch("1078", touch_serve_info, "1528", 1)
+            payload = touch_data | touch_serve_info
+        case ServerTouch.DODGE.value:
+            divided_by = _setup_payload_touch("1079", touch_serve_info, "1528", 1)
+            payload = touch_data | touch_serve_info
+        case ServerTouch.GRANDAPAN.value:
+            divided_by = _setup_payload_touch("1080", touch_serve_info, "1528", 1)
+            payload = touch_data | touch_serve_info
+        case ServerTouch.HERDEGRIZE.value:
+            divided_by = _setup_payload_touch("1081", touch_serve_info, "1528", 1)
+            payload = touch_data | touch_serve_info
+        case ServerTouch.OSHIMO.value:
+            divided_by = _setup_payload_touch("1082", touch_serve_info, "1528", 1)
+            payload = touch_data | touch_serve_info
+        case ServerTouch.TERRA_COGITA.value:
+            divided_by = _setup_payload_touch("1083", touch_serve_info, "1528", 1)
+            payload = touch_data | touch_serve_info
         case _:
             raise ValueError("Server not found")
 
     url = "https://www.lekamas.fr/index.php?route=journal2/ajax/price"
 
-    data = {"option[388]": "", "quantity": "1", "product_id": "136"}
-    payload = data | server_info
     headers = {
         "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
     }
@@ -119,6 +158,7 @@ def get_kamas_price_from_mode_marchand(server: str) -> float:
     """
     endpoint_retro = "https://www.mode-marchand.net/annonces/dofus-retro/kamas"
     endpoint_classique = "https://www.mode-marchand.net/annonces/dofus/kamas"
+    endpoint_touch = "https://www.mode-marchand.net/annonces/dofus-touch/kamas"
     query = "?online=1&server%5B%5D="
     match server:
         case ServerRetro.BOUNE.value:
@@ -145,6 +185,18 @@ def get_kamas_price_from_mode_marchand(server: str) -> float:
             url = f"{endpoint_classique}{query}125"
         case ServerClassic.TYLEZIA.value:
             url = f"{endpoint_classique}{query}124"
+        case ServerTouch.BRUTAS.value:
+            url = f"{endpoint_touch}{query}136"
+        case ServerTouch.DODGE.value:
+            url = f"{endpoint_touch}{query}131"
+        case ServerTouch.GRANDAPAN.value:
+            url = f"{endpoint_touch}{query}132"
+        case ServerTouch.HERDEGRIZE.value:
+            url = f"{endpoint_touch}{query}135"
+        case ServerTouch.OSHIMO.value:
+            url = f"{endpoint_touch}{query}133"
+        case ServerTouch.TERRA_COGITA.value:
+            url = f"{endpoint_touch}{query}134"
         case _:
             raise ValueError("Server not found")
 
@@ -185,6 +237,7 @@ def get_kamas_from_try_and_judge(server: str) -> float:
     """
     endpoint_retro = "https://www.tryandjudge.com/fr/retro-kamas"
     endpoint_classique = "https://www.tryandjudge.com/fr/dofus-kamas"
+    endpoint_touch = "https://www.tryandjudge.com/fr/dofus-touch"
     match server:
         case ServerRetro.BOUNE.value:
             url = f"{endpoint_retro}/{server}/1m-kamas-{server}"
@@ -216,6 +269,22 @@ def get_kamas_from_try_and_judge(server: str) -> float:
         case ServerClassic.TYLEZIA.value:
             url = f"{endpoint_classique}/{server}/3m-kamas-{server}"
             divided_by = 3
+        case ServerTouch.DODGE.value:
+            url = f"{endpoint_touch}/{server}/1m-kamas-{server}"
+            divided_by = 1
+        case ServerTouch.GRANDAPAN.value:
+            url = f"{endpoint_touch}/{server}/1m-kamas-{server}"
+            divided_by = 1
+        case ServerTouch.HERDEGRIZE.value:
+            url = f"{endpoint_touch}/{server}/1m-kamas-{server}"
+            divided_by = 1
+        case ServerTouch.OSHIMO.value:
+            url = f"{endpoint_touch}/{server}/1m-kamas-{server}"
+            divided_by = 1
+        case ServerTouch.TERRA_COGITA.value:
+            server_name = server.replace("-", "")
+            url = f"{endpoint_touch}/kamas-{server_name}/1m-kamas-{server_name}"
+            divided_by = 1
         case _:
             raise ValueError("Server not found")
 
@@ -276,6 +345,18 @@ def get_d_two_gateway_price(server: str) -> float:
             url = f"{endpoint}{start_query}68{end_query}"
         case ServerClassic.TYLEZIA.value:
             url = f"{endpoint}{start_query}75{end_query}"
+        case ServerTouch.BRUTAS.value:
+            url = f"{endpoint}{start_query}33{end_query}"
+        case ServerTouch.DODGE.value:
+            url = f"{endpoint}{start_query}28{end_query}"
+        case ServerTouch.GRANDAPAN.value:
+            url = f"{endpoint}{start_query}32{end_query}"
+        case ServerTouch.HERDEGRIZE.value:
+            url = f"{endpoint}{start_query}30{end_query}"
+        case ServerTouch.OSHIMO.value:
+            url = f"{endpoint}{start_query}31{end_query}"
+        case ServerTouch.TERRA_COGITA.value:
+            url = f"{endpoint}{start_query}29{end_query}"
         case _:
             raise ValueError("Server not found")
     response = requests.get(url, timeout=5)
@@ -288,6 +369,7 @@ def get_d_two_gateway_price(server: str) -> float:
     return float(response["result"][0]["price"])
 
 
+# pylint: disable=too-many-statements
 def get_kamas_from_i_game_gold(server: str) -> float:
     """
     Get the price of 1M of kamas from iGameGold
@@ -298,7 +380,7 @@ def get_kamas_from_i_game_gold(server: str) -> float:
     Returns:
         float: The price of 1M of kamas
     """
-
+    url = "https://www.igamegold.com/fr/Dofus-Kamas"
     match server:
         case ServerRetro.BOUNE.value:
             divided_by = 1
@@ -336,10 +418,32 @@ def get_kamas_from_i_game_gold(server: str) -> float:
         case ServerClassic.TYLEZIA.value:
             divided_by = 5
             string = f"{server.capitalize()} - Classic"
+        case ServerTouch.BRUTAS.value:
+            url = "https://www.igamegold.com/fr/Dofus-Touch-Kamas"
+            divided_by = 3
+            string = f"{server.capitalize()} - ES"
+        case ServerTouch.DODGE.value:
+            url = "https://www.igamegold.com/fr/Dofus-Touch-Kamas"
+            divided_by = 2
+            string = f"{server.capitalize()} - INT"
+        case ServerTouch.GRANDAPAN.value:
+            url = "https://www.igamegold.com/fr/Dofus-Touch-Kamas"
+            divided_by = 3
+            string = f"{server.capitalize()} - INT"
+        case ServerTouch.HERDEGRIZE.value:
+            url = "https://www.igamegold.com/fr/Dofus-Touch-Kamas"
+            divided_by = 1
+            string = f"{server.capitalize()} - FR"
+        case ServerTouch.OSHIMO.value:
+            url = "https://www.igamegold.com/fr/Dofus-Touch-Kamas"
+            divided_by = 1
+            string = f"{server.capitalize()} - FR"
+        case ServerTouch.TERRA_COGITA.value:
+            url = "https://www.igamegold.com/fr/Dofus-Touch-Kamas"
+            divided_by = 1
+            string = "Terra Cogita - FR"
         case _:
             raise ValueError("Server not found")
-
-    url = "https://www.igamegold.com/fr/Dofus-Kamas"
 
     response = requests.get(url, timeout=5)
     soup = BeautifulSoup(response.text, "html.parser")

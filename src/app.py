@@ -11,6 +11,7 @@ from src.controllers.routers_controller import routers
 from src.controllers.top_menu_buttons_controller import (
     toggle_menu_dofus_classic,
     toggle_menu_dofus_retro,
+    toggle_menu_dofus_touch,
 )
 from src.views.template_view import template_view
 

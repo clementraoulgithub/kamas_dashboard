@@ -3,9 +3,9 @@
 import dash
 
 from src.utils import global_variables
+from src.utils.enums import LineGraphScope
 from src.utils.graphs import LineGraph
 from src.utils.scraping.scraping import get_scope_kamas_value
-from src.utils.tools import LineGraphScope
 
 
 @dash.callback(
@@ -34,8 +34,6 @@ def graph_line_controller(value: int):
         "Valeur estimée moyenne",
         [dict["timestamp"] for dict in kamas_dict],
         [dict["average"] for dict in kamas_dict],
-        [dict["max"] for dict in kamas_dict],
-        [dict["min"] for dict in kamas_dict],
     )
 
     return line_graph.create_line_graph()

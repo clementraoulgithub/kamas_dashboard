@@ -9,7 +9,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 
 from src.models.graph_model import GraphModel
-from src.utils.tools import Website
+from src.utils.enums import Website
 
 
 def create_graphs(day_kamas_dict: dict, yesterday_kamas_dict: dict) -> tuple:
@@ -221,8 +221,6 @@ class LineGraph:
         y_title: str,
         x_values: list,
         y_values: list,
-        y_max_values: list,
-        y_min_values: list,
     ):
         self.title = title
         self.description = description
@@ -230,8 +228,6 @@ class LineGraph:
         self.y_title = y_title
         self.x_values = x_values
         self.y_values = y_values
-        self.y_max_values = y_max_values
-        self.y_min_values = y_min_values
 
     def create_line_graph(self) -> px.line:
         """
@@ -257,15 +253,10 @@ class LineGraph:
             data={
                 "Date UTC": x_values,
                 "Moyenne": self.y_values,
-                "Max": self.y_max_values,
-                "Min": self.y_min_values,
             }
         )
-        fig = px.line(
-            dataframe,
-            x="Date UTC",
-            y=["Moyenne", "Max", "Min"],
-            title=f"<b>{model.title}</b>",
+        fig = px.area(
+            dataframe, x="Date UTC", y="Moyenne", title=f"<b>{model.title}</b>"
         )
         self.add_average_values(fig)
         self.update_layout(fig)
@@ -309,12 +300,8 @@ class LineGraph:
             fig (go.Figure): the figure
         """
         average_value = round(np.mean(self.y_values), 2)
-        min_value = round(min(self.y_min_values), 2)
-        max_value = round(max(self.y_max_values), 2)
 
         self.create_h_line(fig, average_value, label="Moyenne")
-        self.create_h_line(fig, min_value, label="Minimum")
-        self.create_h_line(fig, max_value, label="Maximum")
 
     def update_layout(self, fig: go.Figure) -> None:
         """

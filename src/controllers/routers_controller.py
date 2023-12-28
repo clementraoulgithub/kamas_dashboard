@@ -4,7 +4,7 @@ import dash
 
 from src.controllers.servers_controller import server
 from src.utils import global_variables
-from src.utils.tools import ServerClassic, ServerRetro
+from src.utils.enums import ServerClassic, ServerRetro, ServerTouch
 from src.views.error_view import error_view
 
 
@@ -18,7 +18,12 @@ def set_server(
         server_name (str): the server name
     """
     global_variables.current_server_name = server_name
-    return server(server_name), {"display": "none"}, {"display": "none"}
+    return (
+        server(server_name),
+        {"display": "none"},
+        {"display": "none"},
+        {"display": "none"},
+    )
 
 
 # pylint: disable=too-many-return-statements
@@ -27,6 +32,7 @@ def set_server(
         dash.Output("main-content", "children"),
         dash.Output("top-menu-retro", "style", allow_duplicate=True),
         dash.Output("top-menu-classic", "style", allow_duplicate=True),
+        dash.Output("top-menu-touch", "style", allow_duplicate=True),
     ],
     [dash.Input("url", "pathname")],
     prevent_initial_call=True,
@@ -68,5 +74,17 @@ def routers(pathname: str) -> dash.html.Div:
             return set_server(ServerClassic.TALKASHA.value)
         case "/tylezia":
             return set_server(ServerClassic.TYLEZIA.value)
+        case "/brutas":
+            return set_server(ServerTouch.BRUTAS.value)
+        case "/dodge":
+            return set_server(ServerTouch.DODGE.value)
+        case "/grandapan":
+            return set_server(ServerTouch.GRANDAPAN.value)
+        case "/herdegrize":
+            return set_server(ServerTouch.HERDEGRIZE.value)
+        case "/oshimo":
+            return set_server(ServerTouch.OSHIMO.value)
+        case "/terra-cogita":
+            return set_server(ServerTouch.TERRA_COGITA.value)
         case _:
             return error_view()

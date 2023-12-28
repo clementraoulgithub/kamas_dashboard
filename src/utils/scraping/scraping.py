@@ -8,6 +8,7 @@ import requests
 from apscheduler.schedulers.background import BackgroundScheduler
 
 from src.utils.backend import Backend
+from src.utils.enums import ServerClassic, ServerRetro, ServerTouch, Website
 from src.utils.scraping.websites import (
     get_d_two_gateway_price,
     get_kamas_from_i_game_gold,
@@ -16,7 +17,6 @@ from src.utils.scraping.websites import (
     get_kamas_price_from_kamas_facile_endpoint,
     get_kamas_price_from_mode_marchand,
 )
-from src.utils.tools import ServerClassic, ServerRetro, Website
 
 
 def schedule_scrapping() -> None:
@@ -30,7 +30,7 @@ def schedule_scrapping() -> None:
             get_current_kamas_value,
             "interval",
             args=[server],
-            minutes=9,
+            minutes=29,
         )
 
     for server in [server.value for server in ServerClassic.__members__.values()]:
@@ -38,7 +38,15 @@ def schedule_scrapping() -> None:
             get_current_kamas_value,
             "interval",
             args=[server],
-            minutes=11,
+            minutes=31,
+        )
+
+    for server in [server.value for server in ServerTouch.__members__.values()]:
+        scheduler.add_job(
+            get_current_kamas_value,
+            "interval",
+            args=[server],
+            minutes=33,
         )
 
     print("Start the scheduler")
