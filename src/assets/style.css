@@ -105,12 +105,6 @@ a:hover {
     border-bottom: 1px solid grey;
 }
 
-@media (max-width: 400px) {
-    .top-menu {
-        display: inline-block;
-    }
-}
-
 .main-content {
     padding: 0px;
 }
