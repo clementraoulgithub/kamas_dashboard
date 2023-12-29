@@ -116,11 +116,20 @@
     background-color: #1c1e3a;
     border-radius: 16px;
     margin: 10px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
 }
 
 .graph-info-avg {
     display: flex;
     flex-direction: row;
+    align-items: stretch;
+}
+
+.graph-info-avg-vertical {
+    display: flex;
+    flex-direction: column;
     align-items: stretch;
 }
 
@@ -155,9 +164,8 @@
     color: white;
     margin-left: 10px;
     font-weight: bold;
-    font-size: medium;
-    margin: 10px;
-    margin-left: 20px;
+    font-size: small;
+    margin: 0px;
 }
 
 .rc-slider-rail,
@@ -193,6 +201,7 @@
     padding: 0px !important;
     flex: 0.1 !important;
     margin: 10px !important;
+    width: 60%;
 }
 
 @media (max-width: 450px) {
@@ -219,8 +228,18 @@
     flex-wrap: wrap;
 }
 
+.graph-line-container {
+    flex-direction: column;
+    align-items: center;
+    
+}
+
 .graphs-container > *, .graph-line-container > * {
     flex: 1;
+}
+
+.graph-day {
+    display: flex;
 }
 
 .graph-day-container {
@@ -229,17 +248,11 @@
     height: 100%;
 }
 
-.graph-info-container {
-    flex: 0.5;
-}
-
-@media (max-width: 450px) {
-    .graph-info-container {
-        flex: 1;
-    }
-}
-
 #graph-line {
     display: flex;
-    width: 100%;
+    width: 99%;
+    margin-right: 0px;
+    margin-left: 0px;
 }
+
+
