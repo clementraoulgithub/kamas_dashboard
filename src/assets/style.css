@@ -1,40 +1,7 @@
 /* style.css */
 
-body, html {
-    font-family: Helvetica;
-    height: 100%;
-    background-color: #161833;
-    margin: 0px;
-    display: flex;
-    flex-direction: column;
-}
-
 .body-container {
     margin-top: 140px;
-}
-
-h1, h2, h3, h4, h5, h6 {
-    font-weight: bold;
-    font-family: Arial;
-}
-
-p {
-    color: white;
-}
-
-a, button {
-    color: white;
-    background-color: #1c1e3a;
-    font-weight: bold;
-    text-decoration: none;
-    padding: 5px;
-    border: 1px solid transparent;
-    font-size: medium;
-}
-
-a:hover, button:hover {
-    background-color: #EC5C28;
-    color: black;
 }
 
 .header {
@@ -75,6 +42,10 @@ a:hover, button:hover {
 .logo {
     width: 50px;
     height: 50px;
+}
+
+.link {
+    padding: 5px;
 }
 
 .footer {
@@ -119,11 +90,6 @@ a:hover, button:hover {
 .graphs-content {
     align-items: stretch;
     width: 100%;
-}
-
-input[type='radio'] {
-    accent-color: white;
-    margin-right: 10px;
 }
 
 .graph-metrics {

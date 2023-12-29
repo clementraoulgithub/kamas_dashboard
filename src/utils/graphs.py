@@ -255,7 +255,9 @@ class LineGraph:
                 "Moyenne": self.y_values,
             }
         )
-        fig = px.area(dataframe, x="Date UTC", y="Moyenne", title=f"<b>{model.title}</b>")
+        fig = px.area(
+            dataframe, x="Date UTC", y="Moyenne", title=f"<b>{model.title}</b>"
+        )
         self.add_average_values(fig)
         self.update_layout(fig)
 

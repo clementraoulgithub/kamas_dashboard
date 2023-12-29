@@ -17,7 +17,7 @@ def header() -> dash.html.Header:
             dash.html.Div(
                 [
                     dash.html.Img(src="/assets/logo.png", className="logo"),
-                    dash.html.H3(children=NAME.capitalize()),
+                    dash.html.H3(children=NAME),
                 ],
                 className="header-container",
             ),
