@@ -16,7 +16,11 @@ def header() -> dash.html.Header:
         children=[
             dash.html.Div(
                 [
-                    dash.html.Img(src="/assets/logo.png", className="logo"),
+                    dash.html.A(
+                        dash.html.Img(src="/assets/logo.png", className="logo"),
+                        href="/",
+                        id="logo-link",
+                    ),
                     dash.html.Div(
                         [
                             dash.html.H3(children=NAME),

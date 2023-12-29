@@ -6,6 +6,7 @@ from src.controllers.servers_controller import server
 from src.utils import global_variables
 from src.utils.enums import ServerClassic, ServerRetro, ServerTouch
 from src.views.error_view import error_view
+from src.views.index_view import index_view
 
 
 def set_server(
@@ -49,7 +50,7 @@ def routers(pathname: str) -> dash.html.Div:
     """
     match pathname:
         case "/":
-            return set_server(ServerRetro.BOUNE.value)
+            return index_view()
         case "/boune":
             return set_server(ServerRetro.BOUNE.value)
         case "/crail":

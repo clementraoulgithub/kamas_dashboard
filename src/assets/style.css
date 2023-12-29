@@ -16,6 +16,11 @@
     height: 50px;
 }
 
+#logo-link {
+    margin: 0px;
+    padding: 0px;
+}
+
 .header h3 {
     color: #EC5C28;
     margin: 0px;
@@ -25,6 +30,7 @@
 .header-text {
     display: flex;
     flex-direction: column;
+    margin-left: 10px;
 }
 
 .header-text > * {

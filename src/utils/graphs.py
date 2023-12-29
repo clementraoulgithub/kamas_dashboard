@@ -336,7 +336,6 @@ def create_gauche_graph(yesterday_value: float, today_value: float) -> go.Figure
         value = 0
 
     value = round(value, 2)
-    max_value = max(today_value, yesterday_value)
 
     fig = go.Figure(
         go.Indicator(
@@ -351,12 +350,11 @@ def create_gauche_graph(yesterday_value: float, today_value: float) -> go.Figure
             delta={"reference": yesterday_value},
             gauge={
                 "axis": {
-                    "range": [None, max_value],
+                    "range": [0, yesterday_value],
                     "tickwidth": 1,
                     "tickcolor": "white",
                 },
-                "bar": {"color": "lightgray"},
-                "steps": [{"range": [0, yesterday_value], "color": "gray"}],
+                "bar": {"color": "lightgray", "thickness": 1},
             },
         ),
     )
