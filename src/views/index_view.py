@@ -13,8 +13,8 @@ def index_view() -> tuple[html.Div, dict[str, str], dict[str, str]]:
         tuple[html.Div, dict[str, str], dict[str, str]]: the html.Div for index
     """
 
-    description = f"Votre Source fiable pour le suivi quotidien du cours du Kamas. \
-    Découvrez la dynamique du marché du Kamas comme jamais auparavant avec {NAME}. \
+    description = f"Votre Source fiable pour le suivi quotidien du cours du kamas. \
+    Découvrez la dynamique du marché du kamas avec {NAME}. \
     Ce site se consacre à fournir des graphiques intuitifs et des mises à jour en temps réel\
     sur l'évolution quotidienne du cours du Kamas. Que vous soyez un investisseur aguerri, \
     un joueur passionné ou simplement curieux des tendances économiques de Dofus, {NAME} \
