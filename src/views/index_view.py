@@ -47,9 +47,19 @@ def index_view() -> tuple[html.Div, dict[str, str], dict[str, str]]:
                         html.P(please_return_info),
                         html.P(
                             [
-                                html.A(
-                                    "@Muti",
-                                    href="https://discord.com/users/446356755061145612",
+                                html.P(
+                                    [
+                                        html.Img(
+                                            src="assets/logo.png",
+                                            className="logo",
+                                        ),
+                                        html.A(
+                                            "Lien Discord",
+                                            href="https://discord.gg/2RqfUW3DkN",
+                                            style={"flex": "0"},
+                                        ),
+                                    ],
+                                    style={"display": "flex"},
                                 )
                             ]
                         ),
