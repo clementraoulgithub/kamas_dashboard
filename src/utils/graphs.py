@@ -255,7 +255,7 @@ class LineGraph:
                 "Moyenne": self.y_values,
             }
         )
-        fig = px.area(
+        fig = px.line(
             dataframe, x="Date UTC", y="Moyenne", title=f"<b>{model.title}</b>"
         )
         self.add_average_values(fig)
@@ -275,7 +275,7 @@ class LineGraph:
         fig.add_hline(
             y=value,
             line_dash="dash",
-            line_color="white",
+            line_color="red",
             name=label,
             annotation={
                 "text": f"{label}: {value}",
@@ -301,7 +301,7 @@ class LineGraph:
         """
         average_value = round(np.mean(self.y_values), 2)
 
-        self.create_h_line(fig, average_value, label="Moyenne")
+        self.create_h_line(fig, average_value, label="Moy")
 
     def update_layout(self, fig: go.Figure) -> None:
         """
@@ -315,7 +315,7 @@ class LineGraph:
             plot_bgcolor="rgba(0, 0, 0, 0)",
             paper_bgcolor="rgba(0, 0, 0, 0)",
         )
-        fig.update_yaxes(title_text="Valeurs estimées (million)")
+        fig.update_yaxes(title_text="Valeurs moyennes (million)")
 
 
 def create_gauche_graph(yesterday_value: float, today_value: float) -> go.Figure:

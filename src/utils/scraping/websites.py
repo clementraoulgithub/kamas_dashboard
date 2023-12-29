@@ -38,6 +38,7 @@ def get_kamas_price_from_kamas_facile_endpoint(server: str) -> float:
     return round(product_price / 3, 2)
 
 
+# pylint: disable=too-many-statements
 def get_kamas_from_lekamas(server: str) -> float:
     """
     Get the kamas price from lekamas
@@ -83,6 +84,7 @@ def get_kamas_from_lekamas(server: str) -> float:
             payload = data | server_info
         case ServerRetro.ERATZ.value:
             divided_by = _setup_payload("1052", server_info, "1066", 10)
+            payload = data | server_info
         case ServerRetro.GALGARION.value:
             divided_by = _setup_payload("1451", server_info, "1062", 2)
             payload = data | server_info
@@ -106,6 +108,7 @@ def get_kamas_from_lekamas(server: str) -> float:
             payload = data | server_info
         case ServerClassic.TALKASHA.value:
             divided_by = _setup_payload("1455", server_info, "1063", 3)
+            payload = data | server_info
         case ServerClassic.TYLEZIA.value:
             divided_by = _setup_payload("1448", server_info, "1063", 3)
             payload = data | server_info

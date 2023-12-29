@@ -53,16 +53,16 @@ def left_metrics(
                     html.Div(
                         [
                             html.P("Médiane"),
-                            html.H1(f"{mediane}", className="best-price"),
-                            html.H2("EUR/m", className="best-price"),
+                            html.H1(f"{mediane}"),
+                            html.H2("EUR/m"),
                         ],
                         className="graph-info",
                     ),
                     html.Div(
                         [
                             html.P("Meilleur prix"),
-                            html.H1(f"{best_price}", className="best-price"),
-                            html.H2("EUR/m", className="best-price"),
+                            html.H1(f"{best_price}"),
+                            html.H2("EUR/m"),
                         ],
                         className="graph-info",
                     ),
@@ -74,7 +74,7 @@ def left_metrics(
                     html.Div(
                         [
                             html.P("Vendeur le moins cher"),
-                            html.H1(f"{best_price_server}", className="best-price"),
+                            html.H1(f"{best_price_server}"),
                         ],
                         className="graph-info",
                     ),

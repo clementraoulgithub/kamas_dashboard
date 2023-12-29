@@ -28,7 +28,7 @@ def graph_line_controller(value: int):
     )
 
     line_graph = LineGraph(
-        "Evolution<br>du million de kamas",
+        "Evolution moyenne<br>du million de kamas",
         "",
         "Tps",
         "Valeur estimée moyenne",
