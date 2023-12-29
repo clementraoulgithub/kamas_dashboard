@@ -5,6 +5,7 @@ run:
 	python -m src 
 
 lint:
+	python -m header_context
 	python -m isort . --profile black
 	python -m black .
 	python -m pylint src

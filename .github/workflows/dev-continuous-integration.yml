@@ -19,6 +19,7 @@ jobs:
           python -m pip install -r requirements-dev.txt
       - name: Linter
         run: |
+          python -m header_context
           python -m isort --check . --profile black
           python -m black --check .
           python -m pylint src
