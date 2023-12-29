@@ -4,11 +4,13 @@ import plotly.graph_objs as go
 from dash import dcc, html
 
 
+# pylint: disable=too-many-arguments
 def left_metrics(
     average: float,
     mediane: float,
     deviation: float,
     best_price: float,
+    best_price_server: str,
     fig_gauge: go.Figure,
 ) -> html.Div:
     """
@@ -68,14 +70,24 @@ def left_metrics(
                 className="graph-info-avg",
             ),
             html.Div(
-                dcc.Graph(
-                    figure=fig_gauge,
-                    config={
-                        "displayModeBar": False,
-                        "displaylogo": False,
-                    },
-                ),
-                className="graph-info",
+                [
+                    html.Div(
+                        [
+                            html.P("Vendeur le moins cher"),
+                            html.H1(f"{best_price_server}", className="best-price"),
+                        ],
+                        className="graph-info",
+                    ),
+                    dcc.Graph(
+                        figure=fig_gauge,
+                        config={
+                            "displayModeBar": False,
+                            "displaylogo": False,
+                        },
+                        className="graph-info",
+                    ),
+                ],
+                className="graph-info-avg-vertical",
             ),
         ],
         className="graph-info-container",
@@ -141,12 +153,11 @@ def bottom_line_graph() -> html.Div:
             4: "Cette semaine",
             5: "Aujourd'hui",
         },
-        vertical=True,
+        vertical=False,
     )
 
     return html.Div(
         [
-            slider,
             dcc.Graph(
                 config={
                     "displayModeBar": False,
@@ -154,6 +165,7 @@ def bottom_line_graph() -> html.Div:
                 },
                 id="graph-line",
             ),
+            slider,
         ],
         className="graph-line-container",
     )
@@ -166,6 +178,7 @@ def server_view(
     fig_day: go.Figure,
     fig_gauge: go.Figure,
     best_price: float,
+    best_price_server: str,
     average: float,
     mediane: float,
     deviation: float,
@@ -197,7 +210,12 @@ def server_view(
                     html.Div(
                         [
                             left_metrics(
-                                average, mediane, deviation, best_price, fig_gauge
+                                average,
+                                mediane,
+                                deviation,
+                                best_price,
+                                best_price_server,
+                                fig_gauge,
                             ),
                             right_daily_graph(fig_day, nb_site),
                         ],

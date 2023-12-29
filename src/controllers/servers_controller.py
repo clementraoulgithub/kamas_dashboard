@@ -46,12 +46,22 @@ def server(name: str) -> dash.html.Div:
         else 0
     )
 
+    best_price_server = next(
+        (
+            site
+            for site, price in day_kamas_dict["kamas_dict"].items()
+            if price == best_price
+        ),
+        "",
+    )
+
     return server_view(
         name,
         description_lst,
         fig_day,
         fig_gauge,
         best_price,
+        best_price_server,
         average=day_kamas_dict["average"] if day_kamas_dict else 0,
         mediane=mediane,
         deviation=deviation,
