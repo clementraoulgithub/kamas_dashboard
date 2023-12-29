@@ -1,40 +1,7 @@
 /* style.css */
 
-body, html {
-    font-family: Helvetica;
-    height: 100%;
-    background-color: #161833;
-    margin: 0px;
-    display: flex;
-    flex-direction: column;
-}
-
 .body-container {
     margin-top: 140px;
-}
-
-h1, h2, h3, h4, h5, h6 {
-    font-weight: bold;
-    font-family: Arial;
-}
-
-p {
-    color: white;
-}
-
-a, button {
-    color: white;
-    background-color: #1c1e3a;
-    font-weight: bold;
-    text-decoration: none;
-    padding: 5px;
-    border: 1px solid transparent;
-    font-size: medium;
-}
-
-a:hover, button:hover {
-    background-color: #EC5C28;
-    color: black;
 }
 
 .header {
@@ -77,6 +44,10 @@ a:hover, button:hover {
     height: 50px;
 }
 
+.link {
+    padding: 5px;
+}
+
 .footer {
     background-color: #161833;
     color: white;
@@ -117,36 +88,11 @@ a:hover, button:hover {
 }
 
 .graphs-content {
-    display : flex;
-    flex-direction: row;
     align-items: stretch;
     width: 100%;
 }
 
-.graphs-content > * {
-    flex: 1;
-}
-
-.graph-day-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-@media (max-width: 450px) {
-    .graph-day-container  {
-        display: block;
-    }
-}
-
-input[type='radio'] {
-    accent-color: white;
-    margin-right: 10px;
-}
-
 .graph-metrics {
-    display: flex;
-    flex-direction: row;
     justify-content: center;
     align-items: center;
 }
@@ -165,8 +111,6 @@ input[type='radio'] {
 }
 
 .graph-info {
-    display: flex;
-    flex-direction: column;
     justify-content: center;
     text-align: center;
     background-color: #1c1e3a;
@@ -207,15 +151,6 @@ input[type='radio'] {
     margin-left: 0px;
 }
 
-.graph-info-container {
-    display: flex;
-    flex-direction: column;
-}
-
-.graph-info-container > * {
-    flex: 1;
-}
-
 .rc-slider-mark-text {
     color: white;
     margin-left: 10px;
@@ -254,47 +189,57 @@ input[type='radio'] {
     border: 2px solid #EC5C28;
 }
 
-.graphs-container {
-    display: flex;
-    flex-direction: row;
-}
-
-@media (max-width: 450px) {
-    .graphs-container {
-        display: flex;
-        flex-direction: column;
-    }
-}
-
-.graph-line-container {
-    display: flex;
-    flex: 2;
-    flex-direction: row;
-    align-items: center;
-}
-
-@media (max-width: 450px) {
-    .graph-line-container {
-        display: block;
-    }
-}
-
-
 #graph-slider {
-    padding: 0px;
-    margin: 10px;
-    padding-left: 5px;
-    margin-right: 100px;
+    padding: 0px !important;
+    flex: 0.1 !important;
+    margin: 10px !important;
 }
 
-.plot-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+@media (max-width: 450px) {
+    #graph-slider {
+        flex: 1;
+    }
 }
 
 .plot-container a {
     font-size: x-small;
 }
 
+.plot-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+}
+
+.graphs-container, .graph-line-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.graphs-container > *, .graph-line-container > * {
+    flex: 1;
+}
+
+.graph-day-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.graph-info-container {
+    flex: 0.5;
+}
+
+@media (max-width: 450px) {
+    .graph-info-container {
+        flex: 1;
+    }
+}
+
+#graph-line {
+    display: flex;
+    width: 100%;
+}
