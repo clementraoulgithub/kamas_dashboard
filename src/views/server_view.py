@@ -17,6 +17,7 @@ def left_metrics(
     deviation: float,
     best_price: float,
     best_price_server: str,
+    website_link: str,
     fig_gauge: go.Figure,
 ) -> html.Div:
     """
@@ -80,7 +81,19 @@ def left_metrics(
                     html.Div(
                         [
                             html.P("Vendeur le moins cher"),
-                            html.H1(f"{best_price_server}"),
+                            html.Div(
+                                [
+                                    html.H1(f"{best_price_server}"),
+                                    html.A(
+                                        html.Img(
+                                            src="/assets/svg/external-link.svg",
+                                            className="svg",
+                                        ),
+                                        href=website_link,
+                                    ),
+                                ],
+                                className="best-price-server",
+                            ),
                         ],
                         className="graph-info",
                     ),
@@ -185,6 +198,7 @@ def server_view(
     fig_gauge: go.Figure,
     best_price: float,
     best_price_server: str,
+    website_link: str,
     average: float,
     mediane: float,
     deviation: float,
@@ -221,6 +235,7 @@ def server_view(
                                 deviation,
                                 best_price,
                                 best_price_server,
+                                website_link,
                                 fig_gauge,
                             ),
                             right_daily_graph(fig_day, nb_site),

@@ -31,3 +31,8 @@ a:hover, button:hover {
     background-color: #EC5C28;
     color: black;
 }
+
+.svg {
+    width: 30px;
+    height: 30px;
+}

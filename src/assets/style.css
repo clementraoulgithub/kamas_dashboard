@@ -264,4 +264,10 @@
     margin-left: 0px;
 }
 
+.best-price-server {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
 
