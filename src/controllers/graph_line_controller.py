@@ -32,7 +32,8 @@ from src.utils.scraping.scraping import get_scope_kamas_value
 
 
 @dash.callback(
-    dash.Output("graph-line", "figure"), [dash.Input("graph-slider", "value")]
+    [dash.Output("graph-line", "figure"), dash.Output("period-metrics", "children")],
+    [dash.Input("graph-slider", "value")],
 )
 def graph_line_controller(value: int):
     """
@@ -60,4 +61,20 @@ def graph_line_controller(value: int):
         [dict["min"] for dict in kamas_dict],
     )
 
-    return line_graph.create_line_graph()
+    graph, metrics = line_graph.create_line_graph()
+
+    metrics = dash.html.Div(
+        [
+            dash.html.Div(
+                [dash.html.P("Prix moyen:"), dash.html.P(metrics[0])],
+                className="graph-info",
+            ),
+            dash.html.Div(
+                [dash.html.P("Prix minimum:"), dash.html.P(metrics[1])],
+                className="graph-info",
+            ),
+        ],
+        className="graph-info-avg",
+    )
+
+    return graph, metrics

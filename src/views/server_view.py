@@ -279,6 +279,7 @@ def server_view(
                 [
                     html.H2(f"Serveur {name.capitalize()}"),
                     html.P(model_description_lst),
+                    html.H3("Cours instantané du kamas"),
                     html.Div(
                         [
                             left_metrics(
@@ -296,6 +297,10 @@ def server_view(
                             right_daily_graph(fig_day, nb_site),
                         ],
                         className="graphs-container",
+                    ),
+                    html.H3("Cours du kamas sur période"),
+                    html.Div(
+                        id="period-metrics",
                     ),
                     bottom_line_graph(),
                 ],
