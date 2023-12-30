@@ -135,6 +135,12 @@
     flex-direction: column;
 }
 
+.graph-info p {
+    font-weight: bold;
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
 .graph-info-avg {
     display: flex;
     flex-direction: row;
@@ -280,3 +286,6 @@
     justify-content: center;
 }
 
+#external-link {
+    margin-left: 0px;
+}

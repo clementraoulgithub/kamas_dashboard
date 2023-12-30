@@ -129,6 +129,7 @@ def left_metrics(
                                         html.Img(
                                             src="/assets/svg/external-link.svg",
                                             className="svg",
+                                            id="external-link",
                                         ),
                                         href=website_link,
                                     ),
