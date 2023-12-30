@@ -273,12 +273,12 @@ class LineGraph:
         fig.add_scatter(
             x=x_values,
             y=self.y_min_values,
-            name="Prix minimal",
+            name="Prix minimum",
         )
-        self.add_average_values()
+        metrics = self.create_metrics()
         self.update_layout(fig)
 
-        return fig
+        return fig, metrics
 
     def create_h_line(self, fig: go.Figure, value: float, label: str) -> None:
         """
@@ -309,36 +309,32 @@ class LineGraph:
             },
         )
 
-    def add_average_values(self) -> None:
+    def create_metrics(self) -> None:
         """
         Add average values to the graph
 
         Args:
             fig (go.Figure): the figure
         """
+        metrics: list[str] = []
+        for average in (self.y_avg_values, self.y_min_values):
+            average_value = np.mean(average)
+            deviation = np.std(average)
+            deviation_related_to_average = (deviation / average_value) * 100
+            deviation_related_to_average = round(deviation_related_to_average, 2)
 
-        average_value = np.mean(self.y_avg_values)
-        deviation = np.std(self.y_avg_values)
-        deviation_related_to_average = (deviation / average_value) * 100
-        deviation_related_to_average = round(deviation_related_to_average, 2)
+            if len(average) > 1:
+                increase_rate = (average[-1] - average[0]) / average[0] * 100
+            else:
+                increase_rate = 0
 
-        if len(self.y_avg_values) > 1:
-            increase_rate = (
-                (self.y_avg_values[-1] - self.y_avg_values[0])
-                / self.y_avg_values[0]
-                * 100
+            metrics.append(
+                f"Valeur moyenne: {round(average_value, 2)} - "
+                f"Deviation: {round(deviation, 2)} - "
+                f"Deviation relative à la moyenne: {deviation_related_to_average} % - "
+                f"Augmentation: {round(increase_rate, 2)} %"
             )
-        else:
-            increase_rate = 0
-
-        self.title = f"<b>{self.title}</b><br>"
-        self.title += "<br><i>Prix moyen:</i>"
-        self.title += f"<br>Moyenne: <b>{round(average_value, 2)}</b>"
-        self.title += f"<br>Ecart-type: <b>{round(deviation, 2)}</b>"
-        self.title += (
-            f"<br>Ecart-type relatif: <b>{round(deviation_related_to_average, 2)}%</b>"
-        )
-        self.title += f"<br>Taux d'augmentation: <b>{round(increase_rate, 2)}%</b>"
+        return metrics
 
     def update_layout(self, fig: go.Figure) -> None:
         """
