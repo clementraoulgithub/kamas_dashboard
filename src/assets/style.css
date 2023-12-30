@@ -289,3 +289,10 @@
 #external-link {
     margin-left: 0px;
 }
+
+.deviation-related-to-average {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
