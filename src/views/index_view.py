@@ -50,6 +50,19 @@ def index_view() -> tuple[html.Div, dict[str, str], dict[str, str]]:
     Toutes les marques commerciales et marques déposées appartiennent \
     à leurs propriétaires respectifs."
 
+    # pylint: disable=line-too-long
+    description_lst = [
+        "Les graphiques illustrent les estimations du kamas en euros pour chaque serveur ",
+        "sur les différents sites de vente de kamas.",
+        html.Br(),
+        "Les valeurs sont évaluées en se basant sur ",
+        html.B("les offres de vente les plus basses."),
+        html.Br(),
+        html.B(
+            "Les sites avec plusieurs vendeurs ne prennent en compte que les vendeurs connectés."
+        ),
+    ]
+
     return (
         html.Div(
             [
@@ -60,6 +73,7 @@ def index_view() -> tuple[html.Div, dict[str, str], dict[str, str]]:
                         html.H1(NAME),
                         html.P(f"Bienvenue sur {NAME},"),
                         html.P(description),
+                        html.P(description_lst),
                         html.P(warning),
                         html.P(please_return_info),
                         html.P(
