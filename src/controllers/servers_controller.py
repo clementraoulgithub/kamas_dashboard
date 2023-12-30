@@ -86,6 +86,9 @@ def server(name: str) -> dash.html.Div:
         day_kamas_dict, best_price
     )
 
+    is_less_avg = yesterday_kamas_dict["average"] > day_kamas_dict["average"]
+    is_less_min = yesterday_kamas_dict["min"] > day_kamas_dict["min"]
+
     return server_view(
         name,
         description_lst,
@@ -94,6 +97,8 @@ def server(name: str) -> dash.html.Div:
         best_price,
         best_price_server_name,
         website_link,
+        is_less_avg,
+        is_less_min,
         average=day_kamas_dict["average"] if day_kamas_dict else 0,
         mediane=mediane,
         deviation=deviation,

@@ -19,6 +19,8 @@ def left_metrics(
     best_price_server: str,
     website_link: str,
     fig_gauge: go.Figure,
+    is_less_avg: bool,
+    is_less_min: bool,
 ) -> html.Div:
     """
     Return the html.Div for the left metrics
@@ -39,7 +41,18 @@ def left_metrics(
                     html.Div(
                         [
                             html.P("Moyenne"),
-                            html.H1(f"{average}"),
+                            html.Div(
+                                [
+                                    html.H1(f"{average}"),
+                                    html.Img(
+                                        src="/assets/svg/arrow-down.svg"
+                                        if is_less_avg
+                                        else "/assets/svg/arrow-up.svg",
+                                        className="svg",
+                                    ),
+                                ],
+                                className="best-price-server",
+                            ),
                             html.H2("EUR/m"),
                         ],
                         className="graph-info",
@@ -68,7 +81,18 @@ def left_metrics(
                     html.Div(
                         [
                             html.P("Meilleur prix"),
-                            html.H1(f"{best_price}"),
+                            html.Div(
+                                [
+                                    html.H1(f"{best_price}"),
+                                    html.Img(
+                                        src="/assets/svg/arrow-down.svg"
+                                        if is_less_min
+                                        else "/assets/svg/arrow-up.svg",
+                                        className="svg",
+                                    ),
+                                ],
+                                className="best-price-server",
+                            ),
                             html.H2("EUR/m"),
                         ],
                         className="graph-info",
@@ -199,6 +223,8 @@ def server_view(
     best_price: float,
     best_price_server: str,
     website_link: str,
+    is_less_avg: bool,
+    is_less_min: bool,
     average: float,
     mediane: float,
     deviation: float,
@@ -237,6 +263,8 @@ def server_view(
                                 best_price_server,
                                 website_link,
                                 fig_gauge,
+                                is_less_avg,
+                                is_less_min,
                             ),
                             right_daily_graph(fig_day, nb_site),
                         ],

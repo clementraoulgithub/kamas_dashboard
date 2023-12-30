@@ -343,14 +343,16 @@ def create_gauche_graph(yesterday_value: float, today_value: float) -> go.Figure
 
     value = round(value, 2)
 
+    is_less = value < 0
+
     fig = go.Figure(
         go.Indicator(
             mode="gauge+number+delta",
             value=today_value,
             title={
-                "text": f"<b>+{value} % journalier</b>"
-                if value > 0
-                else f"<b>{value} % journalier</b>"
+                "text": f"<b>{value} % journalier</b>"
+                if is_less
+                else f"<b>+{value} % journalier</b>"
             },
             domain={"x": [0, 1], "y": [0, 1]},
             delta={"reference": yesterday_value},
