@@ -46,9 +46,6 @@ def create_graphs(day_kamas_dict: dict, yesterday_kamas_dict: dict) -> tuple:
     Returns:
         tuple: all the graph for the server
     """
-    best_price = min(list(day_kamas_dict["kamas_dict"].values()))
-    deviation_value = round(np.std(list(day_kamas_dict["kamas_dict"].values())), 2)
-
     bar_graph = BarGraph(
         "Valeur journalière<br>du million de kamas",
         "",
@@ -67,7 +64,7 @@ def create_graphs(day_kamas_dict: dict, yesterday_kamas_dict: dict) -> tuple:
             day_kamas_dict["average"], day_kamas_dict["average"]
         )
 
-    return fig_day, fig_gauge, best_price, deviation_value
+    return fig_day, fig_gauge
 
 
 class BarGraph:
@@ -243,14 +240,16 @@ class LineGraph:
         x_title: str,
         y_title: str,
         x_values: list,
-        y_values: list,
+        y_avg_values: list,
+        y_min_values: list,
     ):
         self.title = title
         self.description = description
         self.x_title = x_title
         self.y_title = y_title
         self.x_values = x_values
-        self.y_values = y_values
+        self.y_avg_values = y_avg_values
+        self.y_min_values = y_min_values
 
     def create_line_graph(self) -> px.line:
         """
@@ -264,24 +263,19 @@ class LineGraph:
             for date in self.x_values
         ]
 
-        model = GraphModel(
-            title=self.title,
-            description=self.description,
-            x_title=self.x_title,
-            y_title=self.y_title,
-            x_values=x_values,
-            y_values=self.y_values,
+        fig = go.Figure()
+        fig.add_scatter(
+            x=x_values,
+            y=self.y_avg_values,
+            name="Prix moyen",
         )
-        dataframe = pd.DataFrame(
-            data={
-                "Date UTC": x_values,
-                "Moyenne": self.y_values,
-            }
+
+        fig.add_scatter(
+            x=x_values,
+            y=self.y_min_values,
+            name="Prix minimal",
         )
-        fig = px.line(
-            dataframe, x="Date UTC", y="Moyenne", title=f"<b>{model.title}</b>"
-        )
-        self.add_average_values(fig)
+        self.add_average_values()
         self.update_layout(fig)
 
         return fig
@@ -315,16 +309,36 @@ class LineGraph:
             },
         )
 
-    def add_average_values(self, fig: go.Figure) -> None:
+    def add_average_values(self) -> None:
         """
         Add average values to the graph
 
         Args:
             fig (go.Figure): the figure
         """
-        average_value = round(np.mean(self.y_values), 2)
 
-        self.create_h_line(fig, average_value, label="Moy")
+        average_value = np.mean(self.y_avg_values)
+        deviation = np.std(self.y_avg_values)
+        deviation_related_to_average = (deviation / average_value) * 100
+        deviation_related_to_average = round(deviation_related_to_average, 2)
+
+        if len(self.y_avg_values) > 1:
+            increase_rate = (
+                (self.y_avg_values[-1] - self.y_avg_values[0])
+                / self.y_avg_values[0]
+                * 100
+            )
+        else:
+            increase_rate = 0
+
+        self.title = f"<b>{self.title}</b><br>"
+        self.title += "<br><i>Prix moyen:</i>"
+        self.title += f"<br>Moyenne: <b>{round(average_value, 2)}</b>"
+        self.title += f"<br>Ecart-type: <b>{round(deviation, 2)}</b>"
+        self.title += (
+            f"<br>Ecart-type relatif: <b>{round(deviation_related_to_average, 2)}%</b>"
+        )
+        self.title += f"<br>Taux d'augmentation: <b>{round(increase_rate, 2)}%</b>"
 
     def update_layout(self, fig: go.Figure) -> None:
         """
@@ -337,8 +351,10 @@ class LineGraph:
             template="plotly_dark",
             plot_bgcolor="rgba(0, 0, 0, 0)",
             paper_bgcolor="rgba(0, 0, 0, 0)",
+            title=self.title,
         )
-        fig.update_yaxes(title_text="Valeurs moyennes (million)")
+        fig.update_yaxes(title_text=self.y_title)
+        fig.update_xaxes(title_text=self.x_title)
 
 
 def create_gauche_graph(yesterday_value: float, today_value: float) -> go.Figure:

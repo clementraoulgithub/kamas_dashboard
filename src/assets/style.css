@@ -135,6 +135,12 @@
     flex-direction: column;
 }
 
+.graph-info p {
+    font-weight: bold;
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
 .graph-info-avg {
     display: flex;
     flex-direction: row;
@@ -280,3 +286,19 @@
     justify-content: center;
 }
 
+#external-link {
+    margin-left: 0px;
+}
+
+.deviation-related-to-average {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+@media (max-width: 450px) {
+    .deviation-related-to-average, .best-price-server {
+        flex-direction: column;
+    }
+}

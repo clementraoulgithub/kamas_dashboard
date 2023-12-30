@@ -117,7 +117,7 @@ def get_yesterday_kamas_value(server: str) -> dict | None:
         "average": 0,
         "max": 0,
         "min": 0,
-        "kamas_dict": {"None": 0},
+        "kamas_dict": {"": 0},
         "server": server,
     }
 

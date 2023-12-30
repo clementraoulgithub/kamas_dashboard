@@ -62,6 +62,54 @@ def get_best_price_server(day_kamas_dict: dict, best_price: float) -> tuple:
     return best_price_server_name, website_link
 
 
+def calculate_metrics(day_kamas_dict: dict, yesterday_kamas_dict: dict) -> tuple:
+    """
+    Calculate the metrics
+
+    Args:
+        day_kamas_dict (dict): dictionnary of the day kamas
+        yesterday_kamas_dict (dict): dictionnary of the yesterday kamas
+
+    Returns:
+        tuple: metrics
+    """
+    best_price = min(list(day_kamas_dict["kamas_dict"].values()))
+    deviation = round(np.std(list(day_kamas_dict["kamas_dict"].values())), 2)
+    average = day_kamas_dict["average"] if day_kamas_dict else 0
+
+    deviation_related_to_average = (deviation / average) * 100 if average else 0
+    deviation_related_to_average = round(deviation_related_to_average, 2)
+    deviation_related_to_average = f"{deviation_related_to_average}%"
+
+    mediane = (
+        round(np.median(list(day_kamas_dict["kamas_dict"].values())), 2)
+        if day_kamas_dict
+        else 0
+    )
+    best_price_server_name, website_link = get_best_price_server(
+        day_kamas_dict, best_price
+    )
+
+    is_less_avg = yesterday_kamas_dict["average"] > day_kamas_dict["average"]
+    is_less_min = yesterday_kamas_dict["min"] > day_kamas_dict["min"]
+
+    nb_site = len(day_kamas_dict["kamas_dict"]) if day_kamas_dict else 0
+
+    return (
+        best_price,
+        best_price_server_name,
+        website_link,
+        is_less_avg,
+        is_less_min,
+        average,
+        mediane,
+        deviation,
+        deviation_related_to_average,
+        nb_site,
+    )
+
+
+# pylint: disable=too-many-locals
 def server(name: str) -> dash.html.Div:
     """
     return the html.Div for server
@@ -89,22 +137,20 @@ def server(name: str) -> dash.html.Div:
     if not day_kamas_dict:  # Case for the first fetch of the day
         day_kamas_dict = yesterday_kamas_dict
 
-    fig_day, fig_gauge, best_price, deviation = create_graphs(
-        day_kamas_dict, yesterday_kamas_dict
-    )
+    fig_day, fig_gauge = create_graphs(day_kamas_dict, yesterday_kamas_dict)
 
-    mediane = (
-        round(np.median(list(day_kamas_dict["kamas_dict"].values())), 2)
-        if day_kamas_dict
-        else 0
-    )
-
-    best_price_server_name, website_link = get_best_price_server(
-        day_kamas_dict, best_price
-    )
-
-    is_less_avg = yesterday_kamas_dict["average"] > day_kamas_dict["average"]
-    is_less_min = yesterday_kamas_dict["min"] > day_kamas_dict["min"]
+    (
+        best_price,
+        best_price_server_name,
+        website_link,
+        is_less_avg,
+        is_less_min,
+        average,
+        mediane,
+        deviation,
+        deviation_related_to_average,
+        nb_site,
+    ) = calculate_metrics(day_kamas_dict, yesterday_kamas_dict)
 
     return server_view(
         name,
@@ -116,8 +162,9 @@ def server(name: str) -> dash.html.Div:
         website_link,
         is_less_avg,
         is_less_min,
-        average=day_kamas_dict["average"] if day_kamas_dict else 0,
+        average=average,
         mediane=mediane,
         deviation=deviation,
-        nb_site=len(day_kamas_dict["kamas_dict"]) if day_kamas_dict else 0,
+        deviation_related_to_average=deviation_related_to_average,
+        nb_site=nb_site,
     )

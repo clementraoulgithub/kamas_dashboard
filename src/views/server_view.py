@@ -32,6 +32,7 @@ def left_metrics(
     average: float,
     mediane: float,
     deviation: float,
+    deviation_related_to_average: str,
     best_price: float,
     best_price_server: str,
     website_link: str,
@@ -77,7 +78,13 @@ def left_metrics(
                     html.Div(
                         [
                             html.P("Ecart-type"),
-                            html.H1(f"{deviation}"),
+                            html.Div(
+                                [
+                                    html.H1(f"{deviation}"),
+                                    html.P(deviation_related_to_average),
+                                ],
+                                className="deviation-related-to-average",
+                            ),
                             html.H2("EUR/m"),
                         ],
                         className="graph-info",
@@ -129,6 +136,7 @@ def left_metrics(
                                         html.Img(
                                             src="/assets/svg/external-link.svg",
                                             className="svg",
+                                            id="external-link",
                                         ),
                                         href=website_link,
                                     ),
@@ -245,6 +253,7 @@ def server_view(
     average: float,
     mediane: float,
     deviation: float,
+    deviation_related_to_average: str,
     nb_site: int,
 ) -> html.Div:
     """
@@ -276,6 +285,7 @@ def server_view(
                                 average,
                                 mediane,
                                 deviation,
+                                deviation_related_to_average,
                                 best_price,
                                 best_price_server,
                                 website_link,
