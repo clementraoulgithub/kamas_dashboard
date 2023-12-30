@@ -296,3 +296,9 @@
     justify-content: center;
     align-items: center;
 }
+
+@media (max-width: 450px) {
+    .deviation-related-to-average, .best-price-server {
+        flex-direction: column;
+    }
+}
