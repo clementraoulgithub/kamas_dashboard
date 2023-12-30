@@ -10,9 +10,39 @@
 import dash
 import numpy as np
 
+from src.utils.enums import Website
 from src.utils.graphs import create_graphs
 from src.utils.scraping.scraping import get_daily_kamas_value, get_yesterday_kamas_value
 from src.views.server_view import server_view
+
+
+def get_best_price_server(day_kamas_dict: dict, best_price: float) -> tuple:
+    """
+    Return the best price server name and link
+
+    Args:
+        day_kamas_dict (dict): dictionnary of the day kamas
+        best_price (float): best price
+
+    Returns:
+        tuple: best price server name and link
+    """
+    best_price_server_name = next(
+        (
+            site
+            for site, price in day_kamas_dict["kamas_dict"].items()
+            if price == best_price
+        ),
+        "",
+    )
+
+    if best_price_server_name:
+        website = best_price_server_name.upper().replace(" ", "_")
+        website_link = Website[website].value[1]
+    else:
+        website_link = ""
+
+    return best_price_server_name, website_link
 
 
 def server(name: str) -> dash.html.Div:
@@ -52,14 +82,12 @@ def server(name: str) -> dash.html.Div:
         else 0
     )
 
-    best_price_server = next(
-        (
-            site
-            for site, price in day_kamas_dict["kamas_dict"].items()
-            if price == best_price
-        ),
-        "",
+    best_price_server_name, website_link = get_best_price_server(
+        day_kamas_dict, best_price
     )
+
+    is_less_avg = yesterday_kamas_dict["average"] > day_kamas_dict["average"]
+    is_less_min = yesterday_kamas_dict["min"] > day_kamas_dict["min"]
 
     return server_view(
         name,
@@ -67,7 +95,10 @@ def server(name: str) -> dash.html.Div:
         fig_day,
         fig_gauge,
         best_price,
-        best_price_server,
+        best_price_server_name,
+        website_link,
+        is_less_avg,
+        is_less_min,
         average=day_kamas_dict["average"] if day_kamas_dict else 0,
         mediane=mediane,
         deviation=deviation,
