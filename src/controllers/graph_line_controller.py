@@ -51,12 +51,13 @@ def graph_line_controller(value: int):
     )
 
     line_graph = LineGraph(
-        "Evolution moyenne<br>du million de kamas",
+        "Evolutions <br>du million de kamas",
         "",
         "Tps",
-        "Valeur estimée moyenne",
+        "Valeurs estimées",
         [dict["timestamp"] for dict in kamas_dict],
         [dict["average"] for dict in kamas_dict],
+        [dict["min"] for dict in kamas_dict],
     )
 
     return line_graph.create_line_graph()

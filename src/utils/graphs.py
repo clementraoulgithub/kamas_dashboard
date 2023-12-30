@@ -243,14 +243,16 @@ class LineGraph:
         x_title: str,
         y_title: str,
         x_values: list,
-        y_values: list,
+        y_avg_values: list,
+        y_min_values: list,
     ):
         self.title = title
         self.description = description
         self.x_title = x_title
         self.y_title = y_title
         self.x_values = x_values
-        self.y_values = y_values
+        self.y_avg_values = y_avg_values
+        self.y_min_values = y_min_values
 
     def create_line_graph(self) -> px.line:
         """
@@ -270,16 +272,20 @@ class LineGraph:
             x_title=self.x_title,
             y_title=self.y_title,
             x_values=x_values,
-            y_values=self.y_values,
+            y_values=self.y_avg_values,
         )
         dataframe = pd.DataFrame(
             data={
                 "Date UTC": x_values,
-                "Moyenne": self.y_values,
+                "Prix moyen": self.y_avg_values,
+                "Prix minimal": self.y_min_values,
             }
         )
         fig = px.line(
-            dataframe, x="Date UTC", y="Moyenne", title=f"<b>{model.title}</b>"
+            dataframe,
+            x="Date UTC",
+            y=["Prix moyen", "Prix minimal"],
+            title=f"<b>{model.title}</b>",
         )
         self.add_average_values(fig)
         self.update_layout(fig)
@@ -322,9 +328,9 @@ class LineGraph:
         Args:
             fig (go.Figure): the figure
         """
-        average_value = round(np.mean(self.y_values), 2)
+        average_value = round(np.mean(self.y_avg_values), 2)
 
-        self.create_h_line(fig, average_value, label="Moy")
+        self.create_h_line(fig, average_value, label="Moyenne du prix moyen")
 
     def update_layout(self, fig: go.Figure) -> None:
         """
@@ -338,7 +344,7 @@ class LineGraph:
             plot_bgcolor="rgba(0, 0, 0, 0)",
             paper_bgcolor="rgba(0, 0, 0, 0)",
         )
-        fig.update_yaxes(title_text="Valeurs moyennes (million)")
+        fig.update_yaxes(title_text=self.y_title)
 
 
 def create_gauche_graph(yesterday_value: float, today_value: float) -> go.Figure:
