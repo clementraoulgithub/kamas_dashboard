@@ -279,8 +279,18 @@ def server_view(
     return html.Div(
         [
             html.Div(
-                [
-                    html.H2(f"Serveur {name.capitalize()}"),
+                [   
+                    html.Div(
+                        [
+                            html.Img(
+                                src="/assets/svg/arrow-right.svg",
+                                className="svg",
+                                id="arrow-left",
+                            ),
+                            html.H2(f"Serveur {name.capitalize()}"),
+                        ],
+                        className="title-server",
+                    ),
                     html.H3("Cours instantané du kamas"),
                     html.Div(
                         [

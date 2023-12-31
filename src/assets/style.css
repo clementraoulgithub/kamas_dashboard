@@ -86,10 +86,6 @@
     border-bottom: 1px solid black;
 }
 
-.top-menu a:hover {
-    width: 105%;
-}
-
 .main-content {
     padding: 0px;
 }
@@ -140,6 +136,7 @@
     margin: 10px;
     display: flex;
     flex-direction: column;
+    align-self: stretch;
 }
 
 
@@ -313,4 +310,17 @@
 
 .description {
     font-weight: 400 !important;
+}
+
+.title-server {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.graph-info-container {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: space-between;
 }
