@@ -242,7 +242,6 @@ def bottom_line_graph() -> html.Div:
 # pylint: disable=too-many-arguments
 def server_view(
     name: str,
-    model_description_lst: list,
     fig_day: go.Figure,
     fig_gauge: go.Figure,
     best_price: float,
@@ -278,7 +277,6 @@ def server_view(
             html.Div(
                 [
                     html.H2(f"Serveur {name.capitalize()}"),
-                    html.P(model_description_lst),
                     html.H3("Cours instantané du kamas"),
                     html.Div(
                         [
