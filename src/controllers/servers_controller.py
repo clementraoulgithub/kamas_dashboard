@@ -93,7 +93,16 @@ def calculate_metrics(day_kamas_dict: dict, yesterday_kamas_dict: dict) -> tuple
     is_less_avg = yesterday_kamas_dict["average"] > day_kamas_dict["average"]
     is_less_min = yesterday_kamas_dict["min"] > day_kamas_dict["min"]
 
-    nb_site = len(day_kamas_dict["kamas_dict"]) if day_kamas_dict else 0
+    evolution = (
+        round(
+            (day_kamas_dict["average"] - yesterday_kamas_dict["average"])
+            / yesterday_kamas_dict["average"]
+            * 100,
+            2,
+        )
+        if day_kamas_dict
+        else 0
+    )
 
     return (
         best_price,
@@ -105,7 +114,7 @@ def calculate_metrics(day_kamas_dict: dict, yesterday_kamas_dict: dict) -> tuple
         mediane,
         deviation,
         deviation_related_to_average,
-        nb_site,
+        evolution,
     )
 
 
@@ -123,7 +132,7 @@ def server(name: str) -> dash.html.Div:
     if not day_kamas_dict:  # Case for the first fetch of the day
         day_kamas_dict = yesterday_kamas_dict
 
-    fig_day, fig_gauge = create_graphs(day_kamas_dict, yesterday_kamas_dict)
+    fig_day = create_graphs(day_kamas_dict)
 
     (
         best_price,
@@ -135,13 +144,12 @@ def server(name: str) -> dash.html.Div:
         mediane,
         deviation,
         deviation_related_to_average,
-        nb_site,
+        evolution,
     ) = calculate_metrics(day_kamas_dict, yesterday_kamas_dict)
 
     return server_view(
         name,
         fig_day,
-        fig_gauge,
         best_price,
         best_price_server_name,
         website_link,
@@ -151,5 +159,5 @@ def server(name: str) -> dash.html.Div:
         mediane=mediane,
         deviation=deviation,
         deviation_related_to_average=deviation_related_to_average,
-        nb_site=nb_site,
+        evolution=evolution,
     )

@@ -35,7 +35,7 @@ from src.models.graph_model import GraphModel
 from src.utils.enums import Website
 
 
-def create_graphs(day_kamas_dict: dict, yesterday_kamas_dict: dict) -> tuple:
+def create_graphs(day_kamas_dict: dict) -> tuple:
     """
     return all the graph for the server
 
@@ -53,18 +53,7 @@ def create_graphs(day_kamas_dict: dict, yesterday_kamas_dict: dict) -> tuple:
         "Valeur estimée journalière",
         day_kamas_dict["kamas_dict"],
     )
-    fig_day = bar_graph.create_bar_graph()
-
-    if yesterday_kamas_dict:
-        fig_gauge = create_gauche_graph(
-            yesterday_kamas_dict["average"], day_kamas_dict["average"]
-        )
-    else:
-        fig_gauge = create_gauche_graph(
-            day_kamas_dict["average"], day_kamas_dict["average"]
-        )
-
-    return fig_day, fig_gauge
+    return bar_graph.create_bar_graph()
 
 
 class BarGraph:
@@ -114,7 +103,6 @@ class BarGraph:
             y_values=list(self.x_values.keys()),
         )
         average_value = round(np.mean(list(self.x_values.values())), 2)
-        deviation_value = round(np.std(list(self.x_values.values())), 2)
 
         dataframe = pd.DataFrame(
             data={
@@ -131,8 +119,6 @@ class BarGraph:
             text="Valeurs",
             labels={"Valeurs": "Valeurs estimées (million)"},
         )
-
-        self.add_average_values(fig, average_value, deviation_value)
         self.add_price_annotations(fig)
         self.update_layout(fig, average_value)
 
@@ -330,9 +316,9 @@ class LineGraph:
 
             metrics.append(
                 f"Valeur moyenne: {round(average_value, 2)} - "
-                f"Deviation: {round(deviation, 2)} - "
-                f"Deviation relative à la moyenne: {deviation_related_to_average} % - "
-                f"Augmentation: {round(increase_rate, 2)} %"
+                f"Ecart-type: {round(deviation, 2)} - "
+                f"Ecart-type relatif à la moyenne: {deviation_related_to_average} % - "
+                f"Taux de croissance: {round(increase_rate, 2)} %"
             )
         return metrics
 
@@ -351,57 +337,3 @@ class LineGraph:
         )
         fig.update_yaxes(title_text=self.y_title)
         fig.update_xaxes(title_text=self.x_title)
-
-
-def create_gauche_graph(yesterday_value: float, today_value: float) -> go.Figure:
-    """
-    Create a gauche graph
-
-    Args:
-        yesterday_value (float): the yesterday value
-        today_value (float): the today value
-
-    Returns:
-        go.Figure: the gauche graph
-    """
-
-    try:
-        value = (today_value - yesterday_value) / yesterday_value * 100
-    except ZeroDivisionError:
-        value = 0
-
-    value = round(value, 2)
-
-    is_less = value < 0
-
-    fig = go.Figure(
-        go.Indicator(
-            mode="gauge+number+delta",
-            value=today_value,
-            title={
-                "text": f"<b>{value} % journalier</b>"
-                if is_less
-                else f"<b>+{value} % journalier</b>"
-            },
-            domain={"x": [0, 1], "y": [0, 1]},
-            delta={"reference": yesterday_value},
-            gauge={
-                "axis": {
-                    "range": [0, yesterday_value],
-                    "tickwidth": 1,
-                    "tickcolor": "white",
-                },
-                "bar": {"color": "lightgray", "thickness": 1},
-            },
-        ),
-    )
-    fig.update_layout(
-        template="plotly_dark",
-        plot_bgcolor="rgba(0, 0, 0, 0)",
-        paper_bgcolor="rgba(0, 0, 0, 0)",
-        margin={"t": 0, "b": 0, "r": 0, "l": 0, "pad": 0},
-        height=250,
-        width=250,
-    )
-
-    return fig
