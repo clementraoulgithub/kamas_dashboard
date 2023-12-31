@@ -236,6 +236,7 @@ def bottom_line_graph() -> html.Div:
                     "displaylogo": False,
                 },
                 id="graph-line",
+                style={"display": "none"},
             ),
             slider,
         ],

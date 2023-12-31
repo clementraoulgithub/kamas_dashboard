@@ -32,7 +32,11 @@ from src.utils.scraping.scraping import get_scope_kamas_value
 
 
 @dash.callback(
-    [dash.Output("graph-line", "figure"), dash.Output("period-metrics", "children")],
+    [
+        dash.Output("graph-line", "figure"),
+        dash.Output("graph-line", "style"),
+        dash.Output("period-metrics", "children"),
+    ],
     [dash.Input("graph-slider", "value")],
 )
 def graph_line_controller(value: int):
@@ -77,4 +81,4 @@ def graph_line_controller(value: int):
         className="graph-info-avg",
     )
 
-    return graph, metrics
+    return graph, {"display": "flex"}, metrics

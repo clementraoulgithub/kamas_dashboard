@@ -331,8 +331,8 @@ class LineGraph:
         """
         fig.update_layout(
             template="plotly_dark",
-            plot_bgcolor="rgba(0, 0, 0, 0)",
-            paper_bgcolor="rgba(0, 0, 0, 0)",
+            plot_bgcolor="rgba(22,24,51,0)",
+            paper_bgcolor="rgba(22,24,51,0)",
             title=f"<b>{self.title}</b>",
         )
         fig.update_yaxes(title_text=self.y_title)
