@@ -126,15 +126,14 @@
 }
 
 .graph-info {
-    justify-content: center;
     text-align: center;
     background-color: #1c1e3a;
     border-radius: 16px;
     margin: 10px;
-    padding: 10px;
     display: flex;
     flex-direction: column;
 }
+
 
 .graph-info p {
     font-weight: bold;

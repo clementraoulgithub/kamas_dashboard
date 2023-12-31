@@ -36,9 +36,9 @@ def left_metrics(
     best_price: float,
     best_price_server: str,
     website_link: str,
-    fig_gauge: go.Figure,
     is_less_avg: bool,
     is_less_min: bool,
+    evolution: float,
 ) -> html.Div:
     """
     Return the html.Div for the left metrics
@@ -71,7 +71,7 @@ def left_metrics(
                                 ],
                                 className="best-price-server",
                             ),
-                            html.H2("EUR/m"),
+                            html.H2("Eur/m"),
                         ],
                         className="graph-info",
                     ),
@@ -85,7 +85,7 @@ def left_metrics(
                                 ],
                                 className="deviation-related-to-average",
                             ),
-                            html.H2("EUR/m"),
+                            html.H2("Eur/m"),
                         ],
                         className="graph-info",
                     ),
@@ -98,7 +98,7 @@ def left_metrics(
                         [
                             html.P("Médiane"),
                             html.H1(f"{mediane}"),
-                            html.H2("EUR/m"),
+                            html.H2("Eur/m"),
                         ],
                         className="graph-info",
                     ),
@@ -117,7 +117,7 @@ def left_metrics(
                                 ],
                                 className="best-price-server",
                             ),
-                            html.H2("EUR/m"),
+                            html.H2("Eur/m"),
                         ],
                         className="graph-info",
                     ),
@@ -143,32 +143,43 @@ def left_metrics(
                                 ],
                                 className="best-price-server",
                             ),
+                            html.H2("Lien"),
                         ],
                         className="graph-info",
                     ),
-                    dcc.Graph(
-                        figure=fig_gauge,
-                        config={
-                            "displayModeBar": False,
-                            "displaylogo": False,
-                        },
+                    html.Div(
+                        [
+                            html.P("Evolution journalière"),
+                            html.Div(
+                                [
+                                    html.H1(f"{evolution}%"),
+                                    html.Img(
+                                        src="/assets/svg/arrow-down.svg"
+                                        if evolution < 0
+                                        else "/assets/svg/arrow-up.svg",
+                                        className="svg",
+                                    ),
+                                ],
+                                className="best-price-server",
+                            ),
+                            html.H2("%/m"),
+                        ],
                         className="graph-info",
                     ),
                 ],
-                className="graph-info-avg-vertical",
+                className="graph-info-avg",
             ),
         ],
         className="graph-info-container",
     )
 
 
-def right_daily_graph(fig_day: go.Figure, nb_site: int) -> html.Div:
+def right_daily_graph(fig_day: go.Figure) -> html.Div:
     """
     Return the html.Div for the right daily graph
 
     Args:
         fig_day (go.Figure): the figure for the day
-        nb_site (int): the number of site
 
     Returns:
         html.Div: the html.Div for the right daily graph
@@ -184,13 +195,6 @@ def right_daily_graph(fig_day: go.Figure, nb_site: int) -> html.Div:
                             "displaylogo": False,
                         },
                         id="graph-day",
-                    ),
-                    html.Div(
-                        [
-                            html.P("Nombre de sites"),
-                            html.H1(nb_site, id="nb-site"),
-                        ],
-                        className="graph-info",
                     ),
                 ],
                 className="graph-day-container",
@@ -243,7 +247,6 @@ def bottom_line_graph() -> html.Div:
 def server_view(
     name: str,
     fig_day: go.Figure,
-    fig_gauge: go.Figure,
     best_price: float,
     best_price_server: str,
     website_link: str,
@@ -253,7 +256,7 @@ def server_view(
     mediane: float,
     deviation: float,
     deviation_related_to_average: str,
-    nb_site: int,
+    evolution: float,
 ) -> html.Div:
     """
     Return the html.Div for server
@@ -288,11 +291,11 @@ def server_view(
                                 best_price,
                                 best_price_server,
                                 website_link,
-                                fig_gauge,
                                 is_less_avg,
                                 is_less_min,
+                                evolution,
                             ),
-                            right_daily_graph(fig_day, nb_site),
+                            right_daily_graph(fig_day),
                         ],
                         className="graphs-container",
                     ),
