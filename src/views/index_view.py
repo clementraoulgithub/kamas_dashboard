@@ -72,9 +72,9 @@ def index_view() -> tuple[html.Div, dict[str, str], dict[str, str]]:
                     [
                         html.H1(NAME),
                         html.P(f"Bienvenue sur {NAME},"),
-                        html.P(description),
-                        html.P(description_lst),
-                        html.P(warning),
+                        html.P(description, className="description"),
+                        html.P(description_lst, className="description"),
+                        html.P(warning, className="description"),
                         html.P(please_return_info),
                         html.P(
                             [
