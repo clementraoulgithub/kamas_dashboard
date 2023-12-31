@@ -24,7 +24,6 @@
 .header h3 {
     color: #EC5C28;
     margin: 0px;
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
 }
 
 .header-text {
@@ -84,7 +83,11 @@
     height: 40px;
     background-color: #1c1e3a;
     padding-left: 10px;
-    border-bottom: 1px solid grey;
+    border-bottom: 1px solid black;
+}
+
+.top-menu a:hover {
+    width: 105%;
 }
 
 .main-content {
@@ -119,13 +122,18 @@
 }
 
 .dash-graph {
+    box-shadow: 1px 1px 1px black;
+    border: 1px solid black;
     border-radius: 16px;
     background-color: #1c1e3a;
     margin: 10px;
     flex: 1;
+    font-family: Tahoma;
 }
 
 .graph-info {
+    box-shadow: 1px 1px 1px black;
+    border: 1px solid black;
     text-align: center;
     background-color: #1c1e3a;
     border-radius: 16px;
