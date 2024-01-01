@@ -1,0 +1,16 @@
+.discord {
+	animation-name: discord-c;
+	animation-duration: 2s;
+	animation-play-state: pause;
+	float:left;
+    height: 350px;
+	width: 250px;
+	border: 0px;
+	margin: 20px;
+}
+
+@media (max-width: 650px) {
+	.discord {
+		display: none;
+	}
+}
