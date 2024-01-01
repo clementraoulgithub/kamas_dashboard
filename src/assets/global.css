@@ -30,8 +30,7 @@ a, button {
 }
 
 a:hover, button:hover {
-    background-color: #EC5C28;
-    color: black;
+    color: #EC5C28;
 }
 
 .svg {

@@ -218,9 +218,9 @@ def bottom_line_graph() -> html.Div:
         step=1,
         value=3,
         marks={
-            0: "Année",
-            1: "6 mois",
-            2: "3 mois",
+            0: "Cette Année",
+            1: "-6 mois",
+            2: "-3 mois",
             3: "Ce mois",
             4: "Cette semaine",
             5: "Aujourd'hui",
@@ -280,7 +280,17 @@ def server_view(
         [
             html.Div(
                 [
-                    html.H2(f"Serveur {name.capitalize()}"),
+                    html.Div(
+                        [
+                            html.Img(
+                                src="/assets/svg/arrow-right.svg",
+                                className="svg",
+                                id="arrow-left",
+                            ),
+                            html.H2(f"Serveur {name.capitalize()}"),
+                        ],
+                        className="title-server",
+                    ),
                     html.H3("Cours instantané du kamas"),
                     html.Div(
                         [

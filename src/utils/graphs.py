@@ -306,7 +306,10 @@ class LineGraph:
         for average in (self.y_avg_values, self.y_min_values):
             average_value = np.mean(average)
             deviation = np.std(average)
-            deviation_related_to_average = (deviation / average_value) * 100
+            try:
+                deviation_related_to_average = (deviation / average_value) * 100
+            except ZeroDivisionError:
+                deviation_related_to_average = 0
             deviation_related_to_average = round(deviation_related_to_average, 2)
 
             if len(average) > 1:
