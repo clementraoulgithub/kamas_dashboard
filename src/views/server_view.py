@@ -219,8 +219,8 @@ def bottom_line_graph() -> html.Div:
         value=3,
         marks={
             0: "Cette Année",
-            1: "-3, +3 mois",
-            2: "-2, +1 mois",
+            1: "-6 mois",
+            2: "-3 mois",
             3: "Ce mois",
             4: "Cette semaine",
             5: "Aujourd'hui",
