@@ -303,7 +303,7 @@
 }
 
 @media (max-width: 450px) {
-    .deviation-related-to-average, .best-price-server {
+    .graphs-container {
         flex-direction: column;
     }
 }
