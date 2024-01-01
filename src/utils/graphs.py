@@ -125,7 +125,7 @@ class BarGraph:
         return fig
 
     def add_average_values(
-        self, fig: go.Figure, average_value: float, deviation_value: float
+        self, fig: go.Figure, average_value: float
     ) -> None:
         """
         Add average values to the graph
@@ -133,7 +133,6 @@ class BarGraph:
         Args:
             fig (go.Figure): the figure
             average_value (float): the average value
-            deviation_value (float): the deviation value
         """
         # Add average value
         fig.add_hline(
@@ -149,14 +148,6 @@ class BarGraph:
                 "y": average_value,
                 "showarrow": False,
             },
-        )
-        # Add deviation rectangle value
-        fig.add_hrect(
-            y0=average_value - deviation_value,
-            y1=average_value + deviation_value,
-            line_width=0,
-            fillcolor="rgba(255, 255, 255, 0.2)",
-            opacity=0.2,
         )
 
     def add_price_annotations(self, fig: go.Figure) -> None:
@@ -204,7 +195,7 @@ class BarGraph:
 
         fig.update_traces(
             marker_color=[
-                "#6B6A6A" if value < average_value else "#5D53BE"
+                "#5D53BE" if value < average_value else "#6B6A6A"
                 for value in list(self.x_values.values())
             ],
         )

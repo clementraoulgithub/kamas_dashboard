@@ -44,7 +44,7 @@ def index_view() -> tuple[html.Div, dict[str, str], dict[str, str]]:
     est l'outil indispensable pour rester informé et prendre des décisions éclairées."
 
     please_return_info = "Si vous avez quelques minutes à consacrer, \
-    je serais ravis de connaître votre opinion sur le site."
+    je serais ravis de connaître votre opinion sur le site via Discord."
 
     warning = "Ce site n'est pas affilié à Ankama Games. \
     Toutes les marques commerciales et marques déposées appartiennent \
@@ -70,32 +70,36 @@ def index_view() -> tuple[html.Div, dict[str, str], dict[str, str]]:
                 html.P("Choisissez un serveur dans le menu en haut à gauche"),
                 html.Div(
                     [
-                        html.H1(NAME, className="title"),
-                        html.P(f"Bienvenue sur {NAME},"),
-                        html.P(description, className="description white-p"),
-                        html.P(description_lst, className="description white-p"),
-                        html.P(warning, className="description white-p"),
-                        html.P(please_return_info),
-                        html.P(
+                        html.Div(
                             [
+                                html.H1(NAME, className="title"),
+                                html.P(f"Bienvenue sur {NAME},"),
+                                html.P(description, className="description white-p"),
                                 html.P(
-                                    [
-                                        html.Img(
-                                            src="assets/logo.png",
-                                            className="logo",
-                                        ),
-                                        html.A(
-                                            "Lien Discord",
-                                            href="https://discord.gg/2RqfUW3DkN",
-                                            style={"flex": "0"},
-                                        ),
-                                    ],
-                                    style={"display": "flex"},
-                                )
-                            ]
+                                    description_lst, className="description white-p"
+                                ),
+                                html.P(warning, className="description white-p"),
+                                html.P(please_return_info),
+                                html.P(
+                                    html.A(
+                                        "Discord",
+                                        href="https://discord.gg/C8yfV92Bpu",
+                                        target="_blank",
+                                        className="discord-link",
+                                    )
+                                ),
+                            ],
+                        ),
+                        html.Iframe(
+                            src="https://discord.com/widget?id=1190426977535008768&theme=dark",
+                            width="350",
+                            height="350",
+                            sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts",
+                            className="discord",
                         ),
                     ],
                     className="graph-info",
+                    id="index-info",
                 ),
             ],
             className="graph-main-content",
