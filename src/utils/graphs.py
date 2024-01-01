@@ -124,9 +124,7 @@ class BarGraph:
 
         return fig
 
-    def add_average_values(
-        self, fig: go.Figure, average_value: float
-    ) -> None:
+    def add_average_values(self, fig: go.Figure, average_value: float) -> None:
         """
         Add average values to the graph
 
