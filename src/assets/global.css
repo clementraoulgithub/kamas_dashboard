@@ -1,7 +1,7 @@
 body, html {
     font-family: Helvetica;
     height: 100%;
-    background-color: #161833;
+    background-color: #161833 ;
     margin: 0px;
     display: flex;
     flex-direction: column;
@@ -30,7 +30,7 @@ a, button {
 }
 
 a:hover, button:hover {
-    color: #EC5C28;
+    color: #5D53BE;
 }
 
 .svg {

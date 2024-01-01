@@ -22,7 +22,7 @@
 }
 
 .header h3 {
-    color: #EC5C28;
+    color: white;
     margin: 0px;
 }
 
@@ -39,6 +39,7 @@
 .header p {
     margin-top: 0px;
     margin: 0px;
+    color: #5D53BE;
 }
 
 .container {
@@ -97,8 +98,12 @@
     background-color: #161833;
 }
 
-.graph-main-content h2, h3 {
-    color: #EC5C28;
+.graph-main-content h2 {
+    color: #5D53BE;
+}
+
+.graph-main-content h3 {
+    color: white;
 }
 
 .graphs-content {
@@ -164,21 +169,25 @@
 }
 
 .graph-info h1 {
-    color: #EC5C28;
+    color: white;
     font-weight: bold;
     font-size: 20pt;
     margin: 0px;
 }
 
 .graph-info h2 {
-    color: grey;
+    color: #5D53BE;
     font-size: 15pt;
+}
+
+.graph-info p {
+    color: grey;
 }
 
 #nb-site {
     text-align: center;
     margin: 0px;
-    color: #EC5C28;
+    color: #5D53BE;
     margin-bottom: 20px;
 }
 
@@ -207,16 +216,16 @@
 }
 
 .rc-slider-handle {
-    background-color: #EC5C28;
-    border: 2px solid #EC5C28;
+    background-color: #5D53BE;
+    border: 2px solid #5D53BE;
     width: 18px;
     height: 18px;
 }
 
 .rc-slider-handle:hover,
 .rc-slider-handle:focus {
-    background-color: #EC5C28;
-    border: 2px solid #EC5C28;
+    background-color: #5D53BE;
+    border: 2px solid #5D53BE;
 }
 
 #graph-slider {
@@ -342,3 +351,10 @@
     margin: 0px;
 }
 
+.white-p {
+    color: white !important;
+}
+
+.title {
+    margin-top: 10px !important;
+}

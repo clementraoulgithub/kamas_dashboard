@@ -70,11 +70,11 @@ def index_view() -> tuple[html.Div, dict[str, str], dict[str, str]]:
                 html.P("Choisissez un serveur dans le menu en haut à gauche"),
                 html.Div(
                     [
-                        html.H1(NAME),
+                        html.H1(NAME, className="title"),
                         html.P(f"Bienvenue sur {NAME},"),
-                        html.P(description, className="description"),
-                        html.P(description_lst, className="description"),
-                        html.P(warning, className="description"),
+                        html.P(description, className="description white-p"),
+                        html.P(description_lst, className="description white-p"),
+                        html.P(warning, className="description white-p"),
                         html.P(please_return_info),
                         html.P(
                             [

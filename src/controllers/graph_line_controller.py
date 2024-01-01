@@ -70,11 +70,11 @@ def graph_line_controller(value: int):
     metrics = dash.html.Div(
         [
             dash.html.Div(
-                [dash.html.P("Prix moyen:"), dash.html.P(metrics[0])],
+                [dash.html.P("Prix moyen:"), dash.html.P(metrics[0], className="white-p")],
                 className="graph-info",
             ),
             dash.html.Div(
-                [dash.html.P("Prix minimum:"), dash.html.P(metrics[1])],
+                [dash.html.P("Prix minimum:"), dash.html.P(metrics[1], className="white-p")],
                 className="graph-info",
             ),
         ],

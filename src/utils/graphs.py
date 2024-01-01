@@ -204,7 +204,7 @@ class BarGraph:
 
         fig.update_traces(
             marker_color=[
-                "#00C58E" if value < average_value else "#FA4B3A"
+                "#6B6A6A" if value < average_value else "#5D53BE"
                 for value in list(self.x_values.values())
             ],
         )
@@ -254,12 +254,14 @@ class LineGraph:
             x=x_values,
             y=self.y_avg_values,
             name="Prix moyen",
+            marker = {"color": "#5D53BE"},
         )
 
         fig.add_scatter(
             x=x_values,
             y=self.y_min_values,
             name="Prix minimum",
+            marker = {"color": "grey"},
         )
         metrics = self.create_metrics()
         self.update_layout(fig)
