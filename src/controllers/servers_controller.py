@@ -93,16 +93,19 @@ def calculate_metrics(day_kamas_dict: dict, yesterday_kamas_dict: dict) -> tuple
     is_less_avg = yesterday_kamas_dict["average"] > day_kamas_dict["average"]
     is_less_min = yesterday_kamas_dict["min"] > day_kamas_dict["min"]
 
-    evolution = (
-        round(
-            (day_kamas_dict["average"] - yesterday_kamas_dict["average"])
-            / yesterday_kamas_dict["average"]
-            * 100,
-            2,
+    if yesterday_kamas_dict["average"]:
+        evolution = (
+            round(
+                (day_kamas_dict["average"] - yesterday_kamas_dict["average"])
+                / yesterday_kamas_dict["average"]
+                * 100,
+                2,
+            )
+            if day_kamas_dict
+            else 0
         )
-        if day_kamas_dict
-        else 0
-    )
+    else:
+        evolution = 0
 
     return (
         best_price,
