@@ -137,6 +137,7 @@
     display: flex;
     flex-direction: column;
     align-self: stretch;
+    align-content: center;
 }
 
 
@@ -165,12 +166,13 @@
 .graph-info h1 {
     color: #EC5C28;
     font-weight: bold;
-    font-size: 30pt;
+    font-size: 20pt;
     margin: 0px;
 }
 
 .graph-info h2 {
     color: grey;
+    font-size: 15pt;
 }
 
 #nb-site {
@@ -289,6 +291,9 @@
 .best-price-server a {
     align-items: center;
     justify-content: center;
+    margin: 0px;
+    margin-left: 10px;
+    padding: 0px;
 }
 
 #external-link {
@@ -300,6 +305,14 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    margin: 0px;
+    padding: 0px;
+}
+
+.deviation-related-to-average p {
+    margin: 0px;
+    padding: 0px;
+    margin-left: 10px;
 }
 
 @media (max-width: 450px) {
@@ -324,3 +337,8 @@
     align-items: stretch;
     justify-content: space-between;
 }
+
+.title-graph {
+    margin: 0px;
+}
+
