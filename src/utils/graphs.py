@@ -254,14 +254,14 @@ class LineGraph:
             x=x_values,
             y=self.y_avg_values,
             name="Prix moyen",
-            marker = {"color": "#5D53BE"},
+            marker={"color": "#5D53BE"},
         )
 
         fig.add_scatter(
             x=x_values,
             y=self.y_min_values,
             name="Prix minimum",
-            marker = {"color": "grey"},
+            marker={"color": "grey"},
         )
         metrics = self.create_metrics()
         self.update_layout(fig)
