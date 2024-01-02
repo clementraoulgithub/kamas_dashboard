@@ -35,13 +35,12 @@ from src.models.graph_model import GraphModel
 from src.utils.enums import Website
 
 
-def create_graphs(day_kamas_dict: dict) -> tuple:
+def create_graphs(last_day_kamas_dict: dict) -> tuple:
     """
     return all the graph for the server
 
     Args:
-        day_kamas_dict (dict): dict of the day kamas value
-        yesterday_kamas_dict (dict): dict of the yesterday kamas value
+        last_day_kamas_dict (dict): dict of the day kamas value
 
     Returns:
         tuple: all the graph for the server
@@ -51,7 +50,7 @@ def create_graphs(day_kamas_dict: dict) -> tuple:
         "",
         "Jour",
         "Valeur estimée journalière",
-        day_kamas_dict["kamas_dict"],
+        last_day_kamas_dict["kamas_dict"],
     )
     return bar_graph.create_bar_graph()
 
