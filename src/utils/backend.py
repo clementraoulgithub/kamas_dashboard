@@ -80,7 +80,7 @@ class Backend:
         Returns:
             dict | None: the kamas value
         """
-        response = requests.get(url=f"http://{self.host}{query}{server}", timeout=5)
+        response = requests.get(url=f"http://{self.host}{query}{server}", timeout=10)
         if response.status_code != 200:
             raise requests.exceptions.RequestException("Endpoint is not available")
         return response.json() or None
@@ -101,7 +101,7 @@ class Backend:
         """
         response = requests.get(
             url=f"http://{self.host}:8000/kamas?server={server}&scope={scope}",
-            timeout=5,
+            timeout=10,
         )
         if response.status_code != 200:
             raise requests.exceptions.RequestException("Endpoint is not available")
@@ -132,7 +132,7 @@ class Backend:
             "server": server,
         }
         response = requests.post(
-            url=f"http://{self.host}:8000/kamas", json=body, timeout=5
+            url=f"http://{self.host}:8000/kamas", json=body, timeout=10
         )
         if response.status_code != 200:
             raise requests.exceptions.RequestException("Endpoint is not available")
