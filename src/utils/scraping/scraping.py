@@ -76,7 +76,7 @@ def schedule_scrapping() -> None:
     scheduler.start()
 
 
-def get_daily_kamas_value(server: str) -> dict | None:
+def get_two_last_kamas_value(server: str) -> dict | None:
     """
     Get the daily kamas value
 
@@ -88,7 +88,7 @@ def get_daily_kamas_value(server: str) -> dict | None:
     """
     backend = Backend()
     try:
-        if response := backend.backend_get_daily_kamas_value(server):
+        if response := backend.backend_get_two_last_kamas_value(server):
             return response
     except requests.exceptions.RequestException as e:
         logging.error("Error while getting daily kamas value: %s", e)

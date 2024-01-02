@@ -36,7 +36,7 @@ class Backend:
     def __init__(self):
         self.host = os.environ.get("BACKEND_HOST", "localhost")
 
-    def backend_get_daily_kamas_value(self, server: str) -> dict | None:
+    def backend_get_two_last_kamas_value(self, server: str) -> dict | None:
         """
         backend endpoint to get the daily kamas value
 
