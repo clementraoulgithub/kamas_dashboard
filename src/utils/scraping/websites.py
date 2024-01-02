@@ -49,7 +49,7 @@ def get_kamas_price_from_kamas_facile_endpoint(server: str) -> float:
         url = f"https://www.kamasfacile.com/fr/{server}-kamas/3m-kamas-{server}shadow"
     else:
         url = f"https://www.kamasfacile.com/fr/{server}/3m-kamas-{server}"
-    response = requests.get(url, timeout=5)
+    response = requests.get(url, timeout=10)
 
     if response.status_code != 200:
         raise requests.exceptions.RequestException("Endpoint is not available")
@@ -161,7 +161,7 @@ def get_kamas_from_lekamas(server: str) -> float:
     headers = {
         "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
     }
-    response = requests.post(url, headers=headers, data=payload, timeout=5)
+    response = requests.post(url, headers=headers, data=payload, timeout=10)
 
     value = response.json()["price"].replace("€", "").replace(",", ".")
     value = float(value) / divided_by
@@ -226,7 +226,7 @@ def get_kamas_price_from_mode_marchand(server: str) -> float:
         case _:
             raise ValueError("Server not found")
 
-    response = requests.get(url, timeout=5)
+    response = requests.get(url, timeout=10)
 
     if response.status_code != 200:
         raise requests.exceptions.RequestException("Endpoint is not available")
@@ -314,7 +314,7 @@ def get_kamas_from_try_and_judge(server: str) -> float:
         case _:
             raise ValueError("Server not found")
 
-    response = requests.get(url, timeout=5)
+    response = requests.get(url, timeout=10)
 
     if response.status_code != 200:
         raise requests.exceptions.RequestException("Endpoint is not available")
@@ -385,7 +385,7 @@ def get_d_two_gateway_price(server: str) -> float:
             url = f"{endpoint}{start_query}29{end_query}"
         case _:
             raise ValueError("Server not found")
-    response = requests.get(url, timeout=5)
+    response = requests.get(url, timeout=10)
 
     if response.status_code != 200:
         raise requests.exceptions.RequestException("Endpoint is not available")
@@ -471,7 +471,7 @@ def get_kamas_from_i_game_gold(server: str) -> float:
         case _:
             raise ValueError("Server not found")
 
-    response = requests.get(url, timeout=5)
+    response = requests.get(url, timeout=10)
     soup = BeautifulSoup(response.text, "html.parser")
     calculate_price_elements = soup.find_all(class_="calculate-price")
 
