@@ -27,6 +27,53 @@ import plotly.graph_objs as go
 from dash import dcc, html
 
 
+def create_svg_metrics(
+    is_less_avg: bool | None, is_less_min: bool | None, evolution: float
+) -> tuple:
+    """
+    Return the icons img for the left metrics
+
+    Args:
+        is_less_avg (bool | None): is less than average
+        is_less_min (bool | None): is less than min
+        evolution (float): evolution
+
+    Returns:
+        tuple: the html.Div for the left metrics
+    """
+    if is_less_avg is not None:
+        avg_icon = html.Img(
+            src="/assets/svg/arrow-down.svg"
+            if is_less_avg
+            else "/assets/svg/arrow-up.svg",
+            className="svg",
+        )
+    else:
+        avg_icon = None
+
+    if is_less_min is not None:
+        min_icon = html.Img(
+            src="/assets/svg/arrow-down.svg"
+            if is_less_min
+            else "/assets/svg/arrow-up.svg",
+            className="svg",
+        )
+    else:
+        min_icon = None
+
+    if evolution != 0:
+        evo_icon = html.Img(
+            src="/assets/svg/arrow-down.svg"
+            if evolution < 0
+            else "/assets/svg/arrow-up.svg",
+            className="svg",
+        )
+    else:
+        evo_icon = None
+
+    return avg_icon, min_icon, evo_icon
+
+
 # pylint: disable=too-many-arguments
 def left_metrics(
     average: float,
@@ -52,6 +99,9 @@ def left_metrics(
     Returns:
         html.Div: the html.Div for the left metrics
     """
+    avg_icon, min_icon, evo_icon = create_svg_metrics(
+        is_less_avg, is_less_min, evolution
+    )
     return html.Div(
         [
             html.Div(
@@ -60,15 +110,7 @@ def left_metrics(
                         [
                             html.P("Moyenne"),
                             html.Div(
-                                [
-                                    html.H1(f"{average}"),
-                                    html.Img(
-                                        src="/assets/svg/arrow-down.svg"
-                                        if is_less_avg
-                                        else "/assets/svg/arrow-up.svg",
-                                        className="svg",
-                                    ),
-                                ],
+                                [html.H1(f"{average}"), avg_icon],
                                 className="best-price-server",
                             ),
                             html.H2("Eur/m"),
@@ -106,15 +148,7 @@ def left_metrics(
                         [
                             html.P("Meilleur prix"),
                             html.Div(
-                                [
-                                    html.H1(f"{best_price}"),
-                                    html.Img(
-                                        src="/assets/svg/arrow-down.svg"
-                                        if is_less_min
-                                        else "/assets/svg/arrow-up.svg",
-                                        className="svg",
-                                    ),
-                                ],
+                                [html.H1(f"{best_price}"), min_icon],
                                 className="best-price-server",
                             ),
                             html.H2("Eur/m"),
@@ -133,11 +167,7 @@ def left_metrics(
                                 [
                                     html.H1(f"{best_price_server}"),
                                     html.A(
-                                        html.Img(
-                                            src="/assets/svg/external-link.svg",
-                                            className="svg",
-                                            id="external-link",
-                                        ),
+                                        evo_icon,
                                         href=website_link,
                                     ),
                                 ],
@@ -153,12 +183,6 @@ def left_metrics(
                             html.Div(
                                 [
                                     html.H1(f"{evolution}%"),
-                                    html.Img(
-                                        src="/assets/svg/arrow-down.svg"
-                                        if evolution < 0
-                                        else "/assets/svg/arrow-up.svg",
-                                        className="svg",
-                                    ),
                                 ],
                                 className="best-price-server",
                             ),
