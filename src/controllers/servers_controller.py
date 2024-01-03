@@ -96,8 +96,18 @@ def calculate_metrics(
         last_day_kamas_dict, best_price
     )
 
-    is_less_avg = before_last_day_kamas_dict["average"] > last_day_kamas_dict["average"]
-    is_less_min = before_last_day_kamas_dict["min"] > last_day_kamas_dict["min"]
+    # Calculate if the last day average is less than the before last day average
+    if before_last_day_kamas_dict["average"] != last_day_kamas_dict["average"]:
+        is_less_avg = (
+            before_last_day_kamas_dict["average"] > last_day_kamas_dict["average"]
+        )
+    else:
+        is_less_avg = None
+
+    if before_last_day_kamas_dict["min"] != last_day_kamas_dict["min"]:
+        is_less_min = before_last_day_kamas_dict["min"] > last_day_kamas_dict["min"]
+    else:
+        is_less_min = None
 
     if yesterday_kamas_dict["average"]:
         evolution = (
