@@ -167,7 +167,11 @@ def left_metrics(
                                 [
                                     html.H1(f"{best_price_server}"),
                                     html.A(
-                                        evo_icon,
+                                        html.Img(
+                                            src="/assets/svg/external-link.svg",
+                                            className="svg",
+                                            id="external-link",
+                                        ),
                                         href=website_link,
                                     ),
                                 ],
@@ -181,9 +185,7 @@ def left_metrics(
                         [
                             html.P("Evolution journalière"),
                             html.Div(
-                                [
-                                    html.H1(f"{evolution}%"),
-                                ],
+                                [html.H1(f"{evolution}%"), evo_icon],
                                 className="best-price-server",
                             ),
                             html.H2("%/m"),
