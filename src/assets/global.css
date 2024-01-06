@@ -1,5 +1,5 @@
 body, html {
-    font-family: Helvetica;
+    font-family: Arial;
     height: 100%;
     background-color: #161833 ;
     margin: 0px;
@@ -9,13 +9,13 @@ body, html {
 
 h1, h2, h3, h4, h5, h6 {
     font-weight: bold;
-    font-family: Tahoma;
+    font-family: Tahoma, Arial;
 }
 
 p {
     color: white;
     text-align: justify;
-    font-family: Tahoma;
+    font-family: Tahoma, Arial;
 }
 
 a, button {
@@ -26,7 +26,7 @@ a, button {
     padding: 5px;
     border: 1px solid transparent;
     font-size: medium;
-    font-family: Tahoma;
+    font-family: Tahoma, Arial;
 }
 
 a:hover, button:hover {

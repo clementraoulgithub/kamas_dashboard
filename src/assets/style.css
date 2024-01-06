@@ -129,7 +129,7 @@
     background-color: #1c1e3a;
     margin: 10px;
     flex: 1;
-    font-family: Tahoma;
+    font-family: Tahoma, Arial;
 }
 
 .graph-info {
