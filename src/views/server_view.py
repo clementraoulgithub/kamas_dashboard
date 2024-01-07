@@ -317,7 +317,7 @@ def server_view(
                         ],
                         className="title-server",
                     ),
-                    html.H3("Cours instantané du kamas", className="title-graph"),
+                    html.H3("/ Cours instantané du kamas", className="title-graph"),
                     html.Div(
                         [
                             left_metrics(
@@ -336,7 +336,7 @@ def server_view(
                         ],
                         className="graphs-container",
                     ),
-                    html.H3("Cours du kamas sur période", className="title-graph"),
+                    html.H3("/ Cours du kamas sur période", className="title-graph"),
                     html.Div(
                         id="period-metrics",
                     ),

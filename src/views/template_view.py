@@ -40,7 +40,7 @@ def header() -> dash.html.Header:
             dash.html.Div(
                 [
                     dash.html.A(
-                        dash.html.Img(src="/assets/logo.png", className="logo"),
+                        dash.html.Img(src="/assets/logo.jpeg", className="logo"),
                         href="/",
                         id="logo-link",
                     ),

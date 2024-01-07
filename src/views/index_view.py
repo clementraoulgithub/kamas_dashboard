@@ -90,13 +90,6 @@ def index_view() -> tuple[html.Div, dict[str, str], dict[str, str]]:
                                 ),
                             ],
                         ),
-                        html.Iframe(
-                            src="https://discord.com/widget?id=1190426977535008768&theme=dark",
-                            width="350",
-                            height="350",
-                            sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts",
-                            className="discord",
-                        ),
                     ],
                     className="graph-info",
                     id="index-info",
