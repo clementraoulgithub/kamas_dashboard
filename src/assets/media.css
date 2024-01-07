@@ -1,0 +1,20 @@
+@media (max-width: 450px) {
+    .graphs-container {
+        flex-direction: column;
+    }
+
+    #graph-slider {
+        flex: 1;
+    }
+
+    .rc-slider-mark-text {
+        transform: rotate(90deg) !important;
+        transform-origin: left top !important;
+        margin-left: 10px;
+        margin-top: 10px;
+    }
+
+    .footer {
+        margin-top: 100px;
+    }
+}
