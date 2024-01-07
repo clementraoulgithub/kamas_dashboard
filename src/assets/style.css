@@ -1,11 +1,12 @@
 /* style.css */
+@import url('https://fonts.googleapis.com/css2?family="Figtree"&display=swap');
 
 .body-container {
     margin-top: 100px;
 }
 
 .header {
-    background-color: #1c1e3a;
+    background-color: white;
     color: white; 
     padding: 10px;
     position: fixed;
@@ -19,10 +20,11 @@
 #logo-link {
     margin: 0px;
     padding: 0px;
+    background-color: transparent;
 }
 
 .header h3 {
-    color: white;
+    color: black;
     margin: 0px;
 }
 
@@ -39,7 +41,7 @@
 .header p {
     margin-top: 0px;
     margin: 0px;
-    color: #5D53BE;
+    color: black;
 }
 
 .container {
@@ -63,8 +65,8 @@
 }
 
 .footer {
-    background-color: #161833;
-    color: white;
+    background-color: white;
+    color: black;
     text-align: center;
     bottom: 0;
     width: 100%;
@@ -82,9 +84,9 @@
     left: 0;
     top: 70px;
     height: 40px;
-    background-color: #1c1e3a;
+    background-color: white;
     padding-left: 10px;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid #F3F3F3;
 }
 
 .main-content {
@@ -94,16 +96,22 @@
 .graph-main-content {
     padding-left: 30px;
     padding-right: 30px;
-    border-radius: 16px;
-    background-color: #161833;
+    border-radius: 8px;
+    background-color: white;
+}
+
+.graph-main-content p {
+    color: black;
 }
 
 .graph-main-content h2 {
-    color: #5D53BE;
+    color: black;
+    font-weight: 500;
 }
 
 .graph-main-content h3 {
-    color: white;
+    color: black;
+    font-weight: 500;
 }
 
 .graphs-content {
@@ -123,21 +131,16 @@
 }
 
 .dash-graph {
-    box-shadow: 1px 1px 1px black;
-    border: 1px solid black;
-    border-radius: 16px;
-    background-color: #1c1e3a;
+    border-radius: 8px;
     margin: 10px;
     flex: 1;
-    font-family: Tahoma, Arial;
+    font-family: "Figtree", Arial;
 }
 
 .graph-info {
-    box-shadow: 1px 1px 1px black;
-    border: 1px solid black;
     text-align: center;
-    background-color: #1c1e3a;
-    border-radius: 16px;
+    border-bottom: 1px solid #F3F3F3;
+    border-radius: 8px;
     margin: 10px;
     display: flex;
     flex-direction: column;
@@ -147,7 +150,6 @@
 
 
 .graph-info p {
-    font-weight: bold;
     margin-right: 20px;
     margin-left: 20px;
 }
@@ -169,30 +171,24 @@
 }
 
 .graph-info h1 {
-    color: white;
-    font-weight: bold;
-    font-size: 20pt;
+    color: black;
+    font-weight: 600;
+    font-size: 16pt;
     margin: 0px;
 }
 
 .graph-info h2 {
-    color: #5D53BE;
-    font-size: 15pt;
+    color: gray;
+    font-size: 12pt;
+    font-weight: 200;
 }
 
 .graph-info p {
-    color: grey;
-}
-
-#nb-site {
-    text-align: center;
-    margin: 0px;
-    color: #5D53BE;
-    margin-bottom: 20px;
+    color: black;
 }
 
 .rc-slider-mark-text {
-    color: white;
+    color: black;
     margin-left: 10px;
     font-weight: bold;
     font-size: small;
@@ -201,31 +197,31 @@
 
 .rc-slider-rail,
 .rc-slider-track  {
-    background-color: #1c1e3a;
+    background-color: black;
 }
 
 .rc-slider-step  {
-    background-color: gray;
+    background-color: #f9f8f8;
 }
 
 .rc-slider-dot {
-    background-color: white;
-    border: 2px solid white;
+    background-color: black;
+    border: 2px solid black;
     width: 10px;
     height: 10px;
 }
 
 .rc-slider-handle {
-    background-color: #5D53BE;
-    border: 2px solid #5D53BE;
-    width: 18px;
-    height: 18px;
+    background-color: black;
+    border: 2px solid black;
+    width: 14px;
+    height: 14px;
 }
 
 .rc-slider-handle:hover,
 .rc-slider-handle:focus {
-    background-color: #5D53BE;
-    border: 2px solid #5D53BE;
+    background-color: black;
+    border: 2px solid black;
 }
 
 #graph-slider {
@@ -251,6 +247,7 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    margin-bottom: 20px;
 }
 
 .graph-line-container {
@@ -340,7 +337,7 @@
 }
 
 .white-p {
-    color: white !important;
+    color: black !important;
 }
 
 .title {
@@ -354,7 +351,17 @@
     align-items: center;
 }
 
-@media (max-width: 450px) {
+#button-top-menu-retro,
+#button-top-menu-classic,
+#button-top-menu-touch {
+    border-radius: 4px;
+    background-color: #F3F3F3;
+    margin: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+@media (max-width: 600px) {
     .graphs-container {
         flex-direction: column;
     }
@@ -374,3 +381,4 @@
         margin-top: 100px;
     }
 }
+

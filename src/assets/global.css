@@ -1,36 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Figtree&display=swap');
+
 body, html {
     font-family: Arial;
     height: 100%;
-    background-color: #161833 ;
+    background-color: white;
     margin: 0px;
     display: flex;
     flex-direction: column;
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-weight: bold;
-    font-family: Tahoma, Arial;
+    font-family: "Figtree", Arial;
 }
 
 p {
     color: white;
     text-align: justify;
-    font-family: Tahoma, Arial;
+    font-family: "Figtree", Arial;
 }
 
 a, button {
-    color: white;
-    background-color: #1c1e3a;
-    font-weight: bold;
+    color: black;
+    background-color: transparent;
     text-decoration: none;
     padding: 5px;
     border: 1px solid transparent;
     font-size: medium;
-    font-family: Tahoma, Arial;
+    font-family: "Figtree", Arial;
 }
 
 a:hover, button:hover {
-    color: #5D53BE;
+    color: grey;
 }
 
 .svg {

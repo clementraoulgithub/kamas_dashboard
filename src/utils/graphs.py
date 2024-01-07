@@ -78,7 +78,9 @@ class BarGraph:
         for key, value in self.x_values.items():
             try:
                 key = Website[key.upper().replace(" ", "_")]
-                web_dict[f'<a href="{key.value[1]}">{key.value[0]}</a>'] = value
+                web_dict[
+                    f"<a href='{key.value[1]}' style='color:black'>{key.value[0]}</a>"
+                ] = value
             except KeyError:
                 web_dict[key] = value
 
@@ -114,11 +116,10 @@ class BarGraph:
             dataframe,
             x="Site",
             y="Valeurs",
-            title=f"<b>{model.title}</b>",
+            title=f"{model.title}",
             text="Valeurs",
             labels={"Valeurs": "Valeurs estimées (million)"},
         )
-        self.add_price_annotations(fig)
         self.update_layout(fig, average_value)
 
         return fig
@@ -185,19 +186,27 @@ class BarGraph:
             average_value (float): the average value
         """
         fig.update_layout(
-            template="plotly_dark",
             plot_bgcolor="rgba(0, 0, 0, 0)",
             paper_bgcolor="rgba(0, 0, 0, 0)",
+            title_font_color="black",
         )
 
         fig.update_traces(
             marker_color=[
-                "#5D53BE" if value < average_value else "#6B6A6A"
+                "#D3D3D3" if value < average_value else "black"
                 for value in list(self.x_values.values())
             ],
         )
-        fig.update_xaxes(title_text="Sites de ventes")
-        fig.update_yaxes(title_text="Valeurs estimées (million)")
+        fig.update_xaxes(
+            title_text="Sites de ventes",
+            title_font_color="black",
+            tickfont_color="black",
+        )
+        fig.update_yaxes(
+            title_text="Valeurs estimées (million)",
+            title_font_color="black",
+            tickfont_color="black",
+        )
 
 
 class LineGraph:
@@ -242,14 +251,14 @@ class LineGraph:
             x=x_values,
             y=self.y_avg_values,
             name="Prix moyen",
-            marker={"color": "#5D53BE"},
+            marker={"color": "black"},
         )
 
         fig.add_scatter(
             x=x_values,
             y=self.y_min_values,
             name="Prix minimum",
-            marker={"color": "grey"},
+            marker={"color": "#D3D3D3"},
         )
         metrics = self.create_metrics()
         self.update_layout(fig)
@@ -323,10 +332,14 @@ class LineGraph:
             fig (go.Figure): the figure
         """
         fig.update_layout(
-            template="plotly_dark",
             plot_bgcolor="rgba(22,24,51,0)",
             paper_bgcolor="rgba(22,24,51,0)",
-            title=f"<b>{self.title}</b>",
+            title=f"{self.title}",
+            title_font_color="black",
         )
-        fig.update_yaxes(title_text=self.y_title)
-        fig.update_xaxes(title_text=self.x_title)
+        fig.update_yaxes(
+            title_text=self.y_title, title_font_color="black", tickfont_color="black"
+        )
+        fig.update_xaxes(
+            title_text=self.x_title, title_font_color="black", tickfont_color="black"
+        )
