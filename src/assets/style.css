@@ -235,12 +235,6 @@
     width: 60%;
 }
 
-@media (max-width: 450px) {
-    #graph-slider {
-        flex: 1;
-    }
-}
-
 .plot-container a {
     font-size: x-small;
 }
@@ -324,12 +318,6 @@
     margin-left: 10px;
 }
 
-@media (max-width: 450px) {
-    .graphs-container {
-        flex-direction: column;
-    }
-}
-
 .description {
     font-weight: 400 !important;
 }
@@ -365,3 +353,4 @@
     justify-content: space-between;
     align-items: center;
 }
+
