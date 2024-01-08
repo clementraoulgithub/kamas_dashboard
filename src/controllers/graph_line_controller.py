@@ -59,7 +59,7 @@ def graph_line_controller(value: int):
         "Evolutions <br>du million de kamas",
         "",
         "Date UTC",
-        "Valeurs estimées (Eur/m)",
+        "Valeurs estimées",
         [dict["timestamp"] for dict in kamas_dict],
         [dict["average"] for dict in kamas_dict],
         [dict["min"] for dict in kamas_dict],

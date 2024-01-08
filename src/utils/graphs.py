@@ -79,7 +79,7 @@ class BarGraph:
             try:
                 key = Website[key.upper().replace(" ", "_")]
                 web_dict[
-                    f"<a href='{key.value[1]}' style='color:black'>{key.value[0]}</a>"
+                    f"<a href='{key.value[1]}' style='color:grey'>{key.value[0]}</a>"
                 ] = value
             except KeyError:
                 web_dict[key] = value
@@ -118,7 +118,7 @@ class BarGraph:
             y="Valeurs",
             title=f"{model.title}",
             text="Valeurs",
-            labels={"Valeurs": "Valeurs estimées (million)"},
+            labels={"Valeurs": "Valeurs estimées"},
         )
         self.update_layout(fig, average_value)
 
@@ -189,6 +189,7 @@ class BarGraph:
             plot_bgcolor="rgba(0, 0, 0, 0)",
             paper_bgcolor="rgba(0, 0, 0, 0)",
             title_font_color="black",
+            title_y=0.95,
         )
 
         fig.update_traces(
@@ -205,7 +206,7 @@ class BarGraph:
             griddash="dash",
         )
         fig.update_yaxes(
-            title_text="Valeurs estimées (million)",
+            title_text="Valeurs estimées",
             title_font_color="black",
             tickfont_color="black",
             gridcolor="#F3F3F3",

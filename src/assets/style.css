@@ -205,7 +205,7 @@
 }
 
 .rc-slider-dot {
-    background-color: black;
+    background-color: white;
     border: 2px solid black;
     width: 10px;
     height: 10px;
@@ -227,7 +227,7 @@
 #graph-slider {
     padding: 0px !important;
     flex: 0.1 !important;
-    margin: 10px !important;
+    margin: 20px !important;
     width: 60%;
 }
 
@@ -381,7 +381,7 @@
         margin-top: 10px;
     }
 
-    .footer {
+    #graph-line {
         margin-top: 100px;
     }
 }
