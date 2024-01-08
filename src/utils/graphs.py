@@ -46,10 +46,10 @@ def create_graphs(last_day_kamas_dict: dict) -> tuple:
         tuple: all the graph for the server
     """
     bar_graph = BarGraph(
-        "Valeur journalière<br>du million de kamas",
+        "Valeur instantanée<br>du million de kamas",
         "",
         "Jour",
-        "Valeur estimée journalière",
+        "Valeur estimée",
         last_day_kamas_dict["kamas_dict"],
     )
     return bar_graph.create_bar_graph()
@@ -193,7 +193,7 @@ class BarGraph:
 
         fig.update_traces(
             marker_color=[
-                "#D3D3D3" if value < average_value else "black"
+                "black" if value < average_value else "#D3D3D3"
                 for value in list(self.x_values.values())
             ],
         )
@@ -201,11 +201,15 @@ class BarGraph:
             title_text="Sites de ventes",
             title_font_color="black",
             tickfont_color="black",
+            gridcolor="#F3F3F3",
+            griddash="dash",
         )
         fig.update_yaxes(
             title_text="Valeurs estimées (million)",
             title_font_color="black",
             tickfont_color="black",
+            gridcolor="#F3F3F3",
+            griddash="dash",
         )
 
 
@@ -333,13 +337,20 @@ class LineGraph:
         """
         fig.update_layout(
             plot_bgcolor="rgba(22,24,51,0)",
-            paper_bgcolor="rgba(22,24,51,0)",
             title=f"{self.title}",
             title_font_color="black",
         )
         fig.update_yaxes(
-            title_text=self.y_title, title_font_color="black", tickfont_color="black"
+            title_text=self.y_title,
+            title_font_color="black",
+            tickfont_color="black",
+            gridcolor="#F3F3F3",
+            griddash="dash",
         )
         fig.update_xaxes(
-            title_text=self.x_title, title_font_color="black", tickfont_color="black"
+            title_text=self.x_title,
+            title_font_color="black",
+            tickfont_color="black",
+            gridcolor="#F3F3F3",
+            griddash="dash",
         )

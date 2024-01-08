@@ -107,6 +107,8 @@
 .graph-main-content h2 {
     color: black;
     font-weight: 500;
+    margin-bottom: 5px;
+    margin-top: 25px;
 }
 
 .graph-main-content h3 {
@@ -137,21 +139,23 @@
     font-family: "Figtree", Arial;
 }
 
-.graph-info {
+.graph-info, .graph-info-right {
     text-align: center;
-    border-bottom: 1px solid #F3F3F3;
-    border-radius: 8px;
-    margin: 10px;
     display: flex;
     flex-direction: column;
     align-self: stretch;
     align-content: center;
+    margin: 10px;
 }
 
+.graph-info {
+    border-right: 1px solid #F3F3F3;
+}
 
-.graph-info p {
+.graph-info p, .graph-info-right p {
     margin-right: 20px;
     margin-left: 20px;
+    color: black;
 }
 
 .graph-info-avg {
@@ -170,21 +174,17 @@
     flex: 1;
 }
 
-.graph-info h1 {
+.graph-info h1, .graph-info-right h1 {
     color: black;
     font-weight: 600;
-    font-size: 16pt;
+    font-size: 20pt;
     margin: 0px;
 }
 
-.graph-info h2 {
+.graph-info h2, .graph-info-right h2 {
     color: gray;
     font-size: 12pt;
     font-weight: 200;
-}
-
-.graph-info p {
-    color: black;
 }
 
 .rc-slider-mark-text {
@@ -351,14 +351,18 @@
     align-items: center;
 }
 
+.graph-separator {
+    height: 2px;
+    background-color: #F3F3F3;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 #button-top-menu-retro,
 #button-top-menu-classic,
 #button-top-menu-touch {
-    border-radius: 4px;
-    background-color: #F3F3F3;
     margin: 5px;
-    padding-left: 10px;
-    padding-right: 10px;
 }
 
 @media (max-width: 600px) {
