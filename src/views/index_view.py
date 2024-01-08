@@ -67,6 +67,7 @@ def index_view() -> tuple[html.Div, dict[str, str], dict[str, str]]:
         html.Div(
             [
                 html.H2(f"Bienvenue sur {NAME}"),
+                html.Div(className="graph-separator"),
                 html.P("Choisissez un serveur dans le menu en haut à gauche"),
                 html.Div(
                     [
@@ -91,7 +92,7 @@ def index_view() -> tuple[html.Div, dict[str, str], dict[str, str]]:
                             ],
                         ),
                     ],
-                    className="graph-info",
+                    className="graph-info-right",
                     id="index-info",
                 ),
             ],

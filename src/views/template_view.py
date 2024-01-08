@@ -23,6 +23,8 @@
 
 """Main template view for the app."""
 
+import datetime
+
 import dash
 
 from src import NAME
@@ -47,7 +49,7 @@ def header() -> dash.html.Header:
                     dash.html.Div(
                         [
                             dash.html.H3(children=NAME),
-                            dash.html.P("Visualisation de valeurs de kamas"),
+                            dash.html.P("Visualisation du cours du kamas"),
                         ],
                         className="header-text",
                     ),
@@ -66,8 +68,9 @@ def footer() -> dash.html.Footer:
     Returns:
         dash.html.Footer: the footer of the app
     """
+    year = datetime.datetime.now().year
     return dash.html.Footer(
-        dash.html.P(children=f"© {NAME} 2023, work in progress", className="footer")
+        dash.html.P(children=f"© {NAME} {year}", className="footer")
     )
 
 
@@ -81,7 +84,17 @@ def dofus_retro_menu() -> dash.html.Div:
     return dash.html.Div(
         dash.html.Div(
             [
-                dash.html.Button("Dofus Retro", id="button-top-menu-retro"),
+                dash.html.Button(
+                    [
+                        dash.html.Img(
+                            src="/assets/svg/circle.svg",
+                            className="svg-button",
+                        ),
+                        "Dofus Retro",
+                    ],
+                    id="button-top-menu-retro",
+                    className="title-server",
+                ),
                 dash.html.Div(
                     [
                         dash.dcc.Link("Serveur Boune", href="/boune", className="link"),
@@ -112,7 +125,17 @@ def dofus_classic_menu() -> dash.html.Div:
     return dash.html.Div(
         dash.html.Div(
             [
-                dash.html.Button("Dofus 2", id="button-top-menu-classic"),
+                dash.html.Button(
+                    [
+                        dash.html.Img(
+                            src="/assets/svg/circle.svg",
+                            className="svg-button",
+                        ),
+                        "Dofus 2",
+                    ],
+                    id="button-top-menu-classic",
+                    className="title-server",
+                ),
                 dash.html.Div(
                     [
                         dash.dcc.Link(
@@ -153,7 +176,17 @@ def dofus_touch_menu() -> dash.html.Div:
     return dash.html.Div(
         dash.html.Div(
             [
-                dash.html.Button("Dofus Touch", id="button-top-menu-touch"),
+                dash.html.Button(
+                    [
+                        dash.html.Img(
+                            src="/assets/svg/circle.svg",
+                            className="svg-button",
+                        ),
+                        "Dofus Touch",
+                    ],
+                    id="button-top-menu-touch",
+                    className="title-server",
+                ),
                 dash.html.Div(
                     [
                         dash.dcc.Link(

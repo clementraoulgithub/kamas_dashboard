@@ -81,7 +81,7 @@ def graph_line_controller(value: int):
                     dash.html.P("Prix minimum"),
                     dash.html.P(metrics[1], className="white-p"),
                 ],
-                className="graph-info",
+                className="graph-info-right",
             ),
         ],
         className="graph-info-avg",

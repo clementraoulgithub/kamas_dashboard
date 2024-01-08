@@ -37,3 +37,8 @@ a:hover, button:hover {
     width: 30px;
     height: 30px;
 }
+
+.svg-button {
+    width: 15px;
+    height: 15px;
+}

@@ -110,7 +110,7 @@ def left_metrics(
                         [
                             html.P("Moyenne"),
                             html.Div(
-                                [html.H1(f"{average}"), avg_icon],
+                                [html.H1(f"{average}€"), avg_icon],
                                 className="best-price-server",
                             ),
                             html.H2("Eur/m"),
@@ -122,14 +122,14 @@ def left_metrics(
                             html.P("Ecart-type"),
                             html.Div(
                                 [
-                                    html.H1(f"{deviation}"),
+                                    html.H1(f"{deviation}€"),
                                     html.P(deviation_related_to_average),
                                 ],
                                 className="deviation-related-to-average",
                             ),
                             html.H2("Eur/m"),
                         ],
-                        className="graph-info",
+                        className="graph-info-right",
                     ),
                 ],
                 className="graph-info-avg",
@@ -139,7 +139,7 @@ def left_metrics(
                     html.Div(
                         [
                             html.P("Médiane"),
-                            html.H1(f"{mediane}"),
+                            html.H1(f"{mediane}€"),
                             html.H2("Eur/m"),
                         ],
                         className="graph-info",
@@ -148,12 +148,12 @@ def left_metrics(
                         [
                             html.P("Meilleur prix"),
                             html.Div(
-                                [html.H1(f"{best_price}"), min_icon],
+                                [html.H1(f"{best_price}€"), min_icon],
                                 className="best-price-server",
                             ),
                             html.H2("Eur/m"),
                         ],
-                        className="graph-info",
+                        className="graph-info-right",
                     ),
                 ],
                 className="graph-info-avg",
@@ -190,7 +190,7 @@ def left_metrics(
                             ),
                             html.H2("%/m"),
                         ],
-                        className="graph-info",
+                        className="graph-info-right",
                     ),
                 ],
                 className="graph-info-avg",
@@ -306,18 +306,21 @@ def server_view(
         [
             html.Div(
                 [
+                    html.H2(f"Serveur {name.capitalize()}"),
+                    html.Div(className="graph-separator"),
                     html.Div(
                         [
                             html.Img(
-                                src="/assets/svg/arrow-right.svg",
+                                src="/assets/svg/arrow-bottom.svg",
                                 className="svg",
-                                id="arrow-left",
+                                id="arrow-bottom",
                             ),
-                            html.H2(f"Serveur {name.capitalize()}"),
+                            html.H3(
+                                "Cours instantané du kamas", className="title-graph"
+                            ),
                         ],
                         className="title-server",
                     ),
-                    html.H3("/ Cours instantané du kamas", className="title-graph"),
                     html.Div(
                         [
                             left_metrics(
@@ -336,7 +339,20 @@ def server_view(
                         ],
                         className="graphs-container",
                     ),
-                    html.H3("/ Cours du kamas sur période", className="title-graph"),
+                    html.Div(className="graph-separator"),
+                    html.Div(
+                        [
+                            html.Img(
+                                src="/assets/svg/arrow-bottom.svg",
+                                className="svg",
+                                id="arrow-bottom",
+                            ),
+                            html.H3(
+                                "Cours du kamas sur période", className="title-graph"
+                            ),
+                        ],
+                        className="title-server",
+                    ),
                     html.Div(
                         id="period-metrics",
                     ),
