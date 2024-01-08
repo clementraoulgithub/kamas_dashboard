@@ -113,7 +113,6 @@ def left_metrics(
                                 [html.H1(f"{average}€"), avg_icon],
                                 className="best-price-server",
                             ),
-                            html.H2("Eur/m"),
                         ],
                         className="graph-info",
                     ),
@@ -127,7 +126,6 @@ def left_metrics(
                                 ],
                                 className="deviation-related-to-average",
                             ),
-                            html.H2("Eur/m"),
                         ],
                         className="graph-info-right",
                     ),
@@ -140,7 +138,6 @@ def left_metrics(
                         [
                             html.P("Médiane"),
                             html.H1(f"{mediane}€"),
-                            html.H2("Eur/m"),
                         ],
                         className="graph-info",
                     ),
@@ -151,7 +148,6 @@ def left_metrics(
                                 [html.H1(f"{best_price}€"), min_icon],
                                 className="best-price-server",
                             ),
-                            html.H2("Eur/m"),
                         ],
                         className="graph-info-right",
                     ),
@@ -177,7 +173,6 @@ def left_metrics(
                                 ],
                                 className="best-price-server",
                             ),
-                            html.H2("Lien"),
                         ],
                         className="graph-info",
                     ),
@@ -188,7 +183,6 @@ def left_metrics(
                                 [html.H1(f"{evolution}%"), evo_icon],
                                 className="best-price-server",
                             ),
-                            html.H2("%/m"),
                         ],
                         className="graph-info-right",
                     ),
@@ -256,6 +250,7 @@ def bottom_line_graph() -> html.Div:
 
     return html.Div(
         [
+            slider,
             dcc.Graph(
                 config={
                     "displayModeBar": False,
@@ -264,7 +259,6 @@ def bottom_line_graph() -> html.Div:
                 id="graph-line",
                 style={"display": "none"},
             ),
-            slider,
         ],
         className="graph-line-container",
     )
