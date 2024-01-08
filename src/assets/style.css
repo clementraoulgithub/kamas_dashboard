@@ -145,7 +145,7 @@
     flex-direction: column;
     align-self: stretch;
     align-content: center;
-    margin: 10px;
+    margin: 20px;
 }
 
 .graph-info {
@@ -156,6 +156,8 @@
     margin-right: 20px;
     margin-left: 20px;
     color: black;
+    text-align: center;
+    margin: 0px;
 }
 
 .graph-info-avg {
@@ -329,7 +331,7 @@
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    justify-content: space-between;
+    justify-content: center;
 }
 
 .title-graph {
@@ -338,6 +340,14 @@
 
 .white-p {
     color: black !important;
+    text-align: left !important;
+}
+
+.title-p {
+    color: black !important;
+    text-align: left !important;
+    font-weight: 700 !important;
+    margin-bottom: 10px !important;
 }
 
 .title {

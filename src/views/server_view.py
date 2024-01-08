@@ -108,17 +108,16 @@ def left_metrics(
                 [
                     html.Div(
                         [
-                            html.P("Moyenne"),
                             html.Div(
                                 [html.H1(f"{average}€"), avg_icon],
                                 className="best-price-server",
                             ),
+                            html.P("Moyenne"),
                         ],
                         className="graph-info",
                     ),
                     html.Div(
                         [
-                            html.P("Ecart-type"),
                             html.Div(
                                 [
                                     html.H1(f"{deviation}€"),
@@ -126,6 +125,7 @@ def left_metrics(
                                 ],
                                 className="deviation-related-to-average",
                             ),
+                            html.P("Ecart-type"),
                         ],
                         className="graph-info-right",
                     ),
@@ -136,18 +136,18 @@ def left_metrics(
                 [
                     html.Div(
                         [
-                            html.P("Médiane"),
                             html.H1(f"{mediane}€"),
+                            html.P("Médiane"),
                         ],
                         className="graph-info",
                     ),
                     html.Div(
                         [
-                            html.P("Meilleur prix"),
                             html.Div(
                                 [html.H1(f"{best_price}€"), min_icon],
                                 className="best-price-server",
                             ),
+                            html.P("Meilleur prix"),
                         ],
                         className="graph-info-right",
                     ),
@@ -158,7 +158,6 @@ def left_metrics(
                 [
                     html.Div(
                         [
-                            html.P("Vendeur le moins cher"),
                             html.Div(
                                 [
                                     html.H1(f"{best_price_server}"),
@@ -173,16 +172,17 @@ def left_metrics(
                                 ],
                                 className="best-price-server",
                             ),
+                            html.P("Vendeur le moins cher"),
                         ],
                         className="graph-info",
                     ),
                     html.Div(
                         [
-                            html.P("Evolution journalière"),
                             html.Div(
                                 [html.H1(f"{evolution}%"), evo_icon],
                                 className="best-price-server",
                             ),
+                            html.P("Evolution journalière"),
                         ],
                         className="graph-info-right",
                     ),

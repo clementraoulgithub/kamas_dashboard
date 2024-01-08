@@ -41,4 +41,5 @@ a:hover, button:hover {
 .svg-button {
     width: 15px;
     height: 15px;
+    margin-right: 5px;
 }

@@ -87,7 +87,7 @@ def dofus_retro_menu() -> dash.html.Div:
                 dash.html.Button(
                     [
                         dash.html.Img(
-                            src="/assets/svg/circle.svg",
+                            src="/assets/svg/retro.svg",
                             className="svg-button",
                         ),
                         "Dofus Retro",
@@ -128,7 +128,7 @@ def dofus_classic_menu() -> dash.html.Div:
                 dash.html.Button(
                     [
                         dash.html.Img(
-                            src="/assets/svg/circle.svg",
+                            src="/assets/svg/classic.svg",
                             className="svg-button",
                         ),
                         "Dofus 2",
@@ -179,7 +179,7 @@ def dofus_touch_menu() -> dash.html.Div:
                 dash.html.Button(
                     [
                         dash.html.Img(
-                            src="/assets/svg/circle.svg",
+                            src="/assets/svg/touch.svg",
                             className="svg-button",
                         ),
                         "Dofus Touch",
