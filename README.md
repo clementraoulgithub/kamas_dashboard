@@ -6,7 +6,6 @@
 
 This repository aim to display average kamas price from several servers.
 
-![Screenshot 2024-01-07 at 10-06-30 Kamas Dashboard](https://github.com/clementraoulastek/kamas_dashboard/assets/107399025/af6d9e54-b885-49dc-92c5-9922754ee1eb)
 
 # Conda env
 
