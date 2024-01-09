@@ -23,12 +23,63 @@
 
 """Controller for the line graph."""
 
+from typing import List
+
 import dash
 
 from src.utils import global_variables
 from src.utils.enums import LineGraphScope
 from src.utils.graphs import LineGraph
 from src.utils.scraping.scraping import get_scope_kamas_value
+
+
+def create_div_metrics(metric_lst: List[dict]) -> dash.html.Div:
+    """
+    Create indivual div for each metric.
+
+    Args:
+        metric_lst (List[dict]): each dict contains the metrics
+    Returns:
+        dash.html.Div: the div containing the metrics
+    """
+    return_lst: List[dash.html.Div] = []
+    for metric_dict in metric_lst:
+        average_div = dash.html.Div(
+            [
+                dash.html.Div(
+                    [
+                        dash.html.H1(metric_dict["average_value"]),
+                        dash.html.P("Moyenne"),
+                    ],
+                    className="graph-info",
+                ),
+                dash.html.Div(
+                    [
+                        dash.html.H1(metric_dict["deviation"]),
+                        dash.html.P("Ecart-type"),
+                    ],
+                    className="graph-info",
+                ),
+                dash.html.Div(
+                    [
+                        dash.html.H1(metric_dict["deviation_related_to_average"]),
+                        dash.html.P("Ecart-type relatif"),
+                    ],
+                    className="graph-info",
+                ),
+                dash.html.Div(
+                    [
+                        dash.html.H1(metric_dict["increase_rate"]),
+                        dash.html.P("Taux de croissance"),
+                    ],
+                    className="graph-info-right",
+                ),
+            ],
+            className="graph-info-avg",
+        )
+        return_lst.append(average_div)
+
+    return return_lst
 
 
 @dash.callback(
@@ -66,25 +117,16 @@ def graph_line_controller(value: int):
     )
 
     graph, metrics = line_graph.create_line_graph()
+    div_lst = create_div_metrics(metrics)
 
     metrics = dash.html.Div(
         [
-            dash.html.Div(
-                [
-                    dash.html.P("Prix moyen", className="title-p"),
-                    dash.html.P(metrics[0], className="white-p"),
-                ],
-                className="graph-info",
-            ),
-            dash.html.Div(
-                [
-                    dash.html.P("Prix minimum", className="title-p"),
-                    dash.html.P(metrics[1], className="white-p"),
-                ],
-                className="graph-info-right",
-            ),
+            dash.html.P("Prix moyen", className="graph-info-title"),
+            div_lst[0],
+            dash.html.P("Prix minimum", className="graph-info-title"),
+            div_lst[1],
         ],
-        className="graph-info-avg",
+        className="graph-info-container",
     )
 
     return graph, {"display": "flex"}, metrics

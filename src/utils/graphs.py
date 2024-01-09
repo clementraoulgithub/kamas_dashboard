@@ -322,10 +322,12 @@ class LineGraph:
                 increase_rate = 0
 
             metrics.append(
-                f"Valeur moyenne: {round(average_value, 2)} - "
-                f"Ecart-type: {round(deviation, 2)} - "
-                f"Ecart-type relatif à la moyenne: {deviation_related_to_average} % - "
-                f"Taux de croissance: {round(increase_rate, 2)} %"
+                {
+                    "average_value": f"{round(average_value, 2)}€",
+                    "deviation": f"{round(deviation, 2)}€",
+                    "deviation_related_to_average": f"{deviation_related_to_average}%",
+                    "increase_rate": f"{round(increase_rate, 2)}%",
+                }
             )
         return metrics
 
