@@ -126,7 +126,7 @@ def graph_line_controller(value: int):
             dash.html.P("Prix minimum", className="graph-info-title"),
             div_lst[1],
         ],
-        className="graph-info-container",
+        className="graph-info-container-period",
     )
 
     return graph, {"display": "flex"}, metrics

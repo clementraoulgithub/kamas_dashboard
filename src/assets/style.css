@@ -335,6 +335,18 @@
     justify-content: center;
 }
 
+.graph-info-container-period {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.graph-info-container-period > * {
+    flex: 1;
+}
+
 .title-graph {
     margin: 0px;
 }
@@ -357,6 +369,7 @@
 
 .graph-info-title {
     margin: 5px;
+    flex: 0;
 }
 
 #index-info {
@@ -398,6 +411,10 @@
 
     #graph-line {
         margin-top: 100px;
+    }
+
+    .graph-info-container-period {
+        flex-direction: column;
     }
 }
 
