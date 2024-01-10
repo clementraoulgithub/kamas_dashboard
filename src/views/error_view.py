@@ -36,12 +36,10 @@ def error_view() -> tuple[html.Div, dict[str, str], dict[str, str]]:
     return (
         html.Div(
             [
-                html.H3("Erreur"),
                 html.Div(
                     [
                         html.P("Erreur 404"),
                         html.H1("La page que vous cherchez n'existe pas"),
-                        html.H2("Veuillez vérifier l'URL"),
                     ],
                     className="graph-info",
                 ),

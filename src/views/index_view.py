@@ -55,6 +55,7 @@ def index_view() -> tuple[html.Div, dict[str, str], dict[str, str]]:
         "Les graphiques illustrent les estimations du kamas en euros pour chaque serveur ",
         "sur les différents sites de vente de kamas.",
         html.Br(),
+        html.Br(),
         "Les valeurs sont évaluées en se basant sur ",
         html.B("les offres de vente les plus basses."),
         html.Br(),
@@ -79,7 +80,9 @@ def index_view() -> tuple[html.Div, dict[str, str], dict[str, str]]:
                                 html.P(
                                     description_lst, className="description white-p"
                                 ),
+                                html.Br(),
                                 html.P(warning, className="description white-p"),
+                                html.Br(),
                                 html.P(please_return_info, className="title-p"),
                                 html.P(
                                     html.A(
