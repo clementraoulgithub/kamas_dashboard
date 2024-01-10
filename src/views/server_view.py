@@ -109,53 +109,13 @@ def left_metrics(
                     html.Div(
                         [
                             html.Div(
-                                [html.H1(f"{average}€"), avg_icon],
-                                className="best-price-server",
-                            ),
-                            html.P("Moyenne"),
-                        ],
-                        className="graph-info",
-                    ),
-                    html.Div(
-                        [
-                            html.Div(
-                                [
-                                    html.H1(f"{deviation}€"),
-                                    html.P(deviation_related_to_average),
-                                ],
-                                className="deviation-related-to-average",
-                            ),
-                            html.P("Ecart-type"),
-                        ],
-                        className="graph-info-right",
-                    ),
-                ],
-                className="graph-info-avg",
-            ),
-            html.Div(
-                [
-                    html.Div(
-                        [
-                            html.H1(f"{mediane}€"),
-                            html.P("Médiane"),
-                        ],
-                        className="graph-info",
-                    ),
-                    html.Div(
-                        [
-                            html.Div(
                                 [html.H1(f"{best_price}€"), min_icon],
                                 className="best-price-server",
                             ),
                             html.P("Meilleur prix"),
                         ],
-                        className="graph-info-right",
+                        className="graph-info",
                     ),
-                ],
-                className="graph-info-avg",
-            ),
-            html.Div(
-                [
                     html.Div(
                         [
                             html.Div(
@@ -173,6 +133,46 @@ def left_metrics(
                                 className="best-price-server",
                             ),
                             html.P("Vendeur le moins cher"),
+                        ],
+                        className="graph-info-right",
+                    ),
+                ],
+                className="graph-info-avg",
+            ),
+            html.Div(
+                [
+                    html.Div(
+                        [
+                            html.Div(
+                                [html.H1(f"{average}€"), avg_icon],
+                                className="best-price-server",
+                            ),
+                            html.P("Moyenne"),
+                        ],
+                        className="graph-info",
+                    ),
+                    html.Div(
+                        [
+                            html.H1(f"{mediane}€"),
+                            html.P("Médiane"),
+                        ],
+                        className="graph-info-right",
+                    ),
+                ],
+                className="graph-info-avg",
+            ),
+            html.Div(
+                [
+                    html.Div(
+                        [
+                            html.Div(
+                                [
+                                    html.H1(f"{deviation}€"),
+                                    html.P(deviation_related_to_average),
+                                ],
+                                className="deviation-related-to-average",
+                            ),
+                            html.P("Ecart-type"),
                         ],
                         className="graph-info",
                     ),
