@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="fr" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>utils &mdash; Documentation Kamas Dashboard 0.0.1</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=5cd26065"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/translations.js?v=d99ca74e"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Recherche" href="search.html" />
+    <link rel="prev" title="views" href="views.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Kamas Dashboard
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Rechercher docs" aria-label="Rechercher docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="controllers.html">controllers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="models.html">models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="views.html">views</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">utils</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#src.utils.backend.Backend"><code class="docutils literal notranslate"><span class="pre">Backend</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#src.utils.backend.Backend.backend_get_scope_kamas_value"><code class="docutils literal notranslate"><span class="pre">Backend.backend_get_scope_kamas_value()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#src.utils.backend.Backend.backend_get_two_last_kamas_value"><code class="docutils literal notranslate"><span class="pre">Backend.backend_get_two_last_kamas_value()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#src.utils.backend.Backend.backend_get_yesterday_kamas_value"><code class="docutils literal notranslate"><span class="pre">Backend.backend_get_yesterday_kamas_value()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#src.utils.backend.Backend.backend_post_daily_kamas_value"><code class="docutils literal notranslate"><span class="pre">Backend.backend_post_daily_kamas_value()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#src.utils.enums.LineGraphScope"><code class="docutils literal notranslate"><span class="pre">LineGraphScope</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#src.utils.enums.LineGraphScope.DAY"><code class="docutils literal notranslate"><span class="pre">LineGraphScope.DAY</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#src.utils.enums.LineGraphScope.MONTH"><code class="docutils literal notranslate"><span class="pre">LineGraphScope.MONTH</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#src.utils.enums.LineGraphScope.SIX_MONTHS"><code class="docutils literal notranslate"><span class="pre">LineGraphScope.SIX_MONTHS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#src.utils.enums.LineGraphScope.THREE_MONTHS"><code class="docutils literal notranslate"><span class="pre">LineGraphScope.THREE_MONTHS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#src.utils.enums.LineGraphScope.WEEK"><code class="docutils literal notranslate"><span class="pre">LineGraphScope.WEEK</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#src.utils.enums.LineGraphScope.YEAR"><code class="docutils literal notranslate"><span class="pre">LineGraphScope.YEAR</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#src.utils.enums.ServerClassic"><code class="docutils literal notranslate"><span class="pre">ServerClassic</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#src.utils.enums.ServerClassic.DRACONIROS"><code class="docutils literal notranslate"><span class="pre">ServerClassic.DRACONIROS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#src.utils.enums.ServerClassic.HELLMINA"><code class="docutils literal notranslate"><span class="pre">ServerClassic.HELLMINA</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#src.utils.enums.ServerClassic.IMAGIRO"><code class="docutils literal notranslate"><span class="pre">ServerClassic.IMAGIRO</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#src.utils.enums.ServerClassic.OMBRE"><code class="docutils literal notranslate"><span class="pre">ServerClassic.OMBRE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#src.utils.enums.ServerClassic.ORUKAM"><code class="docutils literal notranslate"><span class="pre">ServerClassic.ORUKAM</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#src.utils.enums.ServerClassic.TALKASHA"><code class="docutils literal notranslate"><span class="pre">ServerClassic.TALKASHA</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#src.utils.enums.ServerClassic.TYLEZIA"><code class="docutils literal notranslate"><span class="pre">ServerClassic.TYLEZIA</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#src.utils.enums.ServerRetro"><code class="docutils literal notranslate"><span class="pre">ServerRetro</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#src.utils.enums.ServerRetro.BOUNE"><code class="docutils literal notranslate"><span class="pre">ServerRetro.BOUNE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#src.utils.enums.ServerRetro.CRAIL"><code class="docutils literal notranslate"><span class="pre">ServerRetro.CRAIL</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#src.utils.enums.ServerRetro.ERATZ"><code class="docutils literal notranslate"><span class="pre">ServerRetro.ERATZ</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#src.utils.enums.ServerRetro.GALGARION"><code class="docutils literal notranslate"><span class="pre">ServerRetro.GALGARION</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#src.utils.enums.ServerRetro.HENUAL"><code class="docutils literal notranslate"><span class="pre">ServerRetro.HENUAL</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#src.utils.enums.ServerTouch"><code class="docutils literal notranslate"><span class="pre">ServerTouch</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#src.utils.enums.ServerTouch.BRUTAS"><code class="docutils literal notranslate"><span class="pre">ServerTouch.BRUTAS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#src.utils.enums.ServerTouch.DODGE"><code class="docutils literal notranslate"><span class="pre">ServerTouch.DODGE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#src.utils.enums.ServerTouch.GRANDAPAN"><code class="docutils literal notranslate"><span class="pre">ServerTouch.GRANDAPAN</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#src.utils.enums.ServerTouch.HERDEGRIZE"><code class="docutils literal notranslate"><span class="pre">ServerTouch.HERDEGRIZE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#src.utils.enums.ServerTouch.OSHIMO"><code class="docutils literal notranslate"><span class="pre">ServerTouch.OSHIMO</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#src.utils.enums.ServerTouch.TERRA_COGITA"><code class="docutils literal notranslate"><span class="pre">ServerTouch.TERRA_COGITA</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#src.utils.enums.Website"><code class="docutils literal notranslate"><span class="pre">Website</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#src.utils.enums.Website.D2GATE"><code class="docutils literal notranslate"><span class="pre">Website.D2GATE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#src.utils.enums.Website.FUN_SHOP"><code class="docutils literal notranslate"><span class="pre">Website.FUN_SHOP</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#src.utils.enums.Website.IG_PLAYS"><code class="docutils literal notranslate"><span class="pre">Website.IG_PLAYS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#src.utils.enums.Website.I_GAME_GOLD"><code class="docutils literal notranslate"><span class="pre">Website.I_GAME_GOLD</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#src.utils.enums.Website.KAMAS_FACILE"><code class="docutils literal notranslate"><span class="pre">Website.KAMAS_FACILE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#src.utils.enums.Website.LE_KAMAS"><code class="docutils literal notranslate"><span class="pre">Website.LE_KAMAS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#src.utils.enums.Website.MODE_MARCHAND"><code class="docutils literal notranslate"><span class="pre">Website.MODE_MARCHAND</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#src.utils.enums.Website.TRY_AND_JUDGE"><code class="docutils literal notranslate"><span class="pre">Website.TRY_AND_JUDGE</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#src.utils.graphs.BarGraph"><code class="docutils literal notranslate"><span class="pre">BarGraph</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#src.utils.graphs.BarGraph.add_average_values"><code class="docutils literal notranslate"><span class="pre">BarGraph.add_average_values()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#src.utils.graphs.BarGraph.add_price_annotations"><code class="docutils literal notranslate"><span class="pre">BarGraph.add_price_annotations()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#src.utils.graphs.BarGraph.create_bar_graph"><code class="docutils literal notranslate"><span class="pre">BarGraph.create_bar_graph()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#src.utils.graphs.BarGraph.create_links"><code class="docutils literal notranslate"><span class="pre">BarGraph.create_links()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#src.utils.graphs.BarGraph.update_layout"><code class="docutils literal notranslate"><span class="pre">BarGraph.update_layout()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#src.utils.graphs.LineGraph"><code class="docutils literal notranslate"><span class="pre">LineGraph</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#src.utils.graphs.LineGraph.create_h_line"><code class="docutils literal notranslate"><span class="pre">LineGraph.create_h_line()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#src.utils.graphs.LineGraph.create_line_graph"><code class="docutils literal notranslate"><span class="pre">LineGraph.create_line_graph()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#src.utils.graphs.LineGraph.create_metrics"><code class="docutils literal notranslate"><span class="pre">LineGraph.create_metrics()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#src.utils.graphs.LineGraph.update_layout"><code class="docutils literal notranslate"><span class="pre">LineGraph.update_layout()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#src.utils.graphs.create_graphs"><code class="docutils literal notranslate"><span class="pre">create_graphs()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#src.utils.tools.get_offset_time_zone"><code class="docutils literal notranslate"><span class="pre">get_offset_time_zone()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#src.utils.tools.logger_config"><code class="docutils literal notranslate"><span class="pre">logger_config()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#src.utils.scraping.scraping.get_current_kamas_value"><code class="docutils literal notranslate"><span class="pre">get_current_kamas_value()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#src.utils.scraping.scraping.get_kamas_value_from_websites_safully"><code class="docutils literal notranslate"><span class="pre">get_kamas_value_from_websites_safully()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#src.utils.scraping.scraping.get_scope_kamas_value"><code class="docutils literal notranslate"><span class="pre">get_scope_kamas_value()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#src.utils.scraping.scraping.get_two_last_kamas_value"><code class="docutils literal notranslate"><span class="pre">get_two_last_kamas_value()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#src.utils.scraping.scraping.get_yesterday_kamas_value"><code class="docutils literal notranslate"><span class="pre">get_yesterday_kamas_value()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#src.utils.scraping.scraping.schedule_scrapping"><code class="docutils literal notranslate"><span class="pre">schedule_scrapping()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#src.utils.scraping.websites.get_d_two_gateway_price"><code class="docutils literal notranslate"><span class="pre">get_d_two_gateway_price()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#src.utils.scraping.websites.get_kamas_from_i_game_gold"><code class="docutils literal notranslate"><span class="pre">get_kamas_from_i_game_gold()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#src.utils.scraping.websites.get_kamas_from_lekamas"><code class="docutils literal notranslate"><span class="pre">get_kamas_from_lekamas()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#src.utils.scraping.websites.get_kamas_from_try_and_judge"><code class="docutils literal notranslate"><span class="pre">get_kamas_from_try_and_judge()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#src.utils.scraping.websites.get_kamas_price_from_kamas_facile_endpoint"><code class="docutils literal notranslate"><span class="pre">get_kamas_price_from_kamas_facile_endpoint()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#src.utils.scraping.websites.get_kamas_price_from_mode_marchand"><code class="docutils literal notranslate"><span class="pre">get_kamas_price_from_mode_marchand()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Kamas Dashboard</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">utils</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/utils.rst.txt" rel="nofollow"> Afficher la source de la page</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-src.utils.backend">
+<span id="utils"></span><h1>utils<a class="headerlink" href="#module-src.utils.backend" title="Link to this heading"></a></h1>
+<p>Module for backend requests.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.utils.backend.Backend">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.utils.backend.</span></span><span class="sig-name descname"><span class="pre">Backend</span></span><a class="headerlink" href="#src.utils.backend.Backend" title="Link to this definition"></a></dt>
+<dd><p>Bases : <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>To make requests to the backend</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.utils.backend.Backend.backend_get_scope_kamas_value">
+<span class="sig-name descname"><span class="pre">backend_get_scope_kamas_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">server</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scope</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#src.utils.backend.Backend.backend_get_scope_kamas_value" title="Link to this definition"></a></dt>
+<dd><p>backend endpoint to get all kamas value</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>server</strong> (<em>str</em>) – the server name</p></li>
+<li><p><strong>scope</strong> (<em>str</em>) – the scope (day, week, month)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Lève<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>Exception</strong> – if the endpoint is not available</p>
+</dd>
+<dt class="field-odd">Renvoie<span class="colon">:</span></dt>
+<dd class="field-odd"><p>all kamas value</p>
+</dd>
+<dt class="field-even">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.utils.backend.Backend.backend_get_two_last_kamas_value">
+<span class="sig-name descname"><span class="pre">backend_get_two_last_kamas_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">server</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#src.utils.backend.Backend.backend_get_two_last_kamas_value" title="Link to this definition"></a></dt>
+<dd><p>backend endpoint to get the daily kamas value</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>server</strong> (<em>str</em>) – the server name</p>
+</dd>
+<dt class="field-even">Lève<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>Exception</strong> – if the endpoint is not available</p>
+</dd>
+<dt class="field-odd">Renvoie<span class="colon">:</span></dt>
+<dd class="field-odd"><p>the daily kamas value</p>
+</dd>
+<dt class="field-even">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.utils.backend.Backend.backend_get_yesterday_kamas_value">
+<span class="sig-name descname"><span class="pre">backend_get_yesterday_kamas_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">server</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#src.utils.backend.Backend.backend_get_yesterday_kamas_value" title="Link to this definition"></a></dt>
+<dd><p>backend endpoint to get the yesterday kamas value</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>server</strong> (<em>str</em>) – the server name</p>
+</dd>
+<dt class="field-even">Lève<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>Exception</strong> – if the endpoint is not available</p>
+</dd>
+<dt class="field-odd">Renvoie<span class="colon">:</span></dt>
+<dd class="field-odd"><p>the yesterday kamas value</p>
+</dd>
+<dt class="field-even">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.utils.backend.Backend.backend_post_daily_kamas_value">
+<span class="sig-name descname"><span class="pre">backend_post_daily_kamas_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mean</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">server</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.utils.backend.Backend.backend_post_daily_kamas_value" title="Link to this definition"></a></dt>
+<dd><p>backend endpoint to post the daily kamas value</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>values</strong> (<em>list</em>) – list of kamas value</p></li>
+<li><p><strong>mean</strong> (<em>float</em>) – mean of kamas value</p></li>
+<li><p><strong>max</strong> (<em>float</em>) – max of kamas value</p></li>
+<li><p><strong>min</strong> (<em>float</em>) – min of kamas value</p></li>
+<li><p><strong>server</strong> (<em>str</em>) – the server name</p></li>
+</ul>
+</dd>
+<dt class="field-even">Lève<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>Exception</strong> – if the endpoint is not available</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<p id="module-src.utils.enums">All enums used in the project are defined here</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.utils.enums.LineGraphScope">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.utils.enums.</span></span><span class="sig-name descname"><span class="pre">LineGraphScope</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qualname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.enums.LineGraphScope" title="Link to this definition"></a></dt>
+<dd><p>Bases : <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<p>Enum of the differents line graph scope</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.utils.enums.LineGraphScope.DAY">
+<span class="sig-name descname"><span class="pre">DAY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">5</span></em><a class="headerlink" href="#src.utils.enums.LineGraphScope.DAY" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.utils.enums.LineGraphScope.MONTH">
+<span class="sig-name descname"><span class="pre">MONTH</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></em><a class="headerlink" href="#src.utils.enums.LineGraphScope.MONTH" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.utils.enums.LineGraphScope.SIX_MONTHS">
+<span class="sig-name descname"><span class="pre">SIX_MONTHS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#src.utils.enums.LineGraphScope.SIX_MONTHS" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.utils.enums.LineGraphScope.THREE_MONTHS">
+<span class="sig-name descname"><span class="pre">THREE_MONTHS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#src.utils.enums.LineGraphScope.THREE_MONTHS" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.utils.enums.LineGraphScope.WEEK">
+<span class="sig-name descname"><span class="pre">WEEK</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4</span></em><a class="headerlink" href="#src.utils.enums.LineGraphScope.WEEK" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.utils.enums.LineGraphScope.YEAR">
+<span class="sig-name descname"><span class="pre">YEAR</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#src.utils.enums.LineGraphScope.YEAR" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="src.utils.enums.ServerClassic">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.utils.enums.</span></span><span class="sig-name descname"><span class="pre">ServerClassic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qualname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.enums.ServerClassic" title="Link to this definition"></a></dt>
+<dd><p>Bases : <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<p>Enum of the differents CLASSIC servers</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.utils.enums.ServerClassic.DRACONIROS">
+<span class="sig-name descname"><span class="pre">DRACONIROS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'draconiros'</span></em><a class="headerlink" href="#src.utils.enums.ServerClassic.DRACONIROS" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.utils.enums.ServerClassic.HELLMINA">
+<span class="sig-name descname"><span class="pre">HELLMINA</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'hellmina'</span></em><a class="headerlink" href="#src.utils.enums.ServerClassic.HELLMINA" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.utils.enums.ServerClassic.IMAGIRO">
+<span class="sig-name descname"><span class="pre">IMAGIRO</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'imagiro'</span></em><a class="headerlink" href="#src.utils.enums.ServerClassic.IMAGIRO" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.utils.enums.ServerClassic.OMBRE">
+<span class="sig-name descname"><span class="pre">OMBRE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'ombre'</span></em><a class="headerlink" href="#src.utils.enums.ServerClassic.OMBRE" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.utils.enums.ServerClassic.ORUKAM">
+<span class="sig-name descname"><span class="pre">ORUKAM</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'orukam'</span></em><a class="headerlink" href="#src.utils.enums.ServerClassic.ORUKAM" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.utils.enums.ServerClassic.TALKASHA">
+<span class="sig-name descname"><span class="pre">TALKASHA</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'talkasha'</span></em><a class="headerlink" href="#src.utils.enums.ServerClassic.TALKASHA" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.utils.enums.ServerClassic.TYLEZIA">
+<span class="sig-name descname"><span class="pre">TYLEZIA</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'tylezia'</span></em><a class="headerlink" href="#src.utils.enums.ServerClassic.TYLEZIA" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="src.utils.enums.ServerRetro">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.utils.enums.</span></span><span class="sig-name descname"><span class="pre">ServerRetro</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qualname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.enums.ServerRetro" title="Link to this definition"></a></dt>
+<dd><p>Bases : <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<p>Enum of the differents RETRO servers</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.utils.enums.ServerRetro.BOUNE">
+<span class="sig-name descname"><span class="pre">BOUNE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'boune'</span></em><a class="headerlink" href="#src.utils.enums.ServerRetro.BOUNE" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.utils.enums.ServerRetro.CRAIL">
+<span class="sig-name descname"><span class="pre">CRAIL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'crail'</span></em><a class="headerlink" href="#src.utils.enums.ServerRetro.CRAIL" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.utils.enums.ServerRetro.ERATZ">
+<span class="sig-name descname"><span class="pre">ERATZ</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'eratz'</span></em><a class="headerlink" href="#src.utils.enums.ServerRetro.ERATZ" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.utils.enums.ServerRetro.GALGARION">
+<span class="sig-name descname"><span class="pre">GALGARION</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'galgarion'</span></em><a class="headerlink" href="#src.utils.enums.ServerRetro.GALGARION" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.utils.enums.ServerRetro.HENUAL">
+<span class="sig-name descname"><span class="pre">HENUAL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'henual'</span></em><a class="headerlink" href="#src.utils.enums.ServerRetro.HENUAL" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="src.utils.enums.ServerTouch">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.utils.enums.</span></span><span class="sig-name descname"><span class="pre">ServerTouch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qualname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.enums.ServerTouch" title="Link to this definition"></a></dt>
+<dd><p>Bases : <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<p>Enum of the differents TOUCH servers</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.utils.enums.ServerTouch.BRUTAS">
+<span class="sig-name descname"><span class="pre">BRUTAS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'brutas'</span></em><a class="headerlink" href="#src.utils.enums.ServerTouch.BRUTAS" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.utils.enums.ServerTouch.DODGE">
+<span class="sig-name descname"><span class="pre">DODGE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'dodge'</span></em><a class="headerlink" href="#src.utils.enums.ServerTouch.DODGE" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.utils.enums.ServerTouch.GRANDAPAN">
+<span class="sig-name descname"><span class="pre">GRANDAPAN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'grandapan'</span></em><a class="headerlink" href="#src.utils.enums.ServerTouch.GRANDAPAN" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.utils.enums.ServerTouch.HERDEGRIZE">
+<span class="sig-name descname"><span class="pre">HERDEGRIZE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'herdegrize'</span></em><a class="headerlink" href="#src.utils.enums.ServerTouch.HERDEGRIZE" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.utils.enums.ServerTouch.OSHIMO">
+<span class="sig-name descname"><span class="pre">OSHIMO</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'oshimo'</span></em><a class="headerlink" href="#src.utils.enums.ServerTouch.OSHIMO" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.utils.enums.ServerTouch.TERRA_COGITA">
+<span class="sig-name descname"><span class="pre">TERRA_COGITA</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'terra-cogita'</span></em><a class="headerlink" href="#src.utils.enums.ServerTouch.TERRA_COGITA" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="src.utils.enums.Website">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.utils.enums.</span></span><span class="sig-name descname"><span class="pre">Website</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qualname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.enums.Website" title="Link to this definition"></a></dt>
+<dd><p>Bases : <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<p>Enum of the differents websites to scrap</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>Enum</strong> (<em>Enum</em>) – the enum class</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.utils.enums.Website.D2GATE">
+<span class="sig-name descname"><span class="pre">D2GATE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('D2gate',</span> <span class="pre">'https://fr.d2gate.net')</span></em><a class="headerlink" href="#src.utils.enums.Website.D2GATE" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.utils.enums.Website.FUN_SHOP">
+<span class="sig-name descname"><span class="pre">FUN_SHOP</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('Fun</span> <span class="pre">shop',</span> <span class="pre">'https://www.funshopes.com')</span></em><a class="headerlink" href="#src.utils.enums.Website.FUN_SHOP" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.utils.enums.Website.IG_PLAYS">
+<span class="sig-name descname"><span class="pre">IG_PLAYS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('Ig</span> <span class="pre">plays',</span> <span class="pre">'https://www.igplays.com')</span></em><a class="headerlink" href="#src.utils.enums.Website.IG_PLAYS" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.utils.enums.Website.I_GAME_GOLD">
+<span class="sig-name descname"><span class="pre">I_GAME_GOLD</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('I</span> <span class="pre">game</span> <span class="pre">gold',</span> <span class="pre">'https://www.igamegold.com')</span></em><a class="headerlink" href="#src.utils.enums.Website.I_GAME_GOLD" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.utils.enums.Website.KAMAS_FACILE">
+<span class="sig-name descname"><span class="pre">KAMAS_FACILE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('Kamas</span> <span class="pre">facile',</span> <span class="pre">'https://www.kamasfacile.com')</span></em><a class="headerlink" href="#src.utils.enums.Website.KAMAS_FACILE" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.utils.enums.Website.LE_KAMAS">
+<span class="sig-name descname"><span class="pre">LE_KAMAS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('Le</span> <span class="pre">kamas',</span> <span class="pre">'https://www.lekamas.fr')</span></em><a class="headerlink" href="#src.utils.enums.Website.LE_KAMAS" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.utils.enums.Website.MODE_MARCHAND">
+<span class="sig-name descname"><span class="pre">MODE_MARCHAND</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('Mode</span> <span class="pre">marchand',</span> <span class="pre">'https://www.mode-marchand.net')</span></em><a class="headerlink" href="#src.utils.enums.Website.MODE_MARCHAND" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.utils.enums.Website.TRY_AND_JUDGE">
+<span class="sig-name descname"><span class="pre">TRY_AND_JUDGE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('Try</span> <span class="pre">and</span> <span class="pre">judge',</span> <span class="pre">'https://www.tryandjudge.com')</span></em><a class="headerlink" href="#src.utils.enums.Website.TRY_AND_JUDGE" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<p id="module-src.utils.global_variables">Module for global variables.</p>
+<p id="module-src.utils.graphs">Module for plotly graphs.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.utils.graphs.BarGraph">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.utils.graphs.</span></span><span class="sig-name descname"><span class="pre">BarGraph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.graphs.BarGraph" title="Link to this definition"></a></dt>
+<dd><p>Bases : <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Daily bar graph, with average value and deviation value</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.utils.graphs.BarGraph.add_average_values">
+<span class="sig-name descname"><span class="pre">add_average_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fig</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Figure</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">average_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.utils.graphs.BarGraph.add_average_values" title="Link to this definition"></a></dt>
+<dd><p>Add average values to the graph</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fig</strong> (<em>go.Figure</em>) – the figure</p></li>
+<li><p><strong>average_value</strong> (<em>float</em>) – the average value</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.utils.graphs.BarGraph.add_price_annotations">
+<span class="sig-name descname"><span class="pre">add_price_annotations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fig</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Figure</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.utils.graphs.BarGraph.add_price_annotations" title="Link to this definition"></a></dt>
+<dd><p>Add price annotations to the graph</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>fig</strong> (<em>go.Figure</em>) – the figure</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.utils.graphs.BarGraph.create_bar_graph">
+<span class="sig-name descname"><span class="pre">create_bar_graph</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">line</span></span></span><a class="headerlink" href="#src.utils.graphs.BarGraph.create_bar_graph" title="Link to this definition"></a></dt>
+<dd><p>Create a daily graph
+:returns: the daily graph
+:rtype: px.line</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.utils.graphs.BarGraph.create_links">
+<span class="sig-name descname"><span class="pre">create_links</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.utils.graphs.BarGraph.create_links" title="Link to this definition"></a></dt>
+<dd><p>Create links for the graph</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.utils.graphs.BarGraph.update_layout">
+<span class="sig-name descname"><span class="pre">update_layout</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fig</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Figure</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">average_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.utils.graphs.BarGraph.update_layout" title="Link to this definition"></a></dt>
+<dd><p>Update the layout of the graph</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fig</strong> (<em>go.Figure</em>) – the figure</p></li>
+<li><p><strong>average_value</strong> (<em>float</em>) – the average value</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="src.utils.graphs.LineGraph">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.utils.graphs.</span></span><span class="sig-name descname"><span class="pre">LineGraph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_avg_values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_min_values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.graphs.LineGraph" title="Link to this definition"></a></dt>
+<dd><p>Bases : <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Line graph, with average value and deviation value</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.utils.graphs.LineGraph.create_h_line">
+<span class="sig-name descname"><span class="pre">create_h_line</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fig</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Figure</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.utils.graphs.LineGraph.create_h_line" title="Link to this definition"></a></dt>
+<dd><p>Create a horizontal line</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fig</strong> (<em>go.Figure</em>) – the figure</p></li>
+<li><p><strong>value</strong> (<em>float</em>) – the value of the line</p></li>
+<li><p><strong>label</strong> (<em>str</em>) – the label of the line</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.utils.graphs.LineGraph.create_line_graph">
+<span class="sig-name descname"><span class="pre">create_line_graph</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">line</span></span></span><a class="headerlink" href="#src.utils.graphs.LineGraph.create_line_graph" title="Link to this definition"></a></dt>
+<dd><p>Create a line graph</p>
+<dl class="field-list simple">
+<dt class="field-odd">Renvoie<span class="colon">:</span></dt>
+<dd class="field-odd"><p>the line graph</p>
+</dd>
+<dt class="field-even">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-even"><p>px.line</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.utils.graphs.LineGraph.create_metrics">
+<span class="sig-name descname"><span class="pre">create_metrics</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.utils.graphs.LineGraph.create_metrics" title="Link to this definition"></a></dt>
+<dd><p>Add average values to the graph</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>fig</strong> (<em>go.Figure</em>) – the figure</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.utils.graphs.LineGraph.update_layout">
+<span class="sig-name descname"><span class="pre">update_layout</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fig</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Figure</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.utils.graphs.LineGraph.update_layout" title="Link to this definition"></a></dt>
+<dd><p>Update the layout of the graph</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>fig</strong> (<em>go.Figure</em>) – the figure</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.utils.graphs.create_graphs">
+<span class="sig-prename descclassname"><span class="pre">src.utils.graphs.</span></span><span class="sig-name descname"><span class="pre">create_graphs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">last_day_kamas_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="headerlink" href="#src.utils.graphs.create_graphs" title="Link to this definition"></a></dt>
+<dd><p>return all the graph for the server</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>last_day_kamas_dict</strong> (<em>dict</em>) – dict of the day kamas value</p>
+</dd>
+<dt class="field-even">Renvoie<span class="colon">:</span></dt>
+<dd class="field-even"><p>all the graph for the server</p>
+</dd>
+<dt class="field-odd">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p id="module-src.utils.tools">Utils functions</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.utils.tools.get_offset_time_zone">
+<span class="sig-prename descclassname"><span class="pre">src.utils.tools.</span></span><span class="sig-name descname"><span class="pre">get_offset_time_zone</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">timedelta</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#src.utils.tools.get_offset_time_zone" title="Link to this definition"></a></dt>
+<dd><p>Get the offset of the local timezone</p>
+<dl class="field-list simple">
+<dt class="field-odd">Renvoie<span class="colon">:</span></dt>
+<dd class="field-odd"><p>the offset of the local timezone</p>
+</dd>
+<dt class="field-even">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-even"><p>datetime.timedelta | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.utils.tools.logger_config">
+<span class="sig-prename descclassname"><span class="pre">src.utils.tools.</span></span><span class="sig-name descname"><span class="pre">logger_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">20</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.utils.tools.logger_config" title="Link to this definition"></a></dt>
+<dd><p>Configure the logger</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>level</strong> (<em>str</em>) – level of the logger</p>
+</dd>
+<dt class="field-even">Renvoie<span class="colon">:</span></dt>
+<dd class="field-even"><p>the configured logger</p>
+</dd>
+<dt class="field-odd">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-odd"><p>logging.Logger</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p id="module-src.utils.scraping.scraping">Main module for scraping functions.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.utils.scraping.scraping.get_current_kamas_value">
+<span class="sig-prename descclassname"><span class="pre">src.utils.scraping.scraping.</span></span><span class="sig-name descname"><span class="pre">get_current_kamas_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">server</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.utils.scraping.scraping.get_current_kamas_value" title="Link to this definition"></a></dt>
+<dd><p>Get the current kamas value</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>server</strong> (<em>str</em>) – the server name</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.utils.scraping.scraping.get_kamas_value_from_websites_safully">
+<span class="sig-prename descclassname"><span class="pre">src.utils.scraping.scraping.</span></span><span class="sig-name descname"><span class="pre">get_kamas_value_from_websites_safully</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kamas_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">callback</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">server</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.utils.scraping.scraping.get_kamas_value_from_websites_safully" title="Link to this definition"></a></dt>
+<dd><p>Get the kamas value from websites safully with exception handling</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>kamas_dict</strong> (<em>dict</em>) – the kamas dict</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – the website name</p></li>
+<li><p><strong>callback</strong> (<em>Callable</em>) – the callback function</p></li>
+<li><p><strong>server</strong> (<em>str</em>) – the server name</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.utils.scraping.scraping.get_scope_kamas_value">
+<span class="sig-prename descclassname"><span class="pre">src.utils.scraping.scraping.</span></span><span class="sig-name descname"><span class="pre">get_scope_kamas_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">server</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scope</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#src.utils.scraping.scraping.get_scope_kamas_value" title="Link to this definition"></a></dt>
+<dd><p>Get all kamas value</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>server</strong> (<em>str</em>) – the server name</p>
+</dd>
+<dt class="field-even">Renvoie<span class="colon">:</span></dt>
+<dd class="field-even"><p>all kamas value</p>
+</dd>
+<dt class="field-odd">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.utils.scraping.scraping.get_two_last_kamas_value">
+<span class="sig-prename descclassname"><span class="pre">src.utils.scraping.scraping.</span></span><span class="sig-name descname"><span class="pre">get_two_last_kamas_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">server</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#src.utils.scraping.scraping.get_two_last_kamas_value" title="Link to this definition"></a></dt>
+<dd><p>Get the daily kamas value</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>server</strong> (<em>str</em>) – the server name</p>
+</dd>
+<dt class="field-even">Renvoie<span class="colon">:</span></dt>
+<dd class="field-even"><p>the daily kamas value</p>
+</dd>
+<dt class="field-odd">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.utils.scraping.scraping.get_yesterday_kamas_value">
+<span class="sig-prename descclassname"><span class="pre">src.utils.scraping.scraping.</span></span><span class="sig-name descname"><span class="pre">get_yesterday_kamas_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">server</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#src.utils.scraping.scraping.get_yesterday_kamas_value" title="Link to this definition"></a></dt>
+<dd><p>Get the yesterday kamas value</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>server</strong> (<em>str</em>) – the server name</p>
+</dd>
+<dt class="field-even">Renvoie<span class="colon">:</span></dt>
+<dd class="field-even"><p>the yesterday kamas value</p>
+</dd>
+<dt class="field-odd">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.utils.scraping.scraping.schedule_scrapping">
+<span class="sig-prename descclassname"><span class="pre">src.utils.scraping.scraping.</span></span><span class="sig-name descname"><span class="pre">schedule_scrapping</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.utils.scraping.scraping.schedule_scrapping" title="Link to this definition"></a></dt>
+<dd><p>Schedule the scrapping of the kamas values</p>
+</dd></dl>
+
+<p id="module-src.utils.scraping.websites">Functions to scrap kamas price from differents websites</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.utils.scraping.websites.get_d_two_gateway_price">
+<span class="sig-prename descclassname"><span class="pre">src.utils.scraping.websites.</span></span><span class="sig-name descname"><span class="pre">get_d_two_gateway_price</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">server</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#src.utils.scraping.websites.get_d_two_gateway_price" title="Link to this definition"></a></dt>
+<dd><p>Get the kamas price from D2 gateway</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>server</strong> (<em>str</em>) – the server name</p>
+</dd>
+<dt class="field-even">Lève<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>Exception</strong> – if the endpoint is not available</p>
+</dd>
+<dt class="field-odd">Renvoie<span class="colon">:</span></dt>
+<dd class="field-odd"><p>the kamas price</p>
+</dd>
+<dt class="field-even">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.utils.scraping.websites.get_kamas_from_i_game_gold">
+<span class="sig-prename descclassname"><span class="pre">src.utils.scraping.websites.</span></span><span class="sig-name descname"><span class="pre">get_kamas_from_i_game_gold</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">server</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#src.utils.scraping.websites.get_kamas_from_i_game_gold" title="Link to this definition"></a></dt>
+<dd><p>Get the price of 1M of kamas from iGameGold</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>server</strong> (<em>str</em>) – The server name</p>
+</dd>
+<dt class="field-even">Renvoie<span class="colon">:</span></dt>
+<dd class="field-even"><p>The price of 1M of kamas</p>
+</dd>
+<dt class="field-odd">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.utils.scraping.websites.get_kamas_from_lekamas">
+<span class="sig-prename descclassname"><span class="pre">src.utils.scraping.websites.</span></span><span class="sig-name descname"><span class="pre">get_kamas_from_lekamas</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">server</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#src.utils.scraping.websites.get_kamas_from_lekamas" title="Link to this definition"></a></dt>
+<dd><p>Get the kamas price from lekamas</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>server</strong> (<em>str</em>) – the server name</p>
+</dd>
+<dt class="field-even">Lève<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – if the server is not found</p>
+</dd>
+<dt class="field-odd">Renvoie<span class="colon">:</span></dt>
+<dd class="field-odd"><p>the kamas price</p>
+</dd>
+<dt class="field-even">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.utils.scraping.websites.get_kamas_from_try_and_judge">
+<span class="sig-prename descclassname"><span class="pre">src.utils.scraping.websites.</span></span><span class="sig-name descname"><span class="pre">get_kamas_from_try_and_judge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">server</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#src.utils.scraping.websites.get_kamas_from_try_and_judge" title="Link to this definition"></a></dt>
+<dd><p>Get the kamas price from try and judge</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>server</strong> (<em>str</em>) – the server name</p>
+</dd>
+<dt class="field-even">Lève<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>Exception</strong> – if the endpoint is not available</p></li>
+<li><p><strong>Exception</strong> – if the server is not found</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Renvoie<span class="colon">:</span></dt>
+<dd class="field-odd"><p>the kamas price</p>
+</dd>
+<dt class="field-even">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.utils.scraping.websites.get_kamas_price_from_kamas_facile_endpoint">
+<span class="sig-prename descclassname"><span class="pre">src.utils.scraping.websites.</span></span><span class="sig-name descname"><span class="pre">get_kamas_price_from_kamas_facile_endpoint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">server</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#src.utils.scraping.websites.get_kamas_price_from_kamas_facile_endpoint" title="Link to this definition"></a></dt>
+<dd><p>Get the kamas price from kamas facile endpoint</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>server</strong> (<em>str</em>) – the server name</p>
+</dd>
+<dt class="field-even">Lève<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>Exception</strong> – if the endpoint is not available</p>
+</dd>
+<dt class="field-odd">Renvoie<span class="colon">:</span></dt>
+<dd class="field-odd"><p>the kamas price</p>
+</dd>
+<dt class="field-even">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.utils.scraping.websites.get_kamas_price_from_mode_marchand">
+<span class="sig-prename descclassname"><span class="pre">src.utils.scraping.websites.</span></span><span class="sig-name descname"><span class="pre">get_kamas_price_from_mode_marchand</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">server</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#src.utils.scraping.websites.get_kamas_price_from_mode_marchand" title="Link to this definition"></a></dt>
+<dd><p>Get the kamas price from mode marchand</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>server</strong> (<em>str</em>) – the server name</p>
+</dd>
+<dt class="field-even">Lève<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>Exception</strong> – if the endpoint is not available</p></li>
+<li><p><strong>Exception</strong> – if the server is not found</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Renvoie<span class="colon">:</span></dt>
+<dd class="field-odd"><p>the kamas price</p>
+</dd>
+<dt class="field-even">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pied de page">
+        <a href="views.html" class="btn btn-neutral float-left" title="views" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Précédent</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Droits d'auteur 2024, RAOUL Clément.</p>
+  </div>
+
+  Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
+    fourni par <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
