@@ -56,6 +56,12 @@ make docker-build
 make docker-push
 ```
 
+# Create the documentation
+
+```bash
+make docs
+```
+
 
 
 
