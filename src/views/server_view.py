@@ -128,6 +128,7 @@ def left_metrics(
                                             id="external-link",
                                         ),
                                         href=website_link,
+                                        target="_blank",
                                     ),
                                 ],
                                 className="best-price-server",

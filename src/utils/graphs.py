@@ -75,12 +75,14 @@ class BarGraph:
         Create links for the graph
         """
         web_dict: Dict[str, float] = {}
+        style_link = "style='color:grey'"
+        target_link = "target='_blank'"
         for key, value in self.x_values.items():
             try:
                 key = Website[key.upper().replace(" ", "_")]
-                web_dict[
-                    f"<a href='{key.value[1]}' style='color:grey'>{key.value[0]}</a>"
-                ] = value
+                start_link = f"<a href='{key.value[1]}'"
+                end_link = f">{key.value[0]}</a>"
+                web_dict[f"{start_link} {style_link} {target_link} {end_link}"] = value
             except KeyError:
                 web_dict[key] = value
 
