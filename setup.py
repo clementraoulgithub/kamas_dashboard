@@ -20,10 +20,14 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module to generate wheel"""
 
 from setuptools import find_packages, setup
+
+from src import VERSION
 
 setup(
     name="kdashboard",
     packages=find_packages(),
+    version=VERSION,
 )

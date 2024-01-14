@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="fr" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>controllers &mdash; Documentation Kamas Dashboard 0.0.1</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=5cd26065"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/translations.js?v=d99ca74e"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Recherche" href="search.html" />
+    <link rel="next" title="models" href="models.html" />
+    <link rel="prev" title="Welcome to Kamas Dashboard’s documentation!" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Kamas Dashboard
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Rechercher docs" aria-label="Rechercher docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">controllers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#src.controllers.graph_line_controller.create_div_metrics"><code class="docutils literal notranslate"><span class="pre">create_div_metrics()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#src.controllers.graph_line_controller.graph_line_controller"><code class="docutils literal notranslate"><span class="pre">graph_line_controller()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#src.controllers.routers_controller.routers"><code class="docutils literal notranslate"><span class="pre">routers()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#src.controllers.routers_controller.set_server"><code class="docutils literal notranslate"><span class="pre">set_server()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#src.controllers.servers_controller.calculate_metrics"><code class="docutils literal notranslate"><span class="pre">calculate_metrics()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#src.controllers.servers_controller.get_best_price_server"><code class="docutils literal notranslate"><span class="pre">get_best_price_server()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#src.controllers.servers_controller.server"><code class="docutils literal notranslate"><span class="pre">server()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#src.controllers.top_menu_buttons_controller.toggle"><code class="docutils literal notranslate"><span class="pre">toggle()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#src.controllers.top_menu_buttons_controller.toggle_menu_dofus_classic"><code class="docutils literal notranslate"><span class="pre">toggle_menu_dofus_classic()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#src.controllers.top_menu_buttons_controller.toggle_menu_dofus_retro"><code class="docutils literal notranslate"><span class="pre">toggle_menu_dofus_retro()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#src.controllers.top_menu_buttons_controller.toggle_menu_dofus_touch"><code class="docutils literal notranslate"><span class="pre">toggle_menu_dofus_touch()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="models.html">models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="views.html">views</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html">utils</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Kamas Dashboard</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">controllers</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/controllers.rst.txt" rel="nofollow"> Afficher la source de la page</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="controllers">
+<h1>controllers<a class="headerlink" href="#controllers" title="Link to this heading"></a></h1>
+<p id="module-src.controllers.graph_line_controller">Controller for the line graph.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.controllers.graph_line_controller.create_div_metrics">
+<span class="sig-prename descclassname"><span class="pre">src.controllers.graph_line_controller.</span></span><span class="sig-name descname"><span class="pre">create_div_metrics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metric_lst</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Div</span></span></span><a class="headerlink" href="#src.controllers.graph_line_controller.create_div_metrics" title="Link to this definition"></a></dt>
+<dd><p>Create indivual div for each metric.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>metric_lst</strong> (<em>List</em><em>[</em><em>dict</em><em>]</em>) – each dict contains the metrics</p>
+</dd>
+<dt class="field-even">Renvoie<span class="colon">:</span></dt>
+<dd class="field-even"><p>the div containing the metrics</p>
+</dd>
+<dt class="field-odd">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dash.html.Div</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.controllers.graph_line_controller.graph_line_controller">
+<span class="sig-prename descclassname"><span class="pre">src.controllers.graph_line_controller.</span></span><span class="sig-name descname"><span class="pre">graph_line_controller</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.controllers.graph_line_controller.graph_line_controller" title="Link to this definition"></a></dt>
+<dd><p>Controller for the line graph.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>int</em>) – the value of the slider</p>
+</dd>
+<dt class="field-even">Renvoie<span class="colon">:</span></dt>
+<dd class="field-even"><p>the line graph</p>
+</dd>
+<dt class="field-odd">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-odd"><p>px.line</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p id="module-src.controllers.routers_controller">Routers controller module.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.controllers.routers_controller.routers">
+<span class="sig-prename descclassname"><span class="pre">src.controllers.routers_controller.</span></span><span class="sig-name descname"><span class="pre">routers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pathname</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Div</span></span></span><a class="headerlink" href="#src.controllers.routers_controller.routers" title="Link to this definition"></a></dt>
+<dd><p>Route the url to the correct server</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>pathname</strong> (<em>str</em>) – the url pathname</p>
+</dd>
+<dt class="field-even">Renvoie<span class="colon">:</span></dt>
+<dd class="field-even"><p>the html.Div for the correct server</p>
+</dd>
+<dt class="field-odd">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dash.html.Div</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.controllers.routers_controller.set_server">
+<span class="sig-prename descclassname"><span class="pre">src.controllers.routers_controller.</span></span><span class="sig-name descname"><span class="pre">set_server</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">server_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Div</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#src.controllers.routers_controller.set_server" title="Link to this definition"></a></dt>
+<dd><p>Set the current server name</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>server_name</strong> (<em>str</em>) – the server name</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p id="module-src.controllers.servers_controller">Server controller</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.controllers.servers_controller.calculate_metrics">
+<span class="sig-prename descclassname"><span class="pre">src.controllers.servers_controller.</span></span><span class="sig-name descname"><span class="pre">calculate_metrics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">last_day_kamas_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">before_last_day_kamas_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yesterday_kamas_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="headerlink" href="#src.controllers.servers_controller.calculate_metrics" title="Link to this definition"></a></dt>
+<dd><p>Calculate the metrics</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>last_day_kamas_dict</strong> (<em>dict</em>) – dictionnary of the last value of the day</p></li>
+<li><p><strong>before_last_day_kamas_dict</strong> (<em>dict</em>) – dictionnary of the before last value of the day</p></li>
+<li><p><strong>yesterday_kamas_dict</strong> (<em>dict</em>) – dictionnary of the yesterday kamas</p></li>
+</ul>
+</dd>
+<dt class="field-even">Renvoie<span class="colon">:</span></dt>
+<dd class="field-even"><p>metrics</p>
+</dd>
+<dt class="field-odd">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.controllers.servers_controller.get_best_price_server">
+<span class="sig-prename descclassname"><span class="pre">src.controllers.servers_controller.</span></span><span class="sig-name descname"><span class="pre">get_best_price_server</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">day_kamas_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">best_price</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="headerlink" href="#src.controllers.servers_controller.get_best_price_server" title="Link to this definition"></a></dt>
+<dd><p>Return the best price server name and link</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>day_kamas_dict</strong> (<em>dict</em>) – dictionnary of the day kamas</p></li>
+<li><p><strong>best_price</strong> (<em>float</em>) – best price</p></li>
+</ul>
+</dd>
+<dt class="field-even">Renvoie<span class="colon">:</span></dt>
+<dd class="field-even"><p>best price server name and link</p>
+</dd>
+<dt class="field-odd">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.controllers.servers_controller.server">
+<span class="sig-prename descclassname"><span class="pre">src.controllers.servers_controller.</span></span><span class="sig-name descname"><span class="pre">server</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Div</span></span></span><a class="headerlink" href="#src.controllers.servers_controller.server" title="Link to this definition"></a></dt>
+<dd><p>return the html.Div for server</p>
+<dl class="field-list simple">
+<dt class="field-odd">Renvoie<span class="colon">:</span></dt>
+<dd class="field-odd"><p>the html.Div for the boune server</p>
+</dd>
+<dt class="field-even">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-even"><p>html.Div</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p id="module-src.controllers.top_menu_buttons_controller">Module for buttons controlle of the top menu.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.controllers.top_menu_buttons_controller.toggle">
+<span class="sig-prename descclassname"><span class="pre">src.controllers.top_menu_buttons_controller.</span></span><span class="sig-name descname"><span class="pre">toggle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_clicks</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">style</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#src.controllers.top_menu_buttons_controller.toggle" title="Link to this definition"></a></dt>
+<dd><p>Toggle the display of the top menu.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_clicks</strong> (<em>int</em>) – number of clicks</p></li>
+<li><p><strong>style</strong> (<em>dict</em>) – style of the top menu</p></li>
+</ul>
+</dd>
+<dt class="field-even">Renvoie<span class="colon">:</span></dt>
+<dd class="field-even"><p>the style of the top menu</p>
+</dd>
+<dt class="field-odd">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple[dict[str, str]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.controllers.top_menu_buttons_controller.toggle_menu_dofus_classic">
+<span class="sig-prename descclassname"><span class="pre">src.controllers.top_menu_buttons_controller.</span></span><span class="sig-name descname"><span class="pre">toggle_menu_dofus_classic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_clicks</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">style</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#src.controllers.top_menu_buttons_controller.toggle_menu_dofus_classic" title="Link to this definition"></a></dt>
+<dd><p>Toggle the display of the top menu.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_clicks</strong> (<em>int</em>) – number of clicks</p></li>
+<li><p><strong>style</strong> (<em>dict</em>) – style of the top menu</p></li>
+</ul>
+</dd>
+<dt class="field-even">Renvoie<span class="colon">:</span></dt>
+<dd class="field-even"><p>the style of the top menu</p>
+</dd>
+<dt class="field-odd">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple[dict[str, str]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.controllers.top_menu_buttons_controller.toggle_menu_dofus_retro">
+<span class="sig-prename descclassname"><span class="pre">src.controllers.top_menu_buttons_controller.</span></span><span class="sig-name descname"><span class="pre">toggle_menu_dofus_retro</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_clicks</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">style</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#src.controllers.top_menu_buttons_controller.toggle_menu_dofus_retro" title="Link to this definition"></a></dt>
+<dd><p>Toggle the display of the top menu.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_clicks</strong> (<em>int</em>) – number of clicks</p></li>
+<li><p><strong>style</strong> (<em>dict</em>) – style of the top menu</p></li>
+</ul>
+</dd>
+<dt class="field-even">Renvoie<span class="colon">:</span></dt>
+<dd class="field-even"><p>the style of the top menu</p>
+</dd>
+<dt class="field-odd">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple[dict[str, str]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.controllers.top_menu_buttons_controller.toggle_menu_dofus_touch">
+<span class="sig-prename descclassname"><span class="pre">src.controllers.top_menu_buttons_controller.</span></span><span class="sig-name descname"><span class="pre">toggle_menu_dofus_touch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_clicks</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">style</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#src.controllers.top_menu_buttons_controller.toggle_menu_dofus_touch" title="Link to this definition"></a></dt>
+<dd><p>Toggle the display of the top menu.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_clicks</strong> (<em>int</em>) – number of clicks</p></li>
+<li><p><strong>style</strong> (<em>dict</em>) – style of the top menu</p></li>
+</ul>
+</dd>
+<dt class="field-even">Renvoie<span class="colon">:</span></dt>
+<dd class="field-even"><p>the style of the top menu</p>
+</dd>
+<dt class="field-odd">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple[dict[str, str]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pied de page">
+        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to Kamas Dashboard’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Précédent</a>
+        <a href="models.html" class="btn btn-neutral float-right" title="models" accesskey="n" rel="next">Suivant <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Droits d'auteur 2024, RAOUL Clément.</p>
+  </div>
+
+  Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
+    fourni par <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

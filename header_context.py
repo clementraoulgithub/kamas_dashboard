@@ -21,15 +21,25 @@
 # SOFTWARE.
 #
 
+"""Module to add header (LICENSE) to all python files"""
 
 import os
 
-directory_path = "."
+DIRECTORY_PATH = "."
+
 
 # Read header from file
-with open("LICENSE", "r") as file:
-    header = file.readlines()
-    header = "".join(f"# {line}" for line in header)
+def read_header() -> str:
+    """
+    Read header from file
+
+    Returns:
+        str: header
+    """
+    with open("LICENSE", "r", encoding="utf-8") as file:
+        header = file.readlines()
+        header = "".join(f"# {line}" for line in header)
+    return header
 
 
 def header_present(file_path: str, header: str) -> bool:
@@ -43,25 +53,27 @@ def header_present(file_path: str, header: str) -> bool:
     Returns:
         bool: True if header is present, False otherwise
     """
-    with open(file_path, "r") as file:
+    with open(file_path, "r", encoding="utf-8") as file:
         content = file.read(len(header))
     return header.replace(" ", "") in content.replace(" ", "")
 
 
-def add_header() -> None:
+def add_header(header: str) -> None:
     """
     Add header to file
     """
-    for dirpath, _, filenames in os.walk(directory_path):
+    for dirpath, _, filenames in os.walk(DIRECTORY_PATH):
         for filename in filenames:
             if filename.endswith(".py"):
                 file_path = os.path.join(dirpath, filename)
 
                 if not header_present(file_path, header):
-                    with open(file_path, "r+") as file:
+                    with open(file_path, "r+", encoding="utf-8") as file:
                         content = file.read()
                         file.seek(0, 0)
                         file.write(header.rstrip("\r\n") + "\n\n" + content)
 
 
-add_header()
+if __name__ == "__main__":
+    HEADER = read_header()
+    add_header(HEADER)
