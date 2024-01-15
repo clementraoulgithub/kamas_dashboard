@@ -24,6 +24,7 @@
 """The Dash application."""
 
 import os
+
 import dash
 
 from src import NAME, PATH
