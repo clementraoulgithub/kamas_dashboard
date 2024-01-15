@@ -23,9 +23,10 @@
 
 """The Dash application."""
 
+import os
 import dash
 
-from src import NAME
+from src import NAME, PATH
 
 # This import are needed to make the app work
 # pylint: disable=unused-import
@@ -38,8 +39,14 @@ from src.controllers.top_menu_buttons_controller import (
 )
 from src.views.template_view import template_view
 
+css_files = os.listdir(os.path.join(PATH, "assets", "css"))
+external_css = [f for f in css_files if f.endswith(".css")]
+
 app = dash.Dash(
-    __name__, suppress_callback_exceptions=True, update_title="Chargement ..."
+    __name__,
+    suppress_callback_exceptions=True,
+    update_title="Chargement ...",
+    external_stylesheets=external_css,
 )
 app.title = NAME
 server = app.server
