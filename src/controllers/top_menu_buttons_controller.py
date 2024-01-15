@@ -44,6 +44,7 @@ def toggle(n_clicks: int, style: dict) -> tuple[dict[str, str]]:
                 "flex-direction": "column",
                 "position": "absolute",
                 "background-color": "white",
+                "border": "1px solid #F3F3F3",
             },
             {"display": "none"},
             {"display": "none"},
