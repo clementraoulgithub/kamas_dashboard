@@ -20,12 +20,12 @@ run-prod:
 
 docker-build: # Build the docker image for an amd64 architecture, and tag it for github container registry
 docker-build:
-	@docker build . --tag ghcr.io/clementraoulastek/kamasdashboard:latest --platform linux/amd64
+	@docker build . --tag ghcr.io/clementraoulgithub/kamasdashboard:latest --platform linux/amd64
 
 
 docker-push: # Push the docker image to github container registry
 docker-push:
-	@docker push ghcr.io/clementraoulastek/kamasdashboard:latest
+	@docker push ghcr.io/clementraoulgithub/kamasdashboard:latest
 
 docs: # Create the documentation in html with sphinx
 docs:
