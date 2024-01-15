@@ -36,3 +36,5 @@ create-uml: # Create the uml diagram with pyreverse
 create-uml:
 	@mkdir -p doc/uml
 	@pyreverse -o png src -d doc/uml
+
+	
