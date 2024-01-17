@@ -31,6 +31,7 @@ from src.utils import global_variables
 from src.utils.enums import LineGraphScope
 from src.utils.graphs import LineGraph
 from src.utils.scraping.scraping import get_scope_kamas_value
+from src.views.periodic_price_view.periodic_metrics_view import PeriodicMetricsView
 
 
 def create_div_metrics(metric_lst: List[dict]) -> dash.html.Div:
@@ -42,43 +43,10 @@ def create_div_metrics(metric_lst: List[dict]) -> dash.html.Div:
     Returns:
         dash.html.Div: the div containing the metrics
     """
-    return_lst: List[dash.html.Div] = []
-    for metric_dict in metric_lst:
-        average_div = dash.html.Div(
-            [
-                dash.html.Div(
-                    [
-                        dash.html.H1(metric_dict["average_value"]),
-                        dash.html.P("Moyenne"),
-                    ],
-                    className="graph-info",
-                ),
-                dash.html.Div(
-                    [
-                        dash.html.H1(metric_dict["deviation"]),
-                        dash.html.P("Ecart-type"),
-                    ],
-                    className="graph-info",
-                ),
-                dash.html.Div(
-                    [
-                        dash.html.H1(metric_dict["deviation_related_to_average"]),
-                        dash.html.P("Ecart-type relatif"),
-                    ],
-                    className="graph-info",
-                ),
-                dash.html.Div(
-                    [
-                        dash.html.H1(metric_dict["increase_rate"]),
-                        dash.html.P("Taux de croissance"),
-                    ],
-                    className="graph-info-right",
-                ),
-            ],
-            className="graph-info-avg",
-        )
-        return_lst.append(average_div)
-
+    return_lst: List[dash.html.Div] = [
+        PeriodicMetricsView.create_metrics_view(metric_dict)
+        for metric_dict in metric_lst
+    ]
     return return_lst
 
 
@@ -119,14 +87,6 @@ def graph_line_controller(value: int):
     graph, metrics = line_graph.create_line_graph()
     div_lst = create_div_metrics(metrics)
 
-    metrics = dash.html.Div(
-        [
-            dash.html.P("Prix moyen", className="graph-info-title"),
-            div_lst[0],
-            dash.html.P("Prix minimum", className="graph-info-title"),
-            div_lst[1],
-        ],
-        className="graph-info-container-period",
-    )
+    metrics = PeriodicMetricsView.create_metrics_container_view(div_lst)
 
     return graph, {"display": "flex"}, metrics

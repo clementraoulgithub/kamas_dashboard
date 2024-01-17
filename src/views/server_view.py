@@ -24,245 +24,11 @@
 """Return Server view."""
 
 import plotly.graph_objs as go
-from dash import dcc, html
+from dash import html
 
-
-def create_svg_metrics(
-    is_less_avg: bool | None, is_less_min: bool | None, evolution: float
-) -> tuple:
-    """
-    Return the icons img for the left metrics
-
-    Args:
-        is_less_avg (bool | None): is less than average
-        is_less_min (bool | None): is less than min
-        evolution (float): evolution
-
-    Returns:
-        tuple: the html.Div for the left metrics
-    """
-    if is_less_avg is not None:
-        avg_icon = html.Img(
-            src="/assets/svg/arrow-down.svg"
-            if is_less_avg
-            else "/assets/svg/arrow-up.svg",
-            className="svg",
-        )
-    else:
-        avg_icon = None
-
-    if is_less_min is not None:
-        min_icon = html.Img(
-            src="/assets/svg/arrow-down.svg"
-            if is_less_min
-            else "/assets/svg/arrow-up.svg",
-            className="svg",
-        )
-    else:
-        min_icon = None
-
-    if evolution != 0:
-        evo_icon = html.Img(
-            src="/assets/svg/arrow-down.svg"
-            if evolution < 0
-            else "/assets/svg/arrow-up.svg",
-            className="svg",
-        )
-    else:
-        evo_icon = None
-
-    return avg_icon, min_icon, evo_icon
-
-
-# pylint: disable=too-many-arguments
-def left_metrics(
-    average: float,
-    mediane: float,
-    deviation: float,
-    deviation_related_to_average: str,
-    best_price: float,
-    best_price_server: str,
-    website_link: str,
-    is_less_avg: bool,
-    is_less_min: bool,
-    evolution: float,
-) -> html.Div:
-    """
-    Return the html.Div for the left metrics
-
-    Args:
-        average (float): average price
-        deviation (float): deviation price
-        best_price (float): best price
-        fig_gauge (go.Figure): the figure for the gauge
-
-    Returns:
-        html.Div: the html.Div for the left metrics
-    """
-    avg_icon, min_icon, evo_icon = create_svg_metrics(
-        is_less_avg, is_less_min, evolution
-    )
-    return html.Div(
-        [
-            html.Div(
-                [
-                    html.Div(
-                        [
-                            html.Div(
-                                [html.H1(f"{best_price}€"), min_icon],
-                                className="best-price-server",
-                            ),
-                            html.P("Meilleur prix"),
-                        ],
-                        className="graph-info",
-                    ),
-                    html.Div(
-                        [
-                            html.Div(
-                                [
-                                    html.H1(f"{best_price_server}"),
-                                    html.A(
-                                        html.Img(
-                                            src="/assets/svg/external-link.svg",
-                                            className="svg",
-                                            id="external-link",
-                                        ),
-                                        href=website_link,
-                                        target="_blank",
-                                    ),
-                                ],
-                                className="best-price-server",
-                            ),
-                            html.P("Vendeur le moins cher"),
-                        ],
-                        className="graph-info-right",
-                    ),
-                ],
-                className="graph-info-avg",
-            ),
-            html.Div(
-                [
-                    html.Div(
-                        [
-                            html.Div(
-                                [html.H1(f"{average}€"), avg_icon],
-                                className="best-price-server",
-                            ),
-                            html.P("Moyenne"),
-                        ],
-                        className="graph-info",
-                    ),
-                    html.Div(
-                        [
-                            html.H1(f"{mediane}€"),
-                            html.P("Médiane"),
-                        ],
-                        className="graph-info-right",
-                    ),
-                ],
-                className="graph-info-avg",
-            ),
-            html.Div(
-                [
-                    html.Div(
-                        [
-                            html.Div(
-                                [
-                                    html.H1(f"{deviation}€"),
-                                    html.P(deviation_related_to_average),
-                                ],
-                                className="deviation-related-to-average",
-                            ),
-                            html.P("Ecart-type"),
-                        ],
-                        className="graph-info",
-                    ),
-                    html.Div(
-                        [
-                            html.Div(
-                                [html.H1(f"{evolution}%"), evo_icon],
-                                className="best-price-server",
-                            ),
-                            html.P("Evolution journalière"),
-                        ],
-                        className="graph-info-right",
-                    ),
-                ],
-                className="graph-info-avg",
-            ),
-        ],
-        className="graph-info-container",
-    )
-
-
-def right_daily_graph(fig_day: go.Figure) -> html.Div:
-    """
-    Return the html.Div for the right daily graph
-
-    Args:
-        fig_day (go.Figure): the figure for the day
-
-    Returns:
-        html.Div: the html.Div for the right daily graph
-    """
-    return html.Div(
-        [
-            html.Div(
-                [
-                    dcc.Graph(
-                        figure=fig_day,
-                        config={
-                            "displayModeBar": False,
-                            "displaylogo": False,
-                        },
-                        id="graph-day",
-                    ),
-                ],
-                className="graph-day-container",
-            ),
-        ],
-        className="graphs-content",
-    )
-
-
-def bottom_line_graph() -> html.Div:
-    """
-    Return the html.Div for the bottom line graph
-
-    Returns:
-        html.Div: the html.Div for the bottom line graph
-    """
-    slider = dcc.Slider(
-        id="graph-slider",
-        min=0,
-        max=5,
-        step=1,
-        value=3,
-        marks={
-            0: "Cette Année",
-            1: "-6 mois",
-            2: "-3 mois",
-            3: "Ce mois",
-            4: "Cette semaine",
-            5: "Aujourd'hui",
-        },
-        vertical=False,
-    )
-
-    return html.Div(
-        [
-            slider,
-            dcc.Graph(
-                config={
-                    "displayModeBar": False,
-                    "displaylogo": False,
-                },
-                id="graph-line",
-                style={"display": "none"},
-            ),
-        ],
-        className="graph-line-container",
-    )
+from src.views.instant_price_view.instant_graph_view import InstantGraphView
+from src.views.instant_price_view.instant_metrics_view import InstantMetricsView
+from src.views.periodic_price_view.periodic_graph_view import PeriodicGraphView
 
 
 # pylint: disable=too-many-arguments
@@ -318,7 +84,7 @@ def server_view(
                     ),
                     html.Div(
                         [
-                            left_metrics(
+                            InstantMetricsView.create_instant_metrics_view(
                                 average,
                                 mediane,
                                 deviation,
@@ -330,7 +96,7 @@ def server_view(
                                 is_less_min,
                                 evolution,
                             ),
-                            right_daily_graph(fig_day),
+                            InstantGraphView.create_instant_graph_view(fig_day),
                         ],
                         className="graphs-container",
                     ),
@@ -351,7 +117,7 @@ def server_view(
                     html.Div(
                         id="period-metrics",
                     ),
-                    bottom_line_graph(),
+                    PeriodicGraphView.create_periodic_graph_view(),
                 ],
                 className="graph-main-content",
             ),

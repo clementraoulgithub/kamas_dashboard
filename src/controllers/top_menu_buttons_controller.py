@@ -38,14 +38,15 @@ def toggle(n_clicks: int, style: dict) -> tuple[dict[str, str]]:
         tuple[dict[str, str]]: the style of the top menu
     """
     if n_clicks and (style["display"] == "none"):
+        menu_style = {
+            "display": "flex",
+            "flex-direction": "column",
+            "position": "absolute",
+            "background-color": "white",
+            "border": "1px solid #F3F3F3",
+        }
         return (
-            {
-                "display": "flex",
-                "flex-direction": "column",
-                "position": "absolute",
-                "background-color": "white",
-                "border": "1px solid #F3F3F3",
-            },
+            menu_style,
             {"display": "none"},
             {"display": "none"},
         )
