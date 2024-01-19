@@ -37,6 +37,7 @@ def toggle(n_clicks: int, state: dict) -> tuple[dict[str, str]]:
     Returns:
         tuple[dict[str, str]]: the style of the top menu
     """
+    button_style_deactivated = {}
     if n_clicks and state["display"] == "none":
         menu_style = {
             "display": "flex",
@@ -48,12 +49,24 @@ def toggle(n_clicks: int, state: dict) -> tuple[dict[str, str]]:
             "borderBottom": "1px solid #F3F3F3",
             "padding": "5px",
         }
+        button_style_activated = {"borderBottom": "2px solid black"}
+
         return (
             menu_style,
             {"display": "none"},
             {"display": "none"},
+            button_style_activated,
+            button_style_deactivated,
+            button_style_deactivated,
         )
-    return {"display": "none"}, {"display": "none"}, {"display": "none"}
+    return (
+        {"display": "none"},
+        {"display": "none"},
+        {"display": "none"},
+        button_style_deactivated,
+        button_style_deactivated,
+        button_style_deactivated,
+    )
 
 
 @dash.callback(
@@ -61,6 +74,9 @@ def toggle(n_clicks: int, state: dict) -> tuple[dict[str, str]]:
         dash.Output("top-menu-retro", "style", allow_duplicate=True),
         dash.Output("top-menu-classic", "style", allow_duplicate=True),
         dash.Output("top-menu-touch", "style", allow_duplicate=True),
+        dash.Output("button-top-menu-retro", "style", allow_duplicate=True),
+        dash.Output("button-top-menu-classic", "style", allow_duplicate=True),
+        dash.Output("button-top-menu-touch", "style", allow_duplicate=True),
     ],
     [
         dash.Input("button-top-menu-retro", "n_clicks"),
@@ -87,6 +103,9 @@ def toggle_menu_dofus_retro(n_clicks: int, state: dict) -> tuple[dict[str, str]]
         dash.Output("top-menu-classic", "style", allow_duplicate=True),
         dash.Output("top-menu-retro", "style", allow_duplicate=True),
         dash.Output("top-menu-touch", "style", allow_duplicate=True),
+        dash.Output("button-top-menu-classic", "style", allow_duplicate=True),
+        dash.Output("button-top-menu-retro", "style", allow_duplicate=True),
+        dash.Output("button-top-menu-touch", "style", allow_duplicate=True),
     ],
     [
         dash.Input("button-top-menu-classic", "n_clicks"),
@@ -113,6 +132,9 @@ def toggle_menu_dofus_classic(n_clicks: int, state: dict) -> tuple[dict[str, str
         dash.Output("top-menu-touch", "style", allow_duplicate=True),
         dash.Output("top-menu-retro", "style", allow_duplicate=True),
         dash.Output("top-menu-classic", "style", allow_duplicate=True),
+        dash.Output("button-top-menu-touch", "style", allow_duplicate=True),
+        dash.Output("button-top-menu-retro", "style", allow_duplicate=True),
+        dash.Output("button-top-menu-classic", "style", allow_duplicate=True),
     ],
     [
         dash.Input("button-top-menu-touch", "n_clicks"),
