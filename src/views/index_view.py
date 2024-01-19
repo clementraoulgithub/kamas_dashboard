@@ -101,7 +101,4 @@ def index_view() -> tuple[html.Div, dict[str, str], dict[str, str]]:
             ],
             className="graph-main-content",
         ),
-        {"display": "none"},
-        {"display": "none"},
-        {"display": "none"},
     )

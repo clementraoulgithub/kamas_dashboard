@@ -74,7 +74,7 @@ def footer() -> dash.html.Footer:
     )
 
 
-def dofus_retro_menu() -> dash.html.Div:
+def dofus_retro_button() -> dash.html.Div:
     """
     return the dofus retro menu of the app
 
@@ -83,34 +83,61 @@ def dofus_retro_menu() -> dash.html.Div:
     """
     return dash.html.Div(
         dash.html.Div(
-            [
-                dash.html.Button(
-                    [
-                        dash.html.Img(
-                            src="/assets/svg/retro.svg",
-                            className="svg-button",
-                        ),
-                        "Dofus Retro",
-                    ],
-                    id="button-top-menu-retro",
-                    className="title-server",
-                ),
-                dash.html.Div(
-                    [
-                        dash.dcc.Link("Serveur Boune", href="/boune", className="link"),
-                        dash.dcc.Link("Serveur Crail", href="/crail", className="link"),
-                        dash.dcc.Link("Serveur Eratz", href="/eratz", className="link"),
-                        dash.dcc.Link(
-                            "Serveur Galgarion", href="/galgarion", className="link"
-                        ),
-                        dash.dcc.Link(
-                            "Serveur Henual", href="/henual", className="link"
-                        ),
-                    ],
-                    style={"display": "none"},
-                    id="top-menu-retro",
-                ),
-            ]
+            dash.html.Button(
+                [
+                    dash.html.Img(
+                        src="/assets/svg/retro.svg",
+                        className="svg-button",
+                    ),
+                    "Dofus Retro",
+                ],
+                id="button-top-menu-retro",
+                className="title-server",
+            ),
+        )
+    )
+
+
+def dofus_retro_menu() -> dash.html.Div:
+    """
+    return the dofus retro menu of the app
+
+    Returns:
+        dash.html.Div: the dofus retro menu of the app
+    """
+    return dash.html.Div(
+        [
+            dash.dcc.Link("Serveur Boune", href="/boune", className="link"),
+            dash.dcc.Link("Serveur Crail", href="/crail", className="link"),
+            dash.dcc.Link("Serveur Eratz", href="/eratz", className="link"),
+            dash.dcc.Link("Serveur Galgarion", href="/galgarion", className="link"),
+            dash.dcc.Link("Serveur Henual", href="/henual", className="link"),
+        ],
+        style={"display": "none"},
+        id="top-menu-retro",
+    )
+
+
+def dofus_classic_button() -> dash.html.Div:
+    """
+    return the dofus classic menu of the app
+
+    Returns:
+        dash.html.Div: the dofus retro menu of the app
+    """
+    return dash.html.Div(
+        dash.html.Div(
+            dash.html.Button(
+                [
+                    dash.html.Img(
+                        src="/assets/svg/classic.svg",
+                        className="svg-button",
+                    ),
+                    "Dofus 2",
+                ],
+                id="button-top-menu-classic",
+                className="title-server",
+            ),
         )
     )
 
@@ -120,53 +147,24 @@ def dofus_classic_menu() -> dash.html.Div:
     return the dofus classic menu of the app
 
     Returns:
-        dash.html.Div: the dofus retro menu of the app
+        dash.html.Div: the dofus classic menu of the app
     """
     return dash.html.Div(
-        dash.html.Div(
-            [
-                dash.html.Button(
-                    [
-                        dash.html.Img(
-                            src="/assets/svg/classic.svg",
-                            className="svg-button",
-                        ),
-                        "Dofus 2",
-                    ],
-                    id="button-top-menu-classic",
-                    className="title-server",
-                ),
-                dash.html.Div(
-                    [
-                        dash.dcc.Link(
-                            "Serveur Draconiros", href="/draconiros", className="link"
-                        ),
-                        dash.dcc.Link(
-                            "Serveur HellMina", href="/hellmina", className="link"
-                        ),
-                        dash.dcc.Link(
-                            "Serveur Imagiro", href="/imagiro", className="link"
-                        ),
-                        dash.dcc.Link("Serveur Ombre", href="/ombre", className="link"),
-                        dash.dcc.Link(
-                            "Serveur Orukam", href="/orukam", className="link"
-                        ),
-                        dash.dcc.Link(
-                            "Serveur Talkasha", href="/talkasha", className="link"
-                        ),
-                        dash.dcc.Link(
-                            "Serveur Tylezia", href="/tylezia", className="link"
-                        ),
-                    ],
-                    style={"display": "none"},
-                    id="top-menu-classic",
-                ),
-            ]
-        )
+        [
+            dash.dcc.Link("Serveur Draconiros", href="/draconiros", className="link"),
+            dash.dcc.Link("Serveur HellMina", href="/hellmina", className="link"),
+            dash.dcc.Link("Serveur Imagiro", href="/imagiro", className="link"),
+            dash.dcc.Link("Serveur Ombre", href="/ombre", className="link"),
+            dash.dcc.Link("Serveur Orukam", href="/orukam", className="link"),
+            dash.dcc.Link("Serveur Talkasha", href="/talkasha", className="link"),
+            dash.dcc.Link("Serveur Tylezia", href="/tylezia", className="link"),
+        ],
+        style={"display": "none"},
+        id="top-menu-classic",
     )
 
 
-def dofus_touch_menu() -> dash.html.Div:
+def dofus_touch_button() -> dash.html.Div:
     """
     return the dofus touch menu of the app
 
@@ -187,32 +185,33 @@ def dofus_touch_menu() -> dash.html.Div:
                     id="button-top-menu-touch",
                     className="title-server",
                 ),
-                dash.html.Div(
-                    [
-                        dash.dcc.Link(
-                            "Serveur Brutas", href="/brutas", className="link"
-                        ),
-                        dash.dcc.Link("Serveur Dodge", href="/dodge", className="link"),
-                        dash.dcc.Link(
-                            "Serveur Grandapan", href="/grandapan", className="link"
-                        ),
-                        dash.dcc.Link(
-                            "Serveur Herdegrize", href="/herdegrize", className="link"
-                        ),
-                        dash.dcc.Link(
-                            "Serveur Oshimo", href="/oshimo", className="link"
-                        ),
-                        dash.dcc.Link(
-                            "Serveur Terra Cogita",
-                            href="/terra-cogita",
-                            className="link",
-                        ),
-                    ],
-                    style={"display": "none"},
-                    id="top-menu-touch",
-                ),
             ]
         )
+    )
+
+
+def dofus_touch_menu() -> dash.html.Div:
+    """
+    return the dofus touch menu of the app
+
+    Returns:
+        dash.html.Div: the dofus touch menu of the app
+    """
+    return dash.html.Div(
+        [
+            dash.dcc.Link("Serveur Brutas", href="/brutas", className="link"),
+            dash.dcc.Link("Serveur Dodge", href="/dodge", className="link"),
+            dash.dcc.Link("Serveur Grandapan", href="/grandapan", className="link"),
+            dash.dcc.Link("Serveur Herdegrize", href="/herdegrize", className="link"),
+            dash.dcc.Link("Serveur Oshimo", href="/oshimo", className="link"),
+            dash.dcc.Link(
+                "Serveur Terra Cogita",
+                href="/terra-cogita",
+                className="link",
+            ),
+        ],
+        style={"display": "none"},
+        id="top-menu-touch",
     )
 
 
@@ -225,9 +224,8 @@ def top_menu() -> dash.html.Div:
 
     )
     """
-
     return dash.html.Div(
-        [dofus_retro_menu(), dofus_classic_menu(), dofus_touch_menu()],
+        [dofus_retro_button(), dofus_classic_button(), dofus_touch_button()],
         className="top-menu",
     )
 
@@ -245,6 +243,9 @@ def template_view() -> dash.html.Div:
             header(),
             dash.dcc.Location(id="url"),
             top_menu(),
+            dofus_retro_menu(),
+            dofus_classic_menu(),
+            dofus_touch_menu(),
             dash.html.Div(
                 children=[
                     content,

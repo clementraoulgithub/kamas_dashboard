@@ -34,7 +34,7 @@ from src.views.index_view import index_view
 
 def set_server(
     server_name: str,
-) -> tuple[dash.html.Div, dict[str, str], dict[str, str]]:
+) -> dash.html.Div:
     """
     Set the current server name
 
@@ -42,22 +42,12 @@ def set_server(
         server_name (str): the server name
     """
     global_variables.current_server_name = server_name
-    return (
-        server(server_name),
-        {"display": "none"},
-        {"display": "none"},
-        {"display": "none"},
-    )
+    return server(server_name)
 
 
 # pylint: disable=too-many-return-statements
 @dash.callback(
-    [
-        dash.Output("main-content", "children"),
-        dash.Output("top-menu-retro", "style", allow_duplicate=True),
-        dash.Output("top-menu-classic", "style", allow_duplicate=True),
-        dash.Output("top-menu-touch", "style", allow_duplicate=True),
-    ],
+    dash.Output("main-content", "children"),
     [dash.Input("url", "pathname")],
     prevent_initial_call=True,
 )
