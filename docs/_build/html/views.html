@@ -52,10 +52,6 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">views</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#src.views.error_view.error_view"><code class="docutils literal notranslate"><span class="pre">error_view()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#src.views.index_view.index_view"><code class="docutils literal notranslate"><span class="pre">index_view()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#src.views.server_view.bottom_line_graph"><code class="docutils literal notranslate"><span class="pre">bottom_line_graph()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#src.views.server_view.create_svg_metrics"><code class="docutils literal notranslate"><span class="pre">create_svg_metrics()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#src.views.server_view.left_metrics"><code class="docutils literal notranslate"><span class="pre">left_metrics()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#src.views.server_view.right_daily_graph"><code class="docutils literal notranslate"><span class="pre">right_daily_graph()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#src.views.server_view.server_view"><code class="docutils literal notranslate"><span class="pre">server_view()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#src.views.template_view.dofus_classic_menu"><code class="docutils literal notranslate"><span class="pre">dofus_classic_menu()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#src.views.template_view.dofus_retro_menu"><code class="docutils literal notranslate"><span class="pre">dofus_retro_menu()</span></code></a></li>
@@ -126,80 +122,6 @@
 </dd></dl>
 
 <p id="module-src.views.server_view">Return Server view.</p>
-<dl class="py function">
-<dt class="sig sig-object py" id="src.views.server_view.bottom_line_graph">
-<span class="sig-prename descclassname"><span class="pre">src.views.server_view.</span></span><span class="sig-name descname"><span class="pre">bottom_line_graph</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Div</span></span></span><a class="headerlink" href="#src.views.server_view.bottom_line_graph" title="Link to this definition"></a></dt>
-<dd><p>Return the html.Div for the bottom line graph</p>
-<dl class="field-list simple">
-<dt class="field-odd">Renvoie<span class="colon">:</span></dt>
-<dd class="field-odd"><p>the html.Div for the bottom line graph</p>
-</dd>
-<dt class="field-even">Type renvoyé<span class="colon">:</span></dt>
-<dd class="field-even"><p>html.Div</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="src.views.server_view.create_svg_metrics">
-<span class="sig-prename descclassname"><span class="pre">src.views.server_view.</span></span><span class="sig-name descname"><span class="pre">create_svg_metrics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">is_less_avg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_less_min</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">evolution</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="headerlink" href="#src.views.server_view.create_svg_metrics" title="Link to this definition"></a></dt>
-<dd><p>Return the icons img for the left metrics</p>
-<dl class="field-list simple">
-<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>is_less_avg</strong> (<em>bool</em><em> | </em><em>None</em>) – is less than average</p></li>
-<li><p><strong>is_less_min</strong> (<em>bool</em><em> | </em><em>None</em>) – is less than min</p></li>
-<li><p><strong>evolution</strong> (<em>float</em>) – evolution</p></li>
-</ul>
-</dd>
-<dt class="field-even">Renvoie<span class="colon">:</span></dt>
-<dd class="field-even"><p>the html.Div for the left metrics</p>
-</dd>
-<dt class="field-odd">Type renvoyé<span class="colon">:</span></dt>
-<dd class="field-odd"><p>tuple</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="src.views.server_view.left_metrics">
-<span class="sig-prename descclassname"><span class="pre">src.views.server_view.</span></span><span class="sig-name descname"><span class="pre">left_metrics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">average</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mediane</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deviation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deviation_related_to_average</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">best_price</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">best_price_server</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">website_link</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_less_avg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_less_min</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">evolution</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Div</span></span></span><a class="headerlink" href="#src.views.server_view.left_metrics" title="Link to this definition"></a></dt>
-<dd><p>Return the html.Div for the left metrics</p>
-<dl class="field-list simple">
-<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>average</strong> (<em>float</em>) – average price</p></li>
-<li><p><strong>deviation</strong> (<em>float</em>) – deviation price</p></li>
-<li><p><strong>best_price</strong> (<em>float</em>) – best price</p></li>
-<li><p><strong>fig_gauge</strong> (<em>go.Figure</em>) – the figure for the gauge</p></li>
-</ul>
-</dd>
-<dt class="field-even">Renvoie<span class="colon">:</span></dt>
-<dd class="field-even"><p>the html.Div for the left metrics</p>
-</dd>
-<dt class="field-odd">Type renvoyé<span class="colon">:</span></dt>
-<dd class="field-odd"><p>html.Div</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="src.views.server_view.right_daily_graph">
-<span class="sig-prename descclassname"><span class="pre">src.views.server_view.</span></span><span class="sig-name descname"><span class="pre">right_daily_graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fig_day</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Figure</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Div</span></span></span><a class="headerlink" href="#src.views.server_view.right_daily_graph" title="Link to this definition"></a></dt>
-<dd><p>Return the html.Div for the right daily graph</p>
-<dl class="field-list simple">
-<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>fig_day</strong> (<em>go.Figure</em>) – the figure for the day</p>
-</dd>
-<dt class="field-even">Renvoie<span class="colon">:</span></dt>
-<dd class="field-even"><p>the html.Div for the right daily graph</p>
-</dd>
-<dt class="field-odd">Type renvoyé<span class="colon">:</span></dt>
-<dd class="field-odd"><p>html.Div</p>
-</dd>
-</dl>
-</dd></dl>
-
 <dl class="py function">
 <dt class="sig sig-object py" id="src.views.server_view.server_view">
 <span class="sig-prename descclassname"><span class="pre">src.views.server_view.</span></span><span class="sig-name descname"><span class="pre">server_view</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fig_day</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Figure</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">best_price</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">best_price_server</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">website_link</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_less_avg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_less_min</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">average</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mediane</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deviation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deviation_related_to_average</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">evolution</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Div</span></span></span><a class="headerlink" href="#src.views.server_view.server_view" title="Link to this definition"></a></dt>

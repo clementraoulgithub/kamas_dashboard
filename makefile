@@ -1,3 +1,9 @@
+docs-folder:
+	@mkdir -p docs
+
+docs-html-folder:
+	@mkdir -p docs/html
+
 tests: # Run all the tests
 tests:
 	@python -m pytest src -v -s
@@ -28,13 +34,12 @@ docker-push:
 	@docker push ghcr.io/clementraoulgithub/kamasdashboard:latest
 
 docs: # Create the documentation in html with sphinx
-docs:
-	@cd doc && \
+docs: docs-folder
+	@cd docs && \
 	make html
 
 create-uml: # Create the uml diagram with pyreverse
-create-uml:
-	@mkdir -p doc/uml
+create-uml: docs-folder docs-html-folder
 	@pyreverse -o png src -d doc/uml
 
 	
