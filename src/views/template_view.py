@@ -108,10 +108,8 @@ def dofus_retro_menu() -> dash.html.Div:
     return dash.html.Div(
         [
             dash.dcc.Link("Serveur Boune", href="/boune", className="link"),
-            dash.dcc.Link("Serveur Crail", href="/crail", className="link"),
-            dash.dcc.Link("Serveur Eratz", href="/eratz", className="link"),
-            dash.dcc.Link("Serveur Galgarion", href="/galgarion", className="link"),
-            dash.dcc.Link("Serveur Henual", href="/henual", className="link"),
+            dash.dcc.Link("Serveur Fallanster", href="/fallanster", className="link"),
+            dash.dcc.Link("Serveur Allisteria", href="/allisteria", className="link"),
         ],
         style={"display": "none"},
         id="top-menu-retro",

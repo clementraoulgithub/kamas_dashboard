@@ -102,17 +102,11 @@ def get_kamas_from_lekamas(server: str) -> float:
         case ServerRetro.BOUNE.value:
             divided_by = _setup_payload("1449", server_info, "1453", 1)
             payload = data | server_info
-        case ServerRetro.CRAIL.value:
+        case ServerRetro.ALLISTERIA.value:
             divided_by = _setup_payload("1450", server_info, "1062", 2)
             payload = data | server_info
-        case ServerRetro.ERATZ.value:
+        case ServerRetro.FALLANSTER.value:
             divided_by = _setup_payload("1052", server_info, "1066", 10)
-            payload = data | server_info
-        case ServerRetro.GALGARION.value:
-            divided_by = _setup_payload("1451", server_info, "1062", 2)
-            payload = data | server_info
-        case ServerRetro.HENUAL.value:
-            divided_by = _setup_payload("1054", server_info, "1062", 2)
             payload = data | server_info
         case ServerClassic.DRACONIROS.value:
             divided_by = _setup_payload("1055", server_info, "1062", 2)
@@ -189,14 +183,6 @@ def get_kamas_price_from_mode_marchand(server: str) -> float:
     match server:
         case ServerRetro.BOUNE.value:
             url = f"{endpoint_retro}{query}130"
-        case ServerRetro.CRAIL.value:
-            url = f"{endpoint_retro}{query}128"
-        case ServerRetro.ERATZ.value:
-            url = f"{endpoint_retro}{query}126"
-        case ServerRetro.GALGARION.value:
-            url = f"{endpoint_retro}{query}129"
-        case ServerRetro.HENUAL.value:
-            url = f"{endpoint_retro}{query}127"
         case ServerClassic.DRACONIROS.value:
             url = f"{endpoint_classique}{query}122"
         case ServerClassic.HELLMINA.value:
@@ -268,10 +254,10 @@ def get_kamas_from_try_and_judge(server: str) -> float:
         case ServerRetro.BOUNE.value:
             url = f"{endpoint_retro}/{server}/1m-kamas-{server}"
             divided_by = 1
-        case ServerRetro.CRAIL.value:
+        case ServerRetro.ALLISTERIA.value:
             url = f"{endpoint_retro}/{server}/3m-kamas-{server}"
             divided_by = 3
-        case ServerRetro.GALGARION.value:
+        case ServerRetro.FALLANSTER.value:
             url = f"{endpoint_retro}/{server}/3m-kamas-{server}"
             divided_by = 3
         case ServerClassic.DRACONIROS.value:
@@ -349,14 +335,10 @@ def get_d_two_gateway_price(server: str) -> float:
     match server:
         case ServerRetro.BOUNE.value:
             url = f"{endpoint}{start_query}34{end_query}"
-        case ServerRetro.CRAIL.value:
-            url = f"{endpoint}{start_query}35{end_query}"
-        case ServerRetro.ERATZ.value:
-            url = f"{endpoint}{start_query}36{end_query}"
-        case ServerRetro.GALGARION.value:
-            url = f"{endpoint}{start_query}37{end_query}"
-        case ServerRetro.HENUAL.value:
-            url = f"{endpoint}{start_query}36{end_query}"
+        case ServerRetro.FALLANSTER.value:
+            url = f"{endpoint}{start_query}104{end_query}"
+        case ServerRetro.ALLISTERIA.value:
+            url = f"{endpoint}{start_query}103{end_query}"
         case ServerClassic.DRACONIROS.value:
             url = f"{endpoint}{start_query}73{end_query}"
         case ServerClassic.HELLMINA.value:
@@ -411,17 +393,11 @@ def get_kamas_from_i_game_gold(server: str) -> float:
         case ServerRetro.BOUNE.value:
             divided_by = 1
             string = f"{server.capitalize()} - 1.3"
-        case ServerRetro.CRAIL.value:
+        case ServerRetro.FALLANSTER.value:
             divided_by = 5
             string = f"{server.capitalize()} - 1.3"
-        case ServerRetro.ERATZ.value:
+        case ServerRetro.ALLISTERIA.value:
             divided_by = 20
-            string = f"{server.capitalize()} - 1.3"
-        case ServerRetro.GALGARION.value:
-            divided_by = 5
-            string = f"{server.capitalize()} - 1.3"
-        case ServerRetro.HENUAL.value:
-            divided_by = 6
             string = f"{server.capitalize()} - 1.3"
         case ServerClassic.DRACONIROS.value:
             divided_by = 4
@@ -472,6 +448,10 @@ def get_kamas_from_i_game_gold(server: str) -> float:
             raise ValueError("Server not found")
 
     response = requests.get(url, timeout=10)
+
+    if response.status_code != 200:
+        raise requests.exceptions.RequestException("Endpoint is not available")
+
     soup = BeautifulSoup(response.text, "html.parser")
     calculate_price_elements = soup.find_all(class_="calculate-price")
 
@@ -479,3 +459,5 @@ def get_kamas_from_i_game_gold(server: str) -> float:
         if element.find("div", class_="title", string=string):
             if price_span := element.find("span", class_="price-value"):
                 return round(float(price_span.text) / divided_by, 2)
+
+    raise ValueError("Server not found")
