@@ -31,10 +31,8 @@ class ServerRetro(Enum):
     """Enum of the differents RETRO servers"""
 
     BOUNE = "boune"
-    CRAIL = "crail"
-    ERATZ = "eratz"
-    GALGARION = "galgarion"
-    HENUAL = "henual"
+    FALLANSTER = "fallanster"
+    ALLISTERIA = "allisteria"
 
 
 @unique

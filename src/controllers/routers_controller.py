@@ -66,14 +66,10 @@ def routers(pathname: str) -> dash.html.Div:
             return index_view()
         case "/boune":
             return set_server(ServerRetro.BOUNE.value)
-        case "/crail":
-            return set_server(ServerRetro.CRAIL.value)
-        case "/eratz":
-            return set_server(ServerRetro.ERATZ.value)
-        case "/galgarion":
-            return set_server(ServerRetro.GALGARION.value)
-        case "/henual":
-            return set_server(ServerRetro.HENUAL.value)
+        case "/fallanster":
+            return set_server(ServerRetro.FALLANSTER.value)
+        case "/allisteria":
+            return set_server(ServerRetro.ALLISTERIA.value)
         case "/draconiros":
             return set_server(ServerClassic.DRACONIROS.value)
         case "/hellmina":
